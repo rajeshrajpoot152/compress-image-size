@@ -1,15 +1,28 @@
 <?php
 /**
- * 40 High-Volume International Programmatic SEO Keywords & Metadata
- * 100% Global Focus - E-E-A-T Optimized
+ * 40 Supported Programmatic Keywords Categorized by Google Keyword Planner Data
+ * Incorporating E-E-A-T & SEO Power Words
+ * Primary Domain Focus: Compress Image Size
  */
 
 return [
+    // PRIMARY FOCUS (Home / Master Tool)
+    'compress-image-size' => [
+        'slug' => 'compress-image-size',
+        'h1' => 'Compress Image Size Online - 100% Free & Private',
+        'title' => '100% Free Compress Image Size Online | Fast, Lossless & No Server Upload',
+        'desc' => 'Instantly compress image size in KB or MB without losing quality. 100% browser-based, private, and secure photo size reducer. No signup or watermark.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'primary'
+    ],
+
+    // CATEGORY A: SIZE-SPECIFIC KEYWORDS (High Conversion)
     'compress-image-to-50kb' => [
         'slug' => 'compress-image-to-50kb',
         'h1' => 'Compress Image to 50KB Online',
-        'title' => 'Compress Image to 50KB Online - Free Photo Size Reducer',
-        'desc' => 'Compress JPG, PNG, and WebP images to 50KB online for free without losing quality. 100% private, browser-based, instant download.',
+        'title' => '100% Free Compress Image to 50KB Online | Lossless Quality & Secure',
+        'desc' => 'Easily compress image to 50KB online in seconds. Reduce JPG, PNG, and WebP file weight without losing clarity. 100% browser-based privacy.',
         'format' => 'image/jpeg',
         'quality' => 70,
         'category' => 'size'
@@ -17,8 +30,8 @@ return [
     'compress-image-to-20kb' => [
         'slug' => 'compress-image-to-20kb',
         'h1' => 'Compress Image to 20KB Online',
-        'title' => 'Compress Image to 20KB Online - Fast Photo & Signature Resizer',
-        'desc' => 'Easily reduce image size to 20KB online. Perfect for official applications, ID cards, and online portal uploads.',
+        'title' => 'Instantly Compress Image to 20KB | Fast Photo & Signature Reducer',
+        'desc' => 'Compress image to 20KB online for application forms, passports, and ID cards. Retain crisp lines and pixel-perfect quality with zero uploads.',
         'format' => 'image/jpeg',
         'quality' => 50,
         'category' => 'size'
@@ -26,8 +39,8 @@ return [
     'compress-image-to-100kb' => [
         'slug' => 'compress-image-to-100kb',
         'h1' => 'Compress Image to 100KB Online',
-        'title' => 'Compress Image to 100KB Online - Free High-Quality Reducer',
-        'desc' => 'Compress JPG and PNG images to under 100KB online. Keep sharp details, crisp text, and vibrant colors with zero server uploads.',
+        'title' => 'Best Free Compress Image to 100KB | Retain HD Clarity & Detail',
+        'desc' => 'Compress JPG and PNG images to under 100KB online. Fast client-side quantization ensures sharp contrast and vivid color preservation.',
         'format' => 'original',
         'quality' => 80,
         'category' => 'size'
@@ -35,17 +48,62 @@ return [
     'compress-image-to-200kb' => [
         'slug' => 'compress-image-to-200kb',
         'h1' => 'Compress Image to 200KB Online',
-        'title' => 'Compress Image to 200KB Online Free - Retain HD Quality',
-        'desc' => 'Shrink photo file size to 200KB while preserving high-definition details. Ideal for email attachments and web upload forms.',
+        'title' => 'Effortless Compress Image to 200KB | Pixel-Perfect Photo Optimizer',
+        'desc' => 'Shrink photo file size to 200KB for web uploads and email attachments while preserving high-definition details.',
         'format' => 'original',
         'quality' => 85,
+        'category' => 'size'
+    ],
+    'resize-image-to-20kb' => [
+        'slug' => 'resize-image-to-20kb',
+        'h1' => 'Resize Image to 20KB Online',
+        'title' => 'Fastest Resize Image to 20KB Online | Free, Accurate & Private',
+        'desc' => 'Resize and compress image to 20KB online with one click. Ideal for job portal submissions and official document uploads.',
+        'format' => 'image/jpeg',
+        'quality' => 50,
+        'category' => 'size'
+    ],
+    'resize-image-to-50kb' => [
+        'slug' => 'resize-image-to-50kb',
+        'h1' => 'Resize Image to 50KB Online',
+        'title' => 'Smart Resize Image to 50KB Online | Lossless Browser Compression',
+        'desc' => 'Quickly resize picture size to 50KB online. Zero server transmission protects your personal confidential photos.',
+        'format' => 'image/jpeg',
+        'quality' => 70,
+        'category' => 'size'
+    ],
+    'resize-image-to-100kb' => [
+        'slug' => 'resize-image-to-100kb',
+        'h1' => 'Resize Image to 100KB Online',
+        'title' => 'Resize Image to 100KB Online Free | High-Speed Client-Side Tool',
+        'desc' => 'Resize and shrink image size to 100KB without blurring or pixelation. Works instantly in any modern web browser.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'size'
+    ],
+    'reduce-image-size-in-kb' => [
+        'slug' => 'reduce-image-size-in-kb',
+        'h1' => 'Reduce Image Size in KB Online',
+        'title' => 'Instantly Reduce Image Size in KB | 100% Free & No Server Uploads',
+        'desc' => 'Reduce image size in KB effortlessly. Drag and drop any photo to compress file weight with industry-standard lossless algorithms.',
+        'format' => 'original',
+        'quality' => 75,
+        'category' => 'size'
+    ],
+    'image-kb-size-reducer' => [
+        'slug' => 'image-kb-size-reducer',
+        'h1' => 'Image KB Size Reducer Online',
+        'title' => 'Ultimate Image KB Size Reducer | Shrink Photos in Seconds Free',
+        'desc' => 'Free online image KB size reducer. Compress heavy camera and phone photos to light KB sizes with crystal clarity.',
+        'format' => 'original',
+        'quality' => 75,
         'category' => 'size'
     ],
     'compress-image-to-30kb' => [
         'slug' => 'compress-image-to-30kb',
         'h1' => 'Compress Image to 30KB Online',
-        'title' => 'Compress Image to 30KB Online - Passport & ID Photo Reducer',
-        'desc' => 'Reduce photo and ID image size to 30KB or less online. Instant client-side compression without quality loss.',
+        'title' => 'Compress Image to 30KB Online | Fast ID & Photo Weight Reducer',
+        'desc' => 'Reduce image size to 30KB or less online. Instant client-side compression without quality loss.',
         'format' => 'image/jpeg',
         'quality' => 60,
         'category' => 'size'
@@ -53,316 +111,266 @@ return [
     'compress-image-to-10kb' => [
         'slug' => 'compress-image-to-10kb',
         'h1' => 'Compress Image to 10KB Online',
-        'title' => 'Compress Image to 10KB Online - Signature & Small Photo Reducer',
+        'title' => 'Compress Image to 10KB Online | Signature & Small Photo Reducer',
         'desc' => 'Compress signatures and small photos down to 10KB online for free. Clean lines, clear contrast, and fast processing.',
         'format' => 'image/jpeg',
         'quality' => 45,
         'category' => 'size'
     ],
-    'compress-image-to-15kb' => [
-        'slug' => 'compress-image-to-15kb',
-        'h1' => 'Compress Image to 15KB Online',
-        'title' => 'Compress Image to 15KB Online - Application Form Photo Resizer',
-        'desc' => 'Resize and shrink image size to 15KB for university admissions, job portals, and online verification.',
-        'format' => 'image/jpeg',
-        'quality' => 50,
-        'category' => 'size'
-    ],
-    'compress-image-to-500kb' => [
-        'slug' => 'compress-image-to-500kb',
-        'h1' => 'Compress Image to 500KB Online',
-        'title' => 'Compress Image to 500KB Online - High-Resolution Image Compressor',
-        'desc' => 'Reduce heavy DSLR and smartphone photos to 500KB without blurring or pixelation. Fast, free, and completely secure.',
-        'format' => 'original',
-        'quality' => 88,
-        'category' => 'size'
-    ],
     'compress-image-to-1mb' => [
         'slug' => 'compress-image-to-1mb',
         'h1' => 'Compress Image to 1MB Online',
-        'title' => 'Compress Image to 1MB Online - Bulk Photo Reducer',
+        'title' => 'Compress Image to 1MB Online Free | Bulk High-Resolution Optimizer',
         'desc' => 'Compress large 5MB, 10MB photos down to 1MB online. 100% private browser processing with lightning speed.',
         'format' => 'original',
         'quality' => 90,
         'category' => 'size'
     ],
-    'compress-image-to-2mb' => [
-        'slug' => 'compress-image-to-2mb',
-        'h1' => 'Compress Image to 2MB Online',
-        'title' => 'Compress Image to 2MB Online - High Quality Photo Compressor',
-        'desc' => 'Shrink image file size to 2MB for web galleries, portfolios, and cloud backups while maintaining visual brilliance.',
-        'format' => 'original',
-        'quality' => 92,
-        'category' => 'size'
-    ],
-    'reduce-image-size-in-kb' => [
-        'slug' => 'reduce-image-size-in-kb',
-        'h1' => 'Reduce Image Size in KB Online',
-        'title' => 'Reduce Image Size in KB Online Free - Fast Picture Reducer',
-        'desc' => 'Easily reduce image size in KB without losing quality. Bulk compress JPG, PNG, WebP images right in your browser.',
-        'format' => 'original',
-        'quality' => 75,
-        'category' => 'general'
-    ],
-    'compress-jpeg-to-50kb' => [
-        'slug' => 'compress-jpeg-to-50kb',
-        'h1' => 'Compress JPEG to 50KB Online',
-        'title' => 'Compress JPEG to 50KB Online - Free JPEG Optimizer',
-        'desc' => 'Compress JPEG images to 50KB online. Strip redundant metadata and optimize compression matrices with zero blur.',
-        'format' => 'image/jpeg',
-        'quality' => 70,
-        'category' => 'format'
-    ],
-    'compress-jpeg-to-20kb' => [
-        'slug' => 'compress-jpeg-to-20kb',
-        'h1' => 'Compress JPEG to 20KB Online',
-        'title' => 'Compress JPEG to 20KB Online - Online Form & Signature Reducer',
-        'desc' => 'Shrink JPEG files down to 20KB online. Meets exact criteria for official international passport and ID applications.',
-        'format' => 'image/jpeg',
-        'quality' => 50,
-        'category' => 'format'
-    ],
-    'compress-jpeg-to-100kb' => [
-        'slug' => 'compress-jpeg-to-100kb',
-        'h1' => 'Compress JPEG to 100KB Online',
-        'title' => 'Compress JPEG to 100KB Online - Lossless JPEG Compressor',
-        'desc' => 'Reduce JPEG file weight to 100KB with crystal clarity. Fast, responsive, and privacy-guaranteed in-browser compression.',
-        'format' => 'image/jpeg',
-        'quality' => 80,
-        'category' => 'format'
-    ],
-    'compress-jpeg-online' => [
-        'slug' => 'compress-jpeg-online',
+
+    // CATEGORY B: FORMAT-SPECIFIC KEYWORDS
+    'compress-jpeg' => [
+        'slug' => 'compress-jpeg',
         'h1' => 'Compress JPEG Online Free',
-        'title' => 'Compress JPEG Online - Free JPEG Image Compressor',
-        'desc' => 'The fastest online JPEG compressor. Reduce JPEG picture sizes by up to 80% while preserving stunning colors.',
+        'title' => 'Compress JPEG Online | Lossless Quality & No Server Uploads',
+        'desc' => 'Compress JPEG photos online. Strip unnecessary metadata and reduce weight by up to 80% while retaining vivid color accuracy.',
+        'format' => 'image/jpeg',
+        'quality' => 75,
+        'category' => 'format'
+    ],
+    'compress-jpg-online' => [
+        'slug' => 'compress-jpg-online',
+        'h1' => 'Compress JPG Online',
+        'title' => '100% Free Compress JPG Online | Instant One-Click Optimization',
+        'desc' => 'The fastest online JPG compressor. Optimize photo files instantly with client-side privacy. Zero lag and no registration needed.',
         'format' => 'image/jpeg',
         'quality' => 80,
         'category' => 'format'
     ],
-    'png-size-reducer' => [
-        'slug' => 'png-size-reducer',
-        'h1' => 'PNG Size Reducer Online',
-        'title' => 'PNG Size Reducer - Compress PNG Images Losslessly',
-        'desc' => 'Free PNG size reducer. Compress PNG files while retaining transparent backgrounds and crisp typography.',
-        'format' => 'image/png',
-        'quality' => 85,
+    'compress-a-jpg' => [
+        'slug' => 'compress-a-jpg',
+        'h1' => 'Compress a JPG Online',
+        'title' => 'Compress a JPG File Online | Smart Compression Algorithm',
+        'desc' => 'Quickly compress a JPG file in your browser. Simple drag-and-drop tool for shrinking photo file sizes effortlessly.',
+        'format' => 'image/jpeg',
+        'quality' => 75,
         'category' => 'format'
     ],
-    'compress-png-to-50kb' => [
-        'slug' => 'compress-png-to-50kb',
-        'h1' => 'Compress PNG to 50KB Online',
-        'title' => 'Compress PNG to 50KB Online - Maintain Transparency & Sharpness',
-        'desc' => 'Compress heavy PNG images to under 50KB online. Perfect for web icons, logos, and high-contrast digital illustrations.',
-        'format' => 'image/png',
-        'quality' => 70,
-        'category' => 'format'
-    ],
-    'compress-png-to-100kb' => [
-        'slug' => 'compress-png-to-100kb',
-        'h1' => 'Compress PNG to 100KB Online',
-        'title' => 'Compress PNG to 100KB Online - Free Transparent PNG Reducer',
-        'desc' => 'Reduce transparent PNG size to 100KB for fast website loading and seamless app performance.',
-        'format' => 'image/png',
-        'quality' => 80,
-        'category' => 'format'
-    ],
-    'compress-png-online' => [
-        'slug' => 'compress-png-online',
-        'h1' => 'Compress PNG Online Free',
-        'title' => 'Compress PNG Online - High Efficiency PNG Optimizer',
-        'desc' => 'Free browser-based PNG compressor. Shrink transparent PNG files by up to 70% without jagged edges or artifacts.',
-        'format' => 'image/png',
-        'quality' => 80,
-        'category' => 'format'
-    ],
-    'compress-webp-online' => [
-        'slug' => 'compress-webp-online',
-        'h1' => 'Compress WebP Online Free',
-        'title' => 'Compress WebP Online - Next-Gen Image Compressor',
-        'desc' => 'Optimize WebP images online for ultra-fast Google PageSpeed scores and maximum bandwidth savings.',
-        'format' => 'image/webp',
-        'quality' => 80,
+    'reduce-size-of-jpg' => [
+        'slug' => 'reduce-size-of-jpg',
+        'h1' => 'Reduce Size of JPG Online',
+        'title' => 'Reduce Size of JPG Online Free | Pixel-Perfect Photo Reducer',
+        'desc' => 'Reduce the size of JPG images without compromising visual sharpness. 100% browser-based with zero data collection.',
+        'format' => 'image/jpeg',
+        'quality' => 75,
         'category' => 'format'
     ],
     'jpeg-size-reducer' => [
         'slug' => 'jpeg-size-reducer',
         'h1' => 'JPEG Size Reducer Online',
-        'title' => 'JPEG Size Reducer - Reduce JPEG File Size Online',
-        'desc' => 'Reduce the size of your JPEG photos in seconds. Free, unlimited, and no registration required.',
+        'title' => 'Smart JPEG Size Reducer | Shrink JPEG Without Quality Loss',
+        'desc' => 'Best JPEG size reducer tool. Compress JPEG images by up to 75% for fast web loading and quick email transfers.',
         'format' => 'image/jpeg',
         'quality' => 75,
         'category' => 'format'
     ],
-    'jpg-size-reducer-in-kb' => [
-        'slug' => 'jpg-size-reducer-in-kb',
-        'h1' => 'JPG Size Reducer in KB Online',
-        'title' => 'JPG Size Reducer in KB - Compress JPG Photos Online',
-        'desc' => 'Free JPG size reducer in KB. Shrink photo dimensions and file weights to fit upload limitations seamlessly.',
-        'format' => 'image/jpeg',
-        'quality' => 75,
-        'category' => 'general'
-    ],
-    'photo-size-reducer-in-kb' => [
-        'slug' => 'photo-size-reducer-in-kb',
-        'h1' => 'Photo Size Reducer in KB Online',
-        'title' => 'Photo Size Reducer in KB - Free Online Photo Compressor',
-        'desc' => 'Easily reduce passport, landscape, and mobile photos in KB without losing sharpness or clarity.',
-        'format' => 'original',
-        'quality' => 80,
-        'category' => 'general'
-    ],
-    'image-size-reducer-online' => [
-        'slug' => 'image-size-reducer-online',
-        'h1' => 'Image Size Reducer Online Free',
-        'title' => 'Image Size Reducer Online - Fast & Secure Image Compressor',
-        'desc' => 'Best online image size reducer. Drag & drop any photo to reduce file size instantly with client-side privacy.',
-        'format' => 'original',
-        'quality' => 80,
-        'category' => 'general'
-    ],
-    'us-visa-photo-compressor' => [
-        'slug' => 'us-visa-photo-compressor',
-        'h1' => 'US Visa Photo Compressor (Under 240KB)',
-        'title' => 'US Visa Photo Compressor (Under 240KB) - DS-160 Compliant',
-        'desc' => 'Compress and resize photos for US Visa and DS-160 online application to strictly under 240KB with 600x600 px dimensions.',
-        'format' => 'image/jpeg',
-        'quality' => 80,
-        'category' => 'visa'
-    ],
-    'schengen-visa-photo-compressor' => [
-        'slug' => 'schengen-visa-photo-compressor',
-        'h1' => 'Schengen Visa Photo Size Reducer',
-        'title' => 'Schengen Visa Photo Compressor (Under 100KB) - Free Online Tool',
-        'desc' => 'Compress European Schengen visa application photos to exact size specifications under 100KB or 50KB.',
-        'format' => 'image/jpeg',
-        'quality' => 75,
-        'category' => 'visa'
-    ],
-    'passport-photo-compressor' => [
-        'slug' => 'passport-photo-compressor',
-        'h1' => 'Passport Photo Size Reducer Online',
-        'title' => 'Passport Photo Compressor (Under 100KB) - International Standards',
-        'desc' => 'Compress passport and visa application photos to under 100KB or 50KB. Compliant with international embassy standards.',
-        'format' => 'image/jpeg',
-        'quality' => 80,
-        'category' => 'visa'
-    ],
-    'uk-passport-photo-compressor' => [
-        'slug' => 'uk-passport-photo-compressor',
-        'h1' => 'UK Passport Photo Size Reducer',
-        'title' => 'UK Passport Photo Compressor Online (Under 10MB, Over 50KB)',
-        'desc' => 'Optimize digital passport photos for HM Passport Office UK online renewal and application.',
-        'format' => 'image/jpeg',
+    'png-compressor' => [
+        'slug' => 'png-compressor',
+        'h1' => 'PNG Compressor Online',
+        'title' => 'Fastest PNG Compressor Online | Retain Transparency & Crisp Detail',
+        'desc' => 'Compress PNG images online with smart alpha channel preservation. Keep transparent backgrounds clean and logos sharp.',
+        'format' => 'image/png',
         'quality' => 85,
-        'category' => 'visa'
+        'category' => 'format'
     ],
-    'canadian-visa-photo-compressor' => [
-        'slug' => 'canadian-visa-photo-compressor',
-        'h1' => 'Canada Visa Photo Compressor',
-        'title' => 'Canada Visa & Permanent Resident Photo Compressor (Under 4MB)',
-        'desc' => 'Compress photos for IRCC Canada Visa and Express Entry applications with high clarity and strict compliance.',
-        'format' => 'image/jpeg',
-        'quality' => 82,
-        'category' => 'visa'
-    ],
-    'dv-lottery-photo-compressor' => [
-        'slug' => 'dv-lottery-photo-compressor',
-        'h1' => 'DV Lottery Green Card Photo Compressor',
-        'title' => 'DV Lottery Photo Compressor (Under 240KB) - Green Card Entry',
-        'desc' => 'Compress digital photos for the US Diversity Visa (Green Card) Lottery strictly under 240KB.',
-        'format' => 'image/jpeg',
+    'png-size-reducer' => [
+        'slug' => 'png-size-reducer',
+        'h1' => 'PNG Size Reducer Online',
+        'title' => 'Free PNG Size Reducer | Lossless Quality & No Watermark',
+        'desc' => 'Reduce PNG file weight without pixel artifacts. Perfect for website icons, graphics, and digital UI design assets.',
+        'format' => 'image/png',
         'quality' => 80,
-        'category' => 'visa'
+        'category' => 'format'
     ],
-    'resume-photo-compressor' => [
-        'slug' => 'resume-photo-compressor',
-        'h1' => 'Resume & CV Photo Compressor Online',
-        'title' => 'Resume Photo Compressor - Lightweight Headshot Optimizer',
-        'desc' => 'Reduce headshot and profile photo size for job applications and PDF resumes without visual distortion.',
-        'format' => 'image/jpeg',
-        'quality' => 78,
-        'category' => 'professional'
-    ],
-    'linkedin-profile-photo-compressor' => [
-        'slug' => 'linkedin-profile-photo-compressor',
-        'h1' => 'LinkedIn Profile Photo Compressor',
-        'title' => 'LinkedIn Profile Picture & Banner Compressor - Under 8MB',
-        'desc' => 'Optimize and compress professional LinkedIn headshots and background banners for crisp HD rendering.',
-        'format' => 'image/jpeg',
-        'quality' => 85,
-        'category' => 'professional'
-    ],
-    'shopify-image-optimizer' => [
-        'slug' => 'shopify-image-optimizer',
-        'h1' => 'Shopify Product Image Optimizer',
-        'title' => 'Shopify Image Optimizer - Fast Loading E-Commerce Photos',
-        'desc' => 'Compress product images for Shopify stores. Boost mobile conversions, lower bounce rates, and accelerate page speed.',
-        'format' => 'image/webp',
-        'quality' => 82,
-        'category' => 'ecommerce'
-    ],
-    'wordpress-image-reducer' => [
-        'slug' => 'wordpress-image-reducer',
-        'h1' => 'WordPress Image Reducer Online',
-        'title' => 'WordPress Image Compressor - Speed Up Your WP Website',
-        'desc' => 'Optimize blog images and banners before uploading to WordPress. Pass Core Web Vitals and get higher Google rankings.',
-        'format' => 'image/webp',
-        'quality' => 80,
-        'category' => 'ecommerce'
-    ],
-    'discord-emoji-compressor' => [
-        'slug' => 'discord-emoji-compressor',
-        'h1' => 'Discord Emoji & Sticker Compressor',
-        'title' => 'Discord Emoji Compressor (Under 256KB) - Free Online Tool',
-        'desc' => 'Compress custom Discord emojis, stickers, and profile banners under 256KB without losing transparency.',
+    'reduce-png-file-size' => [
+        'slug' => 'reduce-png-file-size',
+        'h1' => 'Reduce PNG File Size Online',
+        'title' => 'Reduce PNG File Size Online | Optimal Quality & Zero Lag',
+        'desc' => 'Effortlessly reduce PNG file size in seconds. Smart color quantization delivers maximum compression ratios.',
         'format' => 'image/png',
         'quality' => 75,
-        'category' => 'social'
+        'category' => 'format'
+    ],
+    'compress-gif' => [
+        'slug' => 'compress-gif',
+        'h1' => 'Compress GIF Online Free',
+        'title' => 'Compress GIF Online | Reduce GIF File Size Instantly',
+        'desc' => 'Compress GIF files online to make animations load faster and fit messaging upload limits effortlessly.',
+        'format' => 'original',
+        'quality' => 75,
+        'category' => 'format'
+    ],
+    'animated-gif-compressor' => [
+        'slug' => 'animated-gif-compressor',
+        'h1' => 'Animated GIF Compressor Online',
+        'title' => 'Animated GIF Compressor | Optimize GIF Size Without Stutter',
+        'desc' => 'Free animated GIF compressor. Reduce GIF size for Discord, web pages, and email attachments.',
+        'format' => 'original',
+        'quality' => 75,
+        'category' => 'format'
+    ],
+    'compress-webp-online' => [
+        'slug' => 'compress-webp-online',
+        'h1' => 'Compress WebP Online Free',
+        'title' => 'Compress WebP Online | Modern Next-Gen Image Compression',
+        'desc' => 'Optimize WebP files for maximum Google Core Web Vitals speed. Up to 40% lighter than standard JPEG images.',
+        'format' => 'image/webp',
+        'quality' => 80,
+        'category' => 'format'
+    ],
+    'convert-png-to-jpg' => [
+        'slug' => 'convert-png-to-jpg',
+        'h1' => 'Convert PNG to JPG & Compress',
+        'title' => 'Convert PNG to JPG & Reduce Size | 100% Free Online Tool',
+        'desc' => 'Easily convert transparent PNG images to lightweight JPG photos and reduce file size by up to 80% instantly.',
+        'format' => 'image/jpeg',
+        'quality' => 80,
+        'category' => 'format'
+    ],
+    'convert-jpg-to-webp' => [
+        'slug' => 'convert-jpg-to-webp',
+        'h1' => 'Convert JPG to WebP & Compress',
+        'title' => 'Convert JPG to WebP Online | Fastest Next-Gen Conversion',
+        'desc' => 'Convert JPG photos to modern WebP format online. Save bandwidth and accelerate website load speeds.',
+        'format' => 'image/webp',
+        'quality' => 82,
+        'category' => 'format'
+    ],
+
+    // CATEGORY C: ACTION-ORIENTED KEYWORDS (Broad High-Volume Tools)
+    'reduce-image-size' => [
+        'slug' => 'reduce-image-size',
+        'h1' => 'Reduce Image Size Online',
+        'title' => 'Reduce Image Size Online Free | Private, Fast & No Signup',
+        'desc' => 'The simplest way to reduce image size online. Compress photos in seconds with browser-based privacy.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
+    ],
+    'photo-size-reducer' => [
+        'slug' => 'photo-size-reducer',
+        'h1' => 'Photo Size Reducer Online',
+        'title' => 'Ultimate Photo Size Reducer | Shrink Photos Without Quality Loss',
+        'desc' => 'Reduce photo size in KB or MB easily. Preserve facial features, natural lighting, and sharp textures.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
+    ],
+    'minimize-picture-size' => [
+        'slug' => 'minimize-picture-size',
+        'h1' => 'Minimize Picture Size Online',
+        'title' => 'Minimize Picture Size Online Free | Instant Browser Optimization',
+        'desc' => 'Quickly minimize picture size in KB without software installation. 100% private client-side processing.',
+        'format' => 'original',
+        'quality' => 78,
+        'category' => 'action'
+    ],
+    'decrease-image-size' => [
+        'slug' => 'decrease-image-size',
+        'h1' => 'Decrease Image Size Online',
+        'title' => 'Decrease Image Size Online | Effortless & Pixel-Perfect Reducer',
+        'desc' => 'Decrease image file weight while maintaining high visual definition. Clean, fast, and free forever.',
+        'format' => 'original',
+        'quality' => 78,
+        'category' => 'action'
+    ],
+    'shrink-image-online' => [
+        'slug' => 'shrink-image-online',
+        'h1' => 'Shrink Image Online Free',
+        'title' => 'Shrink Image Online Free | Fast, Secure & No Watermark',
+        'desc' => 'Shrink any image in seconds. Drag and drop to compress JPG, PNG, and WebP photos with zero lag.',
+        'format' => 'original',
+        'quality' => 78,
+        'category' => 'action'
+    ],
+    'condense-image' => [
+        'slug' => 'condense-image',
+        'h1' => 'Condense Image Online Free',
+        'title' => 'Condense Image Online | Advanced Smart Compression Engine',
+        'desc' => 'Condense large digital photos into lightweight web-ready files with optimal visual quality retention.',
+        'format' => 'original',
+        'quality' => 78,
+        'category' => 'action'
+    ],
+    'reduce-image-resolution' => [
+        'slug' => 'reduce-image-resolution',
+        'h1' => 'Reduce Image Resolution Online',
+        'title' => 'Reduce Image Resolution Online | Clean & Precise Photo Optimizer',
+        'desc' => 'Reduce picture resolution and dimensions easily for web publishing, email sending, and form uploads.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
+    ],
+    'reduce-image-dimensions' => [
+        'slug' => 'reduce-image-dimensions',
+        'h1' => 'Reduce Image Dimensions Online',
+        'title' => 'Reduce Image Dimensions Online | Fast & Accurate Image Scaler',
+        'desc' => 'Adjust and reduce image dimensions and file sizes to match strict application requirements perfectly.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
+    ],
+    'image-compressor-online' => [
+        'slug' => 'image-compressor-online',
+        'h1' => 'Image Compressor Online Free',
+        'title' => 'Best Image Compressor Online | 100% Free & Unlimited Usage',
+        'desc' => 'Free online image compressor. Compress unlimited JPG, PNG, and WebP photos right in your browser.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
+    ],
+    'image-size-reducer' => [
+        'slug' => 'image-size-reducer',
+        'h1' => 'Image Size Reducer Online',
+        'title' => 'Image Size Reducer | Shrink Image File Size in Seconds',
+        'desc' => 'High-speed image size reducer. Reduce heavy megabytes to light kilobytes with lossless accuracy.',
+        'format' => 'original',
+        'quality' => 80,
+        'category' => 'action'
     ],
     'bulk-image-compressor' => [
         'slug' => 'bulk-image-compressor',
         'h1' => 'Bulk Image Compressor Online Free',
-        'title' => 'Bulk Image Compressor - Compress Multiple Photos Online',
-        'desc' => 'Batch compress dozens of JPG, PNG, and WebP images simultaneously in your browser. Download all in one click.',
+        'title' => 'Bulk Image Compressor Online | Batch Compress Multiple Photos',
+        'desc' => 'Compress multiple images at once in your browser. Fast queue processing with one-click download.',
         'format' => 'original',
         'quality' => 80,
-        'category' => 'general'
+        'category' => 'action'
     ],
     'lossless-image-compressor' => [
         'slug' => 'lossless-image-compressor',
         'h1' => 'Lossless Image Compressor Online',
-        'title' => 'Lossless Image Compressor - 100% Quality Preserved',
-        'desc' => 'Strip hidden EXIF metadata and optimize image encoding losslessly. 0% quality loss with notable file size savings.',
+        'title' => 'Lossless Image Compressor | 100% Quality Preserved & Verified',
+        'desc' => 'Strip non-essential EXIF metadata losslessly. Retain 100% original pixel sharpness with zero compression artifacts.',
         'format' => 'original',
         'quality' => 95,
-        'category' => 'general'
+        'category' => 'action'
     ],
-    'convert-png-to-jpg' => [
-        'slug' => 'convert-png-to-jpg',
-        'h1' => 'Convert PNG to JPG & Compress Online',
-        'title' => 'Convert PNG to JPG & Reduce Size Online Free',
-        'desc' => 'Easily convert transparent PNG images to lightweight JPG photos and compress file size by up to 80% instantly.',
-        'format' => 'image/jpeg',
-        'quality' => 80,
-        'category' => 'converter'
-    ],
-    'convert-jpg-to-webp' => [
-        'slug' => 'convert-jpg-to-webp',
-        'h1' => 'Convert JPG to WebP & Compress Online',
-        'title' => 'Convert JPG to WebP - Modern Next-Gen Image Compression',
-        'desc' => 'Convert JPG photos to modern WebP format online. Save up to 50% more bandwidth with identical visual clarity.',
+    'shopify-image-optimizer' => [
+        'slug' => 'shopify-image-optimizer',
+        'h1' => 'Shopify Product Image Optimizer',
+        'title' => 'Shopify Image Optimizer | Accelerate E-Commerce Page Speed',
+        'desc' => 'Compress product images for Shopify stores. Boost mobile conversions, reduce bounce rate, and improve SEO.',
         'format' => 'image/webp',
         'quality' => 82,
-        'category' => 'converter'
+        'category' => 'action'
     ],
-    'shrink-image-size' => [
-        'slug' => 'shrink-image-size',
-        'h1' => 'Shrink Image Size Online Free',
-        'title' => 'Shrink Image Size Online - Fast Photo Weight Reducer',
-        'desc' => 'Quickly shrink image file size in KB online. Works on mobile, tablet, and desktop with no software installation.',
-        'format' => 'original',
-        'quality' => 78,
-        'category' => 'general'
+    'wordpress-image-reducer' => [
+        'slug' => 'wordpress-image-reducer',
+        'h1' => 'WordPress Image Reducer Online',
+        'title' => 'WordPress Image Compressor | Speed Up Your Website for SEO',
+        'desc' => 'Optimize blog photos and hero banners before uploading to WordPress. Pass Google Core Web Vitals effortlessly.',
+        'format' => 'image/webp',
+        'quality' => 80,
+        'category' => 'action'
     ],
 ];

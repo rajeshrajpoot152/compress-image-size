@@ -15,9 +15,9 @@ if (!in_array($currentLang, $supportedLangs)) {
 }
 
 // Sanitize & Validate Keyword Tool
-$currentSlug = isset($_GET['tool']) ? strtolower(preg_replace('/[^a-z0-9\-]/', '', $_GET['tool'])) : 'compress-image-to-50kb';
+$currentSlug = isset($_GET['tool']) ? strtolower(preg_replace('/[^a-z0-9\-]/', '', $_GET['tool'])) : 'compress-image-size';
 if (!isset($allKeywords[$currentSlug])) {
-    $currentSlug = 'compress-image-to-50kb';
+    $currentSlug = 'compress-image-size';
 }
 
 // Load Translations

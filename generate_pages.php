@@ -43,8 +43,8 @@ foreach ($languages as $lang) {
         $outputFile = "{$destDir}/{$slug}.html";
         file_put_contents($outputFile, $html);
 
-        // Also if it's the primary tool 'compress-image-to-50kb', make it index.html for that language folder!
-        if ($slug === 'compress-image-to-50kb') {
+        // Primary brand & domain tool: 'compress-image-size' generates index.html for that language folder!
+        if ($slug === 'compress-image-size') {
             file_put_contents("{$destDir}/index.html", $html);
         }
 

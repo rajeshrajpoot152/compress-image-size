@@ -7,14 +7,10 @@ $t = $langData ?? [];
 $isRTL = ($currentLang === 'ar');
 $categorySlug = $allKeywords[$currentSlug]['category'] ?? 'general';
 $categoryNames = [
-    'size'         => 'Size Compressors',
-    'format'       => 'Format Reducers',
-    'visa'         => 'Visa & Passport Resizers',
-    'professional' => 'Professional & Career',
-    'ecommerce'    => 'E-Commerce & Web Speed',
-    'social'       => 'Social & Messaging',
-    'converter'    => 'Format Converters',
-    'general'      => 'Online Optimizers'
+    'primary' => 'Image Size Compressor',
+    'size'    => 'Size-Specific Reducers',
+    'format'  => 'Format Compressors',
+    'action'  => 'Broad Image Tools'
 ];
 $categoryName = $categoryNames[$categorySlug] ?? 'Image Tools';
 
@@ -637,13 +633,11 @@ if (!function_exists('getRelativeLangLink')) {
           </div>
         </div>
 
-        <!-- 40 International Keyword Links Categorized -->
         <?php
         $categories = [
           'Size Reducers' => array_filter($allKeywords, fn($k) => $k['category'] === 'size'),
-          'Formats'       => array_filter($allKeywords, fn($k) => $k['category'] === 'format' || $k['category'] === 'converter'),
-          'Visa & Forms'  => array_filter($allKeywords, fn($k) => $k['category'] === 'visa' || $k['category'] === 'professional'),
-          'Web & Social'  => array_filter($allKeywords, fn($k) => in_array($k['category'], ['general', 'ecommerce', 'social']))
+          'Format Specific' => array_filter($allKeywords, fn($k) => $k['category'] === 'format'),
+          'Action & Broad Tools' => array_filter($allKeywords, fn($k) => in_array($k['category'], ['action', 'primary'])),
         ];
         foreach ($categories as $catTitle => $items):
         ?>
