@@ -255,10 +255,18 @@
           <span class="text-primary-700 font-semibold truncate max-w-[200px] sm:max-w-none">Compress Image to 20KB Online</span>
         </nav>
 
-        <!-- Trust Badge -->
-        <div class="flex justify-center mb-4">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-200">
+        <!-- Modern Feature & Trust Header Pill -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mb-4">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-200 shadow-2xs">
             <span class="w-2 h-2 rounded-full bg-action-500 animate-pulse"></span>
+            <strong class="font-bold text-dark-slate">Image Compressor &amp; Converter</strong>
+            <span class="text-primary-300 hidden sm:inline">&bull;</span>
+            <span class="text-slate-600">Compress &amp; convert AVIF, WebP, PNG, and JPG in browser</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-action-50 text-action-700 border border-action-200">
+            <svg class="w-3.5 h-3.5 text-action-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
             <span id="badgeText">100% Gratuit &amp; Illimité • Zéro Envoi sur Serveur • Confidentialité Totale</span>
           </span>
         </div>
@@ -301,7 +309,7 @@
             <p id="dropHintText" class="mt-4 text-sm font-medium text-dark-muted">
               ou déposez des images n’importe où sur cette page            </p>
             <div class="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-400">
-              <span>Supports JPG, PNG, WebP, GIF</span>
+              <span>Supports JPG, PNG, WebP, GIF, AVIF</span>
               <span>•</span>
               <span>Max file size: 10MB</span>
               <span>•</span>
@@ -314,41 +322,137 @@
             </div>
           </div>
 
-          <!-- Settings Panel (2-Column Grid) -->
+          <!-- Settings Panel (Interactive 2-Column Suite) -->
           <div id="settingsPanel" class="mt-8 pt-8 border-t border-surface-border">
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-primary-100 text-primary-600 flex items-center justify-center text-xs font-bold">1</div>
-                <h3 id="settingsHeading" class="font-bold text-dark-slate text-base sm:text-lg">Paramètres de Compression &amp; Optimisation</h3>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-primary-600 text-white flex items-center justify-center text-xs font-extrabold shadow-sm shadow-primary-600/30">1</div>
+                <div>
+                  <h3 id="settingsHeading" class="font-bold text-dark-slate text-base sm:text-lg leading-tight">Paramètres de Compression &amp; Optimisation</h3>
+                  <span id="settingsSub" class="text-xs text-slate-500">Ajustez la qualité et le format de sortie</span>
+                </div>
               </div>
-              <span id="settingsSub" class="text-xs text-slate-500">Ajustez la qualité et le format de sortie</span>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium self-start sm:self-auto">
+                <span class="w-1.5 h-1.5 rounded-full bg-action-500"></span>
+                <span>In-Browser RAM Engine</span>
+              </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-surface-muted/60 p-5 rounded-2xl border border-surface-border">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-slate-50/70 p-5 sm:p-6 rounded-2xl border border-surface-border shadow-soft">
               
-              <!-- Quality Slider -->
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <label id="labelQuality" class="block text-xs font-semibold uppercase tracking-wider text-slate-500">Qualité de l’Image</label>
-                  <span id="qualityVal" class="text-xs font-bold text-primary-700 bg-primary-100 px-2 py-0.5 rounded-md">50%</span>
+              <!-- Quality & Compression Ratio Control -->
+              <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <label id="labelQuality" class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                      <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                      </svg>
+                      <span>Qualité de l’Image</span>
+                    </label>
+                    <span id="qualityVal" class="text-xs font-extrabold text-primary-700 bg-primary-50 border border-primary-200 px-2.5 py-0.5 rounded-md shadow-2xs">50%</span>
+                  </div>
+
+                  <input type="range" id="qualityRange" min="10" max="100" value="50" class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer accent-primary-600 focus:outline-none" />
+                  
+                  <div class="flex justify-between text-[11px] font-medium text-slate-400 mt-2">
+                    <span class="flex items-center gap-1">&darr; Taille Minimale (10%)</span>
+                    <span class="flex items-center gap-1">Qualité Maximale (100%) &uarr;</span>
+                  </div>
                 </div>
-                <input type="range" id="qualityRange" min="10" max="100" value="50" class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer mt-3" />
-                <div class="flex justify-between text-[11px] text-slate-400 mt-1.5">
-                  <span>Taille Minimale (10%)</span>
-                  <span>Qualité Maximale (100%)</span>
+
+                <!-- Quick Quality Preset Chips -->
+                <div class="mt-4 pt-3 border-t border-slate-100">
+                  <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Quick Presets:</div>
+                  <div class="grid grid-cols-4 gap-1.5">
+                    <button type="button" data-quality="50" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-colors text-slate-600 text-center">
+                      50% <span class="hidden sm:inline text-[9px] block text-slate-400">Max Save</span>
+                    </button>
+                    <button type="button" data-quality="70" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-colors text-slate-600 text-center">
+                      70% <span class="hidden sm:inline text-[9px] block text-slate-400">Balanced</span>
+                    </button>
+                    <button type="button" data-quality="80" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border border-primary-300 bg-primary-50 text-primary-700 text-center">
+                      80% <span class="hidden sm:inline text-[9px] block text-primary-500">Default</span>
+                    </button>
+                    <button type="button" data-quality="95" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 transition-colors text-slate-600 text-center">
+                      95% <span class="hidden sm:inline text-[9px] block text-slate-400">Lossless</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <!-- Output Format -->
-              <div>
-                <label id="labelFormat" class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Format de Sortie</label>
-                <select id="formatSelect" class="w-full bg-white border border-surface-border rounded-xl px-3.5 py-2.5 text-sm font-medium text-dark-slate focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all cursor-pointer">
-                  <option value="original" >Identique à l’Original (Auto)</option>
-                  <option value="image/jpeg" selected>JPG / JPEG (Idéal pour Photos)</option>
-                  <option value="image/webp" >WebP (Compression Nouvelle Génération)</option>
-                  <option value="image/png" >PNG (Pour Logos &amp; Transparences)</option>
-                </select>
-                <p class="text-[11px] text-slate-400 mt-2">Le WebP offre jusqu’à 40% de réduction par rapport au JPG.</p>
+              <!-- Interactive Output Format Cards -->
+              <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <label id="labelFormat" class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                      <svg class="w-4 h-4 text-action-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span>Format de Sortie</span>
+                    </label>
+                    <span class="text-[10px] font-bold text-action-700 bg-action-50 border border-action-200 px-2 py-0.5 rounded-md uppercase">Next-Gen Ready</span>
+                  </div>
+
+                  <!-- Visual Format Selector Cards Grid -->
+                  <div class="grid grid-cols-2 gap-2" id="formatCardsGrid">
+                    
+                    <!-- Original / Auto -->
+                    <button type="button" data-format="original" class="format-card text-left p-2.5 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                      <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-xs font-extrabold uppercase font-mono tracking-tight">Original</span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Auto</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 leading-tight">Same as source</div>
+                    </button>
+
+                    <!-- JPG / JPEG -->
+                    <button type="button" data-format="image/jpeg" class="format-card text-left p-2.5 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
+                      <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-xs font-extrabold uppercase font-mono tracking-tight">JPG / JPEG</span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-primary-100 text-primary-700">Photos</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 leading-tight">Best for portraits &amp; scenery</div>
+                    </button>
+
+                    <!-- WebP -->
+                    <button type="button" data-format="image/webp" class="format-card text-left p-2.5 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                      <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-xs font-extrabold uppercase font-mono tracking-tight">WebP</span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-action-100 text-action-700 font-semibold">&minus;40% Size</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 leading-tight">Ultra fast web loading</div>
+                    </button>
+
+                    <!-- PNG -->
+                    <button type="button" data-format="image/png" class="format-card text-left p-2.5 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                      <div class="flex items-center justify-between mb-0.5">
+                        <span class="text-xs font-extrabold uppercase font-mono tracking-tight">PNG</span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800">Transparent</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 leading-tight">Crisp logos &amp; graphics</div>
+                    </button>
+
+                  </div>
+
+                  <!-- Synchronized Native Select (preserves complete JS compatibility) -->
+                  <select id="formatSelect" class="hidden" aria-label="Target Format">
+                    <option value="original" >Identique à l’Original (Auto)</option>
+                    <option value="image/jpeg" selected>JPG / JPEG (Idéal pour Photos)</option>
+                    <option value="image/webp" >WebP (Compression Nouvelle Génération)</option>
+                    <option value="image/png" >PNG (Pour Logos &amp; Transparences)</option>
+                  </select>
+                </div>
+
+                <div class="mt-3 pt-2.5 border-t border-slate-100">
+                  <p class="text-[11px] text-slate-500 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Le WebP offre jusqu’à 40% de réduction par rapport au JPG.</span>
+                  </p>
+                </div>
+
               </div>
 
             </div>

@@ -96,12 +96,15 @@
       }
       document.title = `${cleanName} - Free Online Image Compressor`;
 
-      if (toolParam.includes('png') && formatSelect) {
-        formatSelect.value = 'image/png';
-      } else if ((toolParam.includes('jpg') || toolParam.includes('jpeg')) && formatSelect) {
-        formatSelect.value = 'image/jpeg';
-      } else if (toolParam.includes('webp') && formatSelect) {
-        formatSelect.value = 'image/webp';
+      if (formatSelect) {
+        if (toolParam.includes('png')) {
+          formatSelect.value = 'image/png';
+        } else if (toolParam.includes('jpg') || toolParam.includes('jpeg')) {
+          formatSelect.value = 'image/jpeg';
+        } else if (toolParam.includes('webp')) {
+          formatSelect.value = 'image/webp';
+        }
+        formatSelect.dispatchEvent(new Event('change'));
       }
     }
   }
@@ -192,6 +195,73 @@
   if (qualityRange && qualityVal) {
     qualityRange.addEventListener('input', () => {
       qualityVal.textContent = `${qualityRange.value}%`;
+      document.querySelectorAll('.quality-preset-btn').forEach(btn => {
+        if (btn.getAttribute('data-quality') === qualityRange.value) {
+          btn.classList.add('border-primary-300', 'bg-primary-50', 'text-primary-700');
+          btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+        } else {
+          btn.classList.remove('border-primary-300', 'bg-primary-50', 'text-primary-700');
+          btn.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+        }
+      });
+    });
+  }
+
+  // Quality Presets
+  const qualityPresets = document.querySelectorAll('.quality-preset-btn');
+  if (qualityPresets.length > 0 && qualityRange) {
+    qualityPresets.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-quality');
+        if (val) {
+          qualityRange.value = val;
+          if (qualityVal) qualityVal.textContent = `${val}%`;
+          qualityPresets.forEach(b => {
+            b.classList.remove('border-primary-300', 'bg-primary-50', 'text-primary-700');
+            b.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+          });
+          btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+          btn.classList.add('border-primary-300', 'bg-primary-50', 'text-primary-700');
+          if (uploadedFiles.length > 0 && compressAllBtn) {
+            compressAllBtn.click();
+          }
+        }
+      });
+    });
+  }
+
+  // Visual Output Format Cards
+  const formatCards = document.querySelectorAll('.format-card');
+  function updateActiveFormatCard(targetFormatVal) {
+    formatCards.forEach(card => {
+      const cardFormat = card.getAttribute('data-format');
+      if (cardFormat === targetFormatVal) {
+        card.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
+        card.classList.add('border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20');
+      } else {
+        card.classList.remove('border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20');
+        card.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      }
+    });
+  }
+
+  if (formatCards.length > 0 && formatSelect) {
+    formatCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const selectedFormat = card.getAttribute('data-format');
+        if (selectedFormat) {
+          formatSelect.value = selectedFormat;
+          updateActiveFormatCard(selectedFormat);
+          formatSelect.dispatchEvent(new Event('change'));
+          if (uploadedFiles.length > 0 && compressAllBtn) {
+            compressAllBtn.click();
+          }
+        }
+      });
+    });
+
+    formatSelect.addEventListener('change', () => {
+      updateActiveFormatCard(formatSelect.value);
     });
   }
 
