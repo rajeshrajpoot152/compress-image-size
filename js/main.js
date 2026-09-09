@@ -439,6 +439,32 @@
     });
   }
 
+  // ── 11. Header & Navigation Controls ─────────────────────────
+  if (langToggleBtn && langMenu) {
+    langToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isClosed = langMenu.classList.toggle('hidden');
+      langToggleBtn.setAttribute('aria-expanded', !isClosed);
+      if (langChevron) {
+        langChevron.classList.toggle('rotate-180', !isClosed);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!langMenu.contains(e.target) && !langToggleBtn.contains(e.target)) {
+        langMenu.classList.add('hidden');
+        langToggleBtn.setAttribute('aria-expanded', 'false');
+        if (langChevron) langChevron.classList.remove('rotate-180');
+      }
+    });
+  }
+
+  if (mobileMenuBtn && mobileDrawer) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('hidden');
+    });
+  }
+
   // Initial Run
   document.addEventListener('DOMContentLoaded', () => {
     handleUrlKeywords();

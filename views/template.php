@@ -16,17 +16,35 @@ $categoryName = $categoryNames[$categorySlug] ?? 'Image Tools';
 
 // 10 Global Languages
 $globalLanguages = [
-    'en' => ['name' => 'English', 'flag' => '🇺🇸'],
-    'es' => ['name' => 'Español', 'flag' => '🇪🇸'],
-    'fr' => ['name' => 'Français', 'flag' => '🇫🇷'],
-    'de' => ['name' => 'Deutsch', 'flag' => '🇩🇪'],
-    'pt' => ['name' => 'Português', 'flag' => '🇵🇹'],
-    'zh' => ['name' => '中文', 'flag' => '🇨🇳'],
-    'ja' => ['name' => '日本語', 'flag' => '🇯🇵'],
-    'ar' => ['name' => 'العربية', 'flag' => '🇸🇦'],
-    'ru' => ['name' => 'Русский', 'flag' => '🇷🇺'],
-    'it' => ['name' => 'Italiano', 'flag' => '🇮🇹']
+    'en' => ['name' => 'English', 'code' => 'en'],
+    'es' => ['name' => 'Español', 'code' => 'es'],
+    'fr' => ['name' => 'Français', 'code' => 'fr'],
+    'de' => ['name' => 'Deutsch', 'code' => 'de'],
+    'pt' => ['name' => 'Português', 'code' => 'pt'],
+    'zh' => ['name' => '中文', 'code' => 'zh'],
+    'ja' => ['name' => '日本語', 'code' => 'ja'],
+    'ar' => ['name' => 'العربية', 'code' => 'ar'],
+    'ru' => ['name' => 'Русский', 'code' => 'ru'],
+    'it' => ['name' => 'Italiano', 'code' => 'it']
 ];
+
+if (!function_exists('getFlagSvg')) {
+    function getFlagSvg($code) {
+        $flags = [
+            'en' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640"/><path fill="#192f5d" d="M0 0h260v260H0z"/></svg>',
+            'es' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#aa151b" d="M0 0h640v480H0z"/><path fill="#f1bf00" d="M0 120h640v240H0z"/></svg>',
+            'fr' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><path fill="#002654" d="M0 0h213.3v480H0z"/><path fill="#ce1126" d="M426.7 0H640v480H426.7z"/></svg>',
+            'de' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ffce00" d="M0 320h640v160H0z"/><path d="M0 0h640v160H0z"/><path fill="#d00" d="M0 160h640v160H0z"/></svg>',
+            'pt' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ff0000" d="M256 0h384v480H256z"/><path fill="#006600" d="M0 0h256v480H0z"/><circle cx="256" cy="240" r="80" fill="#ffff00"/></svg>',
+            'zh' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#de2910" d="M0 0h640v480H0z"/><polygon fill="#ffde00" points="100,50 115,95 160,95 125,120 140,165 100,140 60,165 75,120 40,95 85,95"/></svg>',
+            'ja' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><circle cx="320" cy="240" r="144" fill="#bc002d"/></svg>',
+            'ar' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#00732f" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path d="M0 320h640v160H0z"/><path fill="#ff0000" d="M0 0h160v480H0z"/></svg>',
+            'ru' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v160H0z"/><path fill="#0039a6" d="M0 160h640v160H0z"/><path fill="#d52b1e" d="M0 320h640v160H0z"/></svg>',
+            'it' => '<svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#009246" d="M0 0h213.3v480H0z"/><path fill="#fff" d="M213.3 0h213.4v480H213.3z"/><path fill="#ce2b37" d="M426.7 0H640v480H426.7z"/></svg>'
+        ];
+        return $flags[$code] ?? '';
+    }
+}
 
 if (!function_exists('getRelativeLangLink')) {
     function getRelativeLangLink($targetLang, $targetSlug, $currentLang) {
@@ -180,9 +198,7 @@ if (!function_exists('getRelativeLangLink')) {
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
             <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
-              <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
+              <span id="currentLangFlag" class="inline-flex items-center"><?= getFlagSvg($currentLang) ?></span>
               <span id="currentLangText"><?= htmlspecialchars($globalLanguages[$currentLang]['name'] ?? 'English') ?></span>
               <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" id="langChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -196,7 +212,10 @@ if (!function_exists('getRelativeLangLink')) {
                 $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
               ?>
                 <a href="<?= $linkToLang ?>" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors <?= $currentLang === $code ? 'font-bold bg-primary-50 text-primary-600' : '' ?>">
-                  <span><?= $info['flag'] ?> <?= $info['name'] ?></span>
+                  <span class="flex items-center gap-2.5">
+                    <?= getFlagSvg($code) ?>
+                    <span><?= $info['name'] ?></span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400"><?= $code ?></span>
                 </a>
               <?php endforeach; ?>
@@ -667,7 +686,7 @@ if (!function_exists('getRelativeLangLink')) {
             $langHref = getRelativeLangLink($lCode, $currentSlug, $currentLang);
           ?>
             <a href="<?= $langHref ?>" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 <?= $currentLang === $lCode ? 'font-bold text-primary-600' : 'text-slate-600' ?>">
-              <span><?= $lData['flag'] ?></span>
+              <?= getFlagSvg($lCode) ?>
               <span><?= $lData['name'] ?></span>
             </a>
           <?php endforeach; ?>

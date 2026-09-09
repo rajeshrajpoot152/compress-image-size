@@ -147,9 +147,7 @@
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
             <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
-              <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
+              <span id="currentLangFlag" class="inline-flex items-center"><svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ffce00" d="M0 320h640v160H0z"/><path d="M0 0h640v160H0z"/><path fill="#d00" d="M0 160h640v160H0z"/></svg></span>
               <span id="currentLangText">Deutsch</span>
               <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" id="langChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -160,43 +158,63 @@
             <div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50">
               <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">Global Top 10 Languages</div>
                               <a href="../resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇺🇸 English</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640"/><path fill="#192f5d" d="M0 0h260v260H0z"/></svg>                    <span>English</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">en</span>
                 </a>
                               <a href="../es/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇪🇸 Español</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#aa151b" d="M0 0h640v480H0z"/><path fill="#f1bf00" d="M0 120h640v240H0z"/></svg>                    <span>Español</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">es</span>
                 </a>
                               <a href="../fr/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇫🇷 Français</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><path fill="#002654" d="M0 0h213.3v480H0z"/><path fill="#ce1126" d="M426.7 0H640v480H426.7z"/></svg>                    <span>Français</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">fr</span>
                 </a>
                               <a href="resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors font-bold bg-primary-50 text-primary-600">
-                  <span>🇩🇪 Deutsch</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ffce00" d="M0 320h640v160H0z"/><path d="M0 0h640v160H0z"/><path fill="#d00" d="M0 160h640v160H0z"/></svg>                    <span>Deutsch</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">de</span>
                 </a>
                               <a href="../pt/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇵🇹 Português</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ff0000" d="M256 0h384v480H256z"/><path fill="#006600" d="M0 0h256v480H0z"/><circle cx="256" cy="240" r="80" fill="#ffff00"/></svg>                    <span>Português</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">pt</span>
                 </a>
                               <a href="../zh/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇨🇳 中文</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#de2910" d="M0 0h640v480H0z"/><polygon fill="#ffde00" points="100,50 115,95 160,95 125,120 140,165 100,140 60,165 75,120 40,95 85,95"/></svg>                    <span>中文</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">zh</span>
                 </a>
                               <a href="../ja/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇯🇵 日本語</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><circle cx="320" cy="240" r="144" fill="#bc002d"/></svg>                    <span>日本語</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">ja</span>
                 </a>
                               <a href="../ar/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇸🇦 العربية</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#00732f" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path d="M0 320h640v160H0z"/><path fill="#ff0000" d="M0 0h160v480H0z"/></svg>                    <span>العربية</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">ar</span>
                 </a>
                               <a href="../ru/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇷🇺 Русский</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v160H0z"/><path fill="#0039a6" d="M0 160h640v160H0z"/><path fill="#d52b1e" d="M0 320h640v160H0z"/></svg>                    <span>Русский</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">ru</span>
                 </a>
                               <a href="../it/resize-image-to-100kb.html" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors ">
-                  <span>🇮🇹 Italiano</span>
+                  <span class="flex items-center gap-2.5">
+                    <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#009246" d="M0 0h213.3v480H0z"/><path fill="#fff" d="M213.3 0h213.4v480H213.3z"/><path fill="#ce2b37" d="M426.7 0H640v480H426.7z"/></svg>                    <span>Italiano</span>
+                  </span>
                   <span class="text-[10px] uppercase font-mono text-slate-400">it</span>
                 </a>
                           </div>
@@ -776,44 +794,34 @@
         <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Available Worldwide in Top 10 International Languages:</span>
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs">
                       <a href="../resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇺🇸</span>
-              <span>English</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0z"/><path stroke="#fff" stroke-width="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640"/><path fill="#192f5d" d="M0 0h260v260H0z"/></svg>              <span>English</span>
             </a>
                       <a href="../es/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇪🇸</span>
-              <span>Español</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#aa151b" d="M0 0h640v480H0z"/><path fill="#f1bf00" d="M0 120h640v240H0z"/></svg>              <span>Español</span>
             </a>
                       <a href="../fr/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇫🇷</span>
-              <span>Français</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><path fill="#002654" d="M0 0h213.3v480H0z"/><path fill="#ce1126" d="M426.7 0H640v480H426.7z"/></svg>              <span>Français</span>
             </a>
                       <a href="resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 font-bold text-primary-600">
-              <span>🇩🇪</span>
-              <span>Deutsch</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ffce00" d="M0 320h640v160H0z"/><path d="M0 0h640v160H0z"/><path fill="#d00" d="M0 160h640v160H0z"/></svg>              <span>Deutsch</span>
             </a>
                       <a href="../pt/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇵🇹</span>
-              <span>Português</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#ff0000" d="M256 0h384v480H256z"/><path fill="#006600" d="M0 0h256v480H0z"/><circle cx="256" cy="240" r="80" fill="#ffff00"/></svg>              <span>Português</span>
             </a>
                       <a href="../zh/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇨🇳</span>
-              <span>中文</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#de2910" d="M0 0h640v480H0z"/><polygon fill="#ffde00" points="100,50 115,95 160,95 125,120 140,165 100,140 60,165 75,120 40,95 85,95"/></svg>              <span>中文</span>
             </a>
                       <a href="../ja/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇯🇵</span>
-              <span>日本語</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v480H0z"/><circle cx="320" cy="240" r="144" fill="#bc002d"/></svg>              <span>日本語</span>
             </a>
                       <a href="../ar/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇸🇦</span>
-              <span>العربية</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#00732f" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path d="M0 320h640v160H0z"/><path fill="#ff0000" d="M0 0h160v480H0z"/></svg>              <span>العربية</span>
             </a>
                       <a href="../ru/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇷🇺</span>
-              <span>Русский</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#fff" d="M0 0h640v160H0z"/><path fill="#0039a6" d="M0 160h640v160H0z"/><path fill="#d52b1e" d="M0 320h640v160H0z"/></svg>              <span>Русский</span>
             </a>
                       <a href="../it/resize-image-to-100kb.html" class="hover:text-primary-600 transition-colors flex items-center gap-1.5 text-slate-600">
-              <span>🇮🇹</span>
-              <span>Italiano</span>
+              <svg class="w-4.5 h-3 rounded-[2px] overflow-hidden shadow-xs border border-slate-200/90 inline-block flex-shrink-0" viewBox="0 0 640 480"><path fill="#009246" d="M0 0h213.3v480H0z"/><path fill="#fff" d="M213.3 0h213.4v480H213.3z"/><path fill="#ce2b37" d="M426.7 0H640v480H426.7z"/></svg>              <span>Italiano</span>
             </a>
                   </div>
       </div>
