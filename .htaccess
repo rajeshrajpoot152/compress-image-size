@@ -1,0 +1,16 @@
+# Enable URL Rewriting
+RewriteEngine On
+RewriteBase /
+
+# Stop rewrite if physical file or directory exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Multi-Language Routing: /es/compress-jpeg-to-50kb
+RewriteRule ^(en|es|fr|de|pt|zh|ja|ar|ru|it)/([a-z0-9\-]+)/?$ index.php?lang=$1&tool=$2 [L,QSA]
+
+# Language Directory Root: /es/
+RewriteRule ^(en|es|fr|de|pt|zh|ja|ar|ru|it)/?$ index.php?lang=$1 [L,QSA]
+
+# Default English Tool: /compress-image-to-50kb
+RewriteRule ^([a-z0-9\-]+)/?$ index.php?tool=$1 [L,QSA]

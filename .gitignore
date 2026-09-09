@@ -1,0 +1,12 @@
+# Dependencies & Binaries
+tailwindcss.exe
+*.exe
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & temp
+*.log
+scratch/
