@@ -25,23 +25,58 @@ body {
   background: #94A3B8;
 }
 
-/* Dropzone drag-active state */
+/* Dropzone styling & states */
+.dropzone {
+  transition: all 0.25s ease;
+}
+.dropzone:hover {
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
 .dropzone.dragover {
   border-color: #2563EB !important;
   background-color: #EFF6FF !important;
   transform: scale(1.008);
 }
 
-/* Clean AdSense Container Placeholder */
-.adsense-slot {
+/* Clean Transparent AdSense Containers (Zero Wireframe Boxes / No Layout Shift) */
+.adsense-slot-clean {
   position: relative;
-  background: repeating-linear-gradient(
-    -45deg,
-    #F8FAFC,
-    #F8FAFC 10px,
-    #F1F5F9 10px,
-    #F1F5F9 20px
-  );
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  min-height: 0;
+  transition: all 0.3s ease;
+}
+.adsense-slot-clean ins.adsbygoogle[data-ad-status="filled"],
+.adsense-slot-clean ins.adsbygoogle iframe {
+  display: block !important;
+  margin: 0 auto;
+}
+.adsense-slot-clean:has(ins[data-ad-status="filled"]) {
+  min-height: 90px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Compact Dropzone State (Smoothly shrinks when files are active) */
+.dropzone.compact-mode {
+  padding: 1rem 1.5rem !important;
+  border-width: 1.5px !important;
+}
+.dropzone.compact-mode .drop-icon-box {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  margin-bottom: 0.25rem !important;
+}
+.dropzone.compact-mode .drop-icon-box svg {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+.dropzone.compact-mode .drop-extra-hints {
+  display: none !important;
 }
 
 /* Quality Range Slider styling */
@@ -58,4 +93,21 @@ input[type=range] {
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
   outline: 2px solid #2563EB;
   outline-offset: 2px;
+}
+
+/* ── Hero Banner with banner.jpg ─────────────────────────────────── */
+.hero-banner-section {
+  position: relative;
+  background-color: #0F172A;
+}
+
+.hero-banner-bg {
+  background-image: url('../images/banner.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.hero-banner-overlay {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.70) 100%);
 }

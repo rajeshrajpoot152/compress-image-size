@@ -10,6 +10,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Primary (60%) - Clean & Focused
+        'bg-light': '#F8FAFC',
+        'bg-card': '#FFFFFF',
+        'bg-muted': '#F1F5F9',
+        surface: {
+          light:  '#F8FAFC', // Clean Off-White background
+          card:   '#FFFFFF', // Pure White card container
+          border: '#E2E8F0', // Crisp subtle border
+          muted:  '#F1F5F9', // Subtle section tint
+        },
+
+        // Secondary (30%) - Trust & Professionalism
+        'brand-blue': {
+          DEFAULT: '#2563EB', // Royal Blue (Trust)
+          dark:    '#1E3A8A', // Deep Navy
+          light:   '#3B82F6',
+          50:      '#EFF6FF',
+          100:     '#DBEAFE',
+          200:     '#BFDBFE',
+          600:     '#2563EB',
+          700:     '#1D4ED8',
+          800:     '#1E40AF',
+          900:     '#1E3A8A',
+        },
         primary: {
           50:  '#EFF6FF',
           100: '#DBEAFE',
@@ -20,24 +44,42 @@ module.exports = {
           800: '#1E40AF',
           900: '#1E3A8A',
         },
+
+        // Typography (Optimal readability WCAG 4.5:1)
+        'text-charcoal': '#0F172A',
+        'text-cool':     '#475569',
+        dark: {
+          slate: '#0F172A', // Dark Charcoal heading & high-contrast text
+          body:  '#475569', // Cool Grey body paragraph text (WCAG AAA)
+          muted: '#64748B', // Secondary metadata text
+        },
+
+        // Accent (10%) - High Conversion CTAs
+        'cta-green': {
+          DEFAULT: '#10B981', // Neon Emerald Green
+          hover:   '#059669',
+          50:      '#F0FDF4',
+          100:     '#DCFCE7',
+          500:     '#10B981',
+          600:     '#16A34A',
+          700:     '#15803D',
+        },
+        'cta-orange': {
+          DEFAULT: '#F97316', // Vibrant Orange CTA
+          hover:   '#EA580C',
+          50:      '#FFF7ED',
+          100:     '#FFEDD5',
+          500:     '#F97316',
+          600:     '#EA580C',
+          700:     '#C2410C',
+        },
         action: {
           50:  '#F0FDF4',
           100: '#DCFCE7',
-          500: '#22C55E',
+          500: '#10B981',
           600: '#16A34A', // Conversion Green CTA
           700: '#15803D',
           800: '#166534',
-        },
-        surface: {
-          light:  '#F8FAFC', // Clean Off-White background
-          card:   '#FFFFFF', // Pure White card container
-          border: '#E2E8F0', // Crisp subtle border
-          muted:  '#F1F5F9', // Subtle section tint
-        },
-        dark: {
-          slate: '#0F172A', // Dark Slate heading & high-contrast text
-          body:  '#334155', // Body paragraph text (WCAG AAA)
-          muted: '#64748B', // Secondary metadata text
         }
       },
       fontFamily: {

@@ -1,0 +1,23 @@
+{
+  "name": "CompressImageSize - Free Image Compressor",
+  "short_name": "CompressImage",
+  "description": "100% Free, Private, Client-Side Image Compressor in KB and MB.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "images/logo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -362,6 +362,13 @@
     uploadedFiles = [...uploadedFiles, ...validFiles];
     updateQueueUI();
     processBatch(validFiles);
+
+    // Auto-scroll so results and download buttons appear immediately in eye focus
+    setTimeout(() => {
+      if (resultsContainer) {
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 120);
   }
 
   function updateQueueUI() {
@@ -371,12 +378,18 @@
     }
     if (count > 0) {
       clearAllBtn?.classList.remove('hidden');
+      clearAllBtn?.classList.add('inline-flex');
+      batchStatsCard?.classList.remove('hidden');
       resultsContainer?.classList.remove('hidden');
+      dropzone?.classList.add('compact-mode');
     } else {
       clearAllBtn?.classList.add('hidden');
+      clearAllBtn?.classList.remove('inline-flex');
       downloadAllBtn?.classList.add('hidden');
+      downloadAllBtn?.classList.remove('inline-flex');
       resultsContainer?.classList.add('hidden');
       batchStatsCard?.classList.add('hidden');
+      dropzone?.classList.remove('compact-mode');
     }
   }
 
@@ -496,6 +509,7 @@
 
   function compressSingleFile(file) {
     return new Promise((resolve) => {
+      const startTime = Date.now();
       // Use Blob URL for low memory footprint
       const originalBlobUrl = URL.createObjectURL(file);
       const img = new Image();
@@ -515,8 +529,13 @@
           }
         }
 
-        // Clamp excessive dimensions (e.g. 50MP DSLR photos) to max 4096px to protect memory
-        const MAX_DIM = 4096;
+        // Mobile Device Memory & iOS Safari Canvas Safeguard
+        // Safari iOS crash threshold is ~16.7M pixels; cap iOS to 2560px and mobile to 3200px
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const MAX_DIM = isIOS ? 2560 : (isMobile ? 3200 : 4096);
+
         let targetWidth = img.naturalWidth || img.width;
         let targetHeight = img.naturalHeight || img.height;
 
@@ -562,10 +581,7 @@
         }
 
         const blobUrl = URL.createObjectURL(compressedBlob);
-        let extension = 'jpg';
-        if (selectedFormat === 'image/png') extension = 'png';
-        else if (selectedFormat === 'image/webp') extension = 'webp';
-        else if (selectedFormat === 'image/jpeg') extension = 'jpg';
+        const extension = selectedFormat === 'image/png' ? 'png' : selectedFormat === 'image/webp' ? 'webp' : 'jpg';
 
         const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
         const outputName = `${rawName}-compressed.${extension}`;
@@ -582,7 +598,12 @@
           originalUrl: originalBlobUrl,
         };
 
-        resolve(itemData);
+        // User Psychology: Perceived value micro-delay (450ms) for high satisfaction feedback
+        const elapsedTime = Date.now() - startTime;
+        const delay = Math.max(0, 450 - elapsedTime);
+        setTimeout(() => {
+          resolve(itemData);
+        }, delay);
       };
 
       img.onerror = function () {
@@ -629,78 +650,85 @@
     if (statTotalCount) statTotalCount.textContent = `${count}`;
     if (statOriginalSize) statOriginalSize.textContent = formatBytes(totalOrig);
     if (statNewSize) statNewSize.textContent = formatBytes(totalNew);
-    if (statSavingsPercent) statSavingsPercent.innerHTML = `&darr; ${savingsPercent}% Saved`;
+    if (statSavingsPercent) statSavingsPercent.textContent = `${savingsPercent}%`;
 
     if (resultsCount) resultsCount.textContent = `${count}`;
-    if (downloadZipBtnText) downloadZipBtnText.textContent = `Download All as ZIP (${count} Files)`;
+    if (downloadZipBtnText) downloadZipBtnText.textContent = count > 1 ? `Download all images (${count})` : 'Download all images';
   }
 
-  // ── 10. Result Card Rendering with Compare & Download ────────
+  // ── 10. Result Row Rendering (TinyPNG-Style High Clarity Strip) ─
   function renderResultCard(item) {
     if (!resultsList) return;
 
     const savings = Math.max(0, Math.round(((item.originalSize - item.newSize) / item.originalSize) * 100));
     const isSmaller = item.newSize < item.originalSize;
+    const fileExt = item.name.split('.').pop().toUpperCase();
 
-    const card = document.createElement('div');
-    card.className =
-      'bg-white rounded-2xl p-4 sm:p-5 border border-surface-border shadow-soft flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-in hover:border-primary-300 transition-all';
+    const row = document.createElement('div');
+    row.className =
+      'flex items-center justify-between p-2.5 sm:p-3 hover:bg-slate-50/90 transition-colors gap-2 sm:gap-4 group animate-fade-in';
 
-    card.innerHTML = `
-      <div class="flex items-center gap-3.5 w-full sm:w-auto min-w-0">
-        <!-- Thumbnail with preview trigger -->
-        <button type="button" class="preview-btn relative flex-shrink-0 group focus:outline-none rounded-xl overflow-hidden" title="Click to inspect quality">
-          <img src="${item.url}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover border border-slate-200 bg-slate-50 shadow-2xs group-hover:scale-105 transition-transform" />
-          <div class="absolute inset-0 bg-primary-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+    // Format badge color accent (like TinyPNG format tags)
+    const isPng = fileExt === 'PNG';
+    const isWebp = fileExt === 'WEBP';
+    const badgeClass = isPng 
+      ? 'bg-blue-50 text-blue-600 border-blue-200' 
+      : (isWebp ? 'bg-purple-50 text-purple-600 border-purple-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200');
+
+    row.innerHTML = `
+      <!-- Left: Thumbnail Preview & File Metadata -->
+      <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
+        <!-- Thumbnail Preview -->
+        <button type="button" class="preview-btn relative flex-shrink-0 focus:outline-none rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shadow-2xs group-hover:border-primary-400 transition-all cursor-pointer" title="Click to preview & compare">
+          <img src="${item.url}" alt="${item.name}" class="w-10 h-10 sm:w-11 sm:h-11 object-cover" />
+          <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
           </div>
         </button>
 
+        <!-- Filename & Original File Size -->
         <div class="min-w-0 flex-1">
-          <h5 class="text-xs sm:text-sm font-bold text-dark-slate truncate max-w-[200px] sm:max-w-xs" title="${item.name}">${item.name}</h5>
-          <div class="flex items-center gap-2 text-[11px] sm:text-xs text-slate-500 mt-1 flex-wrap">
-            ${item.width ? `<span>${item.width} &times; ${item.height} px</span><span>•</span>` : ''}
-            <span class="line-through text-slate-400">${formatBytes(item.originalSize)}</span>
-            <span>&rarr;</span>
-            <span class="font-bold text-primary-700">${formatBytes(item.newSize)}</span>
+          <h5 class="text-xs sm:text-sm font-semibold text-slate-800 truncate" title="${item.name}">${item.name}</h5>
+          <div class="flex items-center gap-1.5 mt-0.5 text-xs">
+            <span class="inline-block px-1.5 py-0.5 text-[10px] font-extrabold uppercase rounded border ${badgeClass} font-mono tracking-wider">${fileExt}</span>
+            <span class="text-slate-400 font-medium text-[11px] sm:text-xs">${formatBytes(item.originalSize)}</span>
           </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-between sm:justify-end gap-2 sm:gap-2.5 w-full sm:w-auto flex-shrink-0">
-        <!-- Savings Badge -->
-        ${
-          isSmaller
-            ? `<span class="px-2.5 py-1 text-[11px] sm:text-xs font-bold bg-action-50 text-action-700 border border-action-200 rounded-lg whitespace-nowrap">
-                &darr; ${savings}% Saved
-              </span>`
-            : `<span class="px-2.5 py-1 text-[11px] sm:text-xs font-bold bg-slate-100 text-slate-600 rounded-lg whitespace-nowrap">Optimized</span>`
-        }
+      <!-- Right: Savings %, New Size & Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+        <!-- Savings Percentage & New Compressed Size -->
+        <div class="text-right min-w-[55px] sm:min-w-[70px]">
+          <span class="text-xs sm:text-sm font-black text-emerald-600 font-mono block">
+            ${isSmaller ? `-${savings}%` : '0%'}
+          </span>
+          <span class="text-[11px] sm:text-xs text-slate-500 font-medium block">${formatBytes(item.newSize)}</span>
+        </div>
 
-        <!-- Compare Button -->
-        <button type="button" class="compare-btn inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all" title="Side-by-side quality comparison">
-          <svg class="w-3.5 h-3.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-          <span class="hidden sm:inline">Compare</span>
+        <!-- Compare Modal Trigger Button -->
+        <button type="button" class="compare-btn p-1.5 text-slate-400 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-all cursor-pointer" title="Inspect Original vs Compressed">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
         </button>
 
-        <!-- Individual Download Button -->
-        <a href="${item.url}" download="${item.name}" class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-xs font-bold text-white bg-action-600 hover:bg-action-700 active:scale-95 rounded-xl shadow-xs transition-all">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        <!-- Individual Download Pill Button (TinyPNG Style: Download Icon + Format Tag) -->
+        <a href="${item.url}" download="${item.name}" class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-action-600 border border-slate-200 hover:border-action-600 rounded-lg shadow-2xs transition-all cursor-pointer" title="Download ${item.name}">
+          <svg class="w-3.5 h-3.5 text-slate-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span>Download</span>
+          <span class="font-mono uppercase text-[11px] font-extrabold">${fileExt}</span>
         </a>
       </div>
     `;
 
     // Hook compare modal events
-    const compareBtn = card.querySelector('.compare-btn');
-    const previewBtn = card.querySelector('.preview-btn');
+    const compareBtn = row.querySelector('.compare-btn');
+    const previewBtn = row.querySelector('.preview-btn');
     const openModal = () => openCompareModal(item);
     if (compareBtn) compareBtn.addEventListener('click', openModal);
     if (previewBtn) previewBtn.addEventListener('click', openModal);
 
-    resultsList.appendChild(card);
+    resultsList.appendChild(row);
   }
 
   // ── 11. Compare Modal Logic ──────────────────────────────────
@@ -800,9 +828,13 @@
     });
   }
 
-  // ── 13. Sequential Multi-Download Fallback ───────────────────
+  // ── 13. Sequential Multi-Download Fallback & Bottom Action ───
   if (downloadAllBtn) {
     downloadAllBtn.addEventListener('click', () => {
+      if (downloadZipBtn && processedFiles.length > 1) {
+        downloadZipBtn.click();
+        return;
+      }
       processedFiles.forEach((item, index) => {
         setTimeout(() => {
           const a = document.createElement('a');

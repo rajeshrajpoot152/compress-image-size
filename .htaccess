@@ -1,16 +1,44 @@
-# Enable URL Rewriting
+# ==============================================================================
+# CompressImageSize - High Performance Production Apache Configuration
+# ==============================================================================
+
 RewriteEngine On
-RewriteBase /
 
-# Stop rewrite if physical file or directory exists
-RewriteCond %{REQUEST_FILENAME} !-f
+# 1. Clean URLs (Allow URLs without .html extension)
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
 
-# Multi-Language Routing: /es/compress-jpeg-to-50kb
-RewriteRule ^(en|es|fr|de|pt|zh|ja|ar|ru|it)/([a-z0-9\-]+)/?$ index.php?lang=$1&tool=$2 [L,QSA]
+# 2. Custom 404 Error Page
+ErrorDocument 404 /404.html
 
-# Language Directory Root: /es/
-RewriteRule ^(en|es|fr|de|pt|zh|ja|ar|ru|it)/?$ index.php?lang=$1 [L,QSA]
+# 3. Gzip & Deflate Compression (Core Web Vitals Optimization)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+  AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
 
-# Default English Tool: /compress-image-to-50kb
-RewriteRule ^([a-z0-9\-]+)/?$ index.php?tool=$1 [L,QSA]
+# 4. Browser Caching (1 Year for static assets)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# 5. Security Headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 64" width="360" height="64" fill="none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="logoShadow" x="-10%" y="-10%" width="130%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#2563eb" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Logo App Icon -->
+  <g filter="url(#logoShadow)">
+    <rect x="8" y="8" width="48" height="48" rx="14" fill="url(#logoGrad)"/>
+    <!-- Photo landscape mountain & sun icon -->
+    <path d="M19 38l6.5-6.5a1.5 1.5 0 012.1 0L39 43" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M33 34l3.5-3.5a1.5 1.5 0 012.1 0L45 37" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="36" cy="22" r="3" fill="#ffffff"/>
+    <!-- Compression Arrows Accent -->
+    <path d="M18 19l4 4m0 0l4-4m-4 4V16" stroke="#93c5fd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Typography: CompressImageSize -->
+  <text x="68" y="42" font-family="'Poppins', 'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5" fill="#2563eb">Compress</text>
+  <text x="198" y="42" font-family="'Poppins', 'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="26" letter-spacing="-0.5" fill="#0f172a">ImageSize</text>
+
+  <!-- Free Badge Pill -->
+  <rect x="306" y="24" width="44" height="20" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1.2"/>
+  <text x="328" y="38" text-anchor="middle" font-family="'Poppins', 'Segoe UI', system-ui, sans-serif" font-weight="800" font-size="10" letter-spacing="0.5" fill="#059669">FREE</text>
+</svg>

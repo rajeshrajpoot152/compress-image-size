@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# XML Sitemap Index
+Sitemap: https://compressimagesize.com/sitemap.xml

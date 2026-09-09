@@ -52,30 +52,21 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
     }
 
     return <<<HTML
-  <!-- 1. HEADER -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border transition-all duration-300">
+  <!-- 1. HEADER (Full-Width Header with Contained Content) -->
+  <header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-surface-border shadow-xs transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-18">
+      <div class="flex items-center justify-between h-16 sm:h-17">
         
         <!-- Logo -->
-        <a href="{$homeLink}" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg p-1">
-          <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-md shadow-primary-600/25 group-hover:bg-primary-700 transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 19L5 5" class="opacity-40" />
-            </svg>
-          </div>
-          <div>
-            <span class="text-xl font-extrabold tracking-tight text-primary-600">Compress</span><span class="text-xl font-extrabold tracking-tight text-dark-slate">ImageSize</span>
-            <span class="hidden sm:inline-block ml-1.5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-action-100 text-action-700 rounded-full">Free</span>
-          </div>
+        <a href="{$homeLink}" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg p-1" aria-label="CompressImageSize Home">
+          <img src="{$prefix}images/logo.svg" alt="CompressImageSize - 100% Free Online Image Compressor" class="h-8 sm:h-9 w-auto" width="225" height="40" />
         </a>
 
         <!-- Navigation Links -->
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-dark-body">
+        <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
           <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Image Compressor</a>
           <a href="{$homeLink}#how-to" class="hover:text-primary-600 transition-colors">How It Works</a>
-          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Methodology & E-E-A-T</a>
+          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Quality & Security</a>
           <a href="{$homeLink}#features" class="hover:text-primary-600 transition-colors">Features</a>
           <a href="{$homeLink}#faq" class="hover:text-primary-600 transition-colors">FAQ</a>
         </nav>
@@ -83,7 +74,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         <!-- World Top 10 Language Switcher -->
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
-            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
+            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-1.5 sm:py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
               <span id="currentLangFlag" class="inline-flex items-center">
                 {$currentFlag}
               </span>
@@ -108,15 +99,15 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
           </button>
         </div>
       </div>
-    </div>
 
-    <!-- Mobile Drawer -->
-    <div id="mobileDrawer" class="hidden md:hidden border-t border-surface-border bg-white px-4 pt-3 pb-6 space-y-3">
-      <a href="{$homeLink}" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Image Compressor</a>
-      <a href="{$homeLink}#how-to" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">How It Works</a>
-      <a href="{$homeLink}#eeat-authority" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">E-E-A-T & Methodology</a>
-      <a href="{$homeLink}#features" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Features</a>
-      <a href="{$homeLink}#faq" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">FAQ</a>
+      <!-- Mobile Drawer -->
+      <div id="mobileDrawer" class="hidden md:hidden border-t border-surface-border bg-white px-2 pt-3 pb-5 space-y-2">
+        <a href="{$homeLink}" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Image Compressor</a>
+        <a href="{$homeLink}#how-to" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">How It Works</a>
+        <a href="{$homeLink}#eeat-authority" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Quality & Standards</a>
+        <a href="{$homeLink}#features" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Features</a>
+        <a href="{$homeLink}#faq" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">FAQ</a>
+      </div>
     </div>
   </header>
 HTML;
@@ -161,7 +152,7 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
         <div class="flex items-center gap-4">
           <a href="{$privacyLink}" class="{$activePrivacy}">Privacy Policy</a>
           <a href="{$termsLink}" class="{$activeTerms}">Terms of Service</a>
-          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Editorial & E-E-A-T Policy</a>
+          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Editorial & Quality Policy</a>
         </div>
       </div>
 
@@ -189,6 +180,13 @@ foreach ($languages as $langCode => $langInfo) {
     $footerPrivacy = getCommonFooter($langCode, $prefix, $languages, $flags, 'privacy');
     $canonicalPrivacy = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "privacy-policy.html";
 
+    $privacyHreflang = '';
+    foreach ($languages as $lCode => $lInfo) {
+        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "privacy-policy.html";
+        $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrl}\" />\n";
+    }
+    $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/privacy-policy.html\" />";
+
     $privacyHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
@@ -199,13 +197,21 @@ foreach ($languages as $langCode => $langInfo) {
   <meta name="description" content="Discover how CompressImageSize protects your confidentiality with 100% in-browser client-side WebAssembly compression. No images ever touch external cloud servers. GDPR & CCPA compliant.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="{$canonicalPrivacy}">
+{$privacyHreflang}
 
-  <!-- Open Graph -->
+  <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="{$canonicalPrivacy}">
   <meta property="og:title" content="Privacy Policy - CompressImageSize">
   <meta property="og:description" content="Zero-Server Privacy Guarantee: All image compression executes locally in your browser.">
+  <meta property="og:image" content="https://compressimagesize.com/images/og-image.jpg">
   <meta property="og:site_name" content="CompressImageSize">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy Policy - CompressImageSize">
+  <meta name="twitter:description" content="Zero-Server Privacy Guarantee: All image compression executes locally in your browser.">
+  <meta name="twitter:image" content="https://compressimagesize.com/images/og-image.jpg">
+
+  <link rel="icon" href="{$prefix}images/favicon.png">
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -348,7 +354,7 @@ foreach ($languages as $langCode => $langInfo) {
         </section>
 
         <section class="border-b border-surface-border pb-8">
-          <h2 class="text-xl font-bold text-dark-slate mb-3">7. E-E-A-T Compliance &amp; Security Auditing</h2>
+          <h2 class="text-xl font-bold text-dark-slate mb-3">7. Quality Standards &amp; Security Auditing</h2>
           <div class="bg-slate-50 border border-surface-border rounded-xl p-4 flex items-start gap-4">
             <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-lg flex-shrink-0">
               EV
@@ -402,6 +408,13 @@ HTML;
     $footerTerms = getCommonFooter($langCode, $prefix, $languages, $flags, 'terms');
     $canonicalTerms = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "terms-of-service.html";
 
+    $termsHreflang = '';
+    foreach ($languages as $lCode => $lInfo) {
+        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "terms-of-service.html";
+        $termsHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrl}\" />\n";
+    }
+    $termsHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/terms-of-service.html\" />";
+
     $termsHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
@@ -412,13 +425,21 @@ HTML;
   <meta name="description" content="Read the CompressImageSize Terms of Service. Understand your rights, 100% file copyright ownership, acceptable usage, and warranty disclaimers for our free compression utility.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="{$canonicalTerms}">
+{$termsHreflang}
 
-  <!-- Open Graph -->
+  <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="{$canonicalTerms}">
   <meta property="og:title" content="Terms of Service - CompressImageSize">
   <meta property="og:description" content="Terms of Service: Free, client-side image compression with 100% user copyright retention.">
+  <meta property="og:image" content="https://compressimagesize.com/images/og-image.jpg">
   <meta property="og:site_name" content="CompressImageSize">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Terms of Service - CompressImageSize">
+  <meta name="twitter:description" content="Terms of Service: Free, client-side image compression with 100% user copyright retention.">
+  <meta name="twitter:image" content="https://compressimagesize.com/images/og-image.jpg">
+
+  <link rel="icon" href="{$prefix}images/favicon.png">
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
