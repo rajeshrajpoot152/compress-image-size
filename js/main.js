@@ -21,6 +21,31 @@
   const compressAllBtn = document.getElementById('compressAllBtn');
   const downloadAllBtn = document.getElementById('downloadAllBtn');
 
+  // Progress Bar & Batch Stats Elements
+  const progressContainer = document.getElementById('progressContainer');
+  const progressBarFill = document.getElementById('progressBarFill');
+  const progressPercentage = document.getElementById('progressPercentage');
+  const progressStatusText = document.getElementById('progressStatusText');
+  const progressCountText = document.getElementById('progressCountText');
+
+  const batchStatsCard = document.getElementById('batchStatsCard');
+  const statTotalCount = document.getElementById('statTotalCount');
+  const statOriginalSize = document.getElementById('statOriginalSize');
+  const statNewSize = document.getElementById('statNewSize');
+  const statSavingsPercent = document.getElementById('statSavingsPercent');
+  const downloadZipBtn = document.getElementById('downloadZipBtn');
+  const downloadZipBtnText = document.getElementById('downloadZipBtnText');
+  const resultsCount = document.getElementById('resultsCount');
+
+  // Compare Modal Elements
+  const compareModal = document.getElementById('compareModal');
+  const compareOrigImg = document.getElementById('compareOrigImg');
+  const compareNewImg = document.getElementById('compareNewImg');
+  const compareOrigSize = document.getElementById('compareOrigSize');
+  const compareNewSize = document.getElementById('compareNewSize');
+  const closeCompareModalBtn = document.getElementById('closeCompareModalBtn');
+  const closeCompareModalBottomBtn = document.getElementById('closeCompareModalBottomBtn');
+
   // Nav & Header
   const langToggleBtn = document.getElementById('langToggleBtn');
   const langMenu = document.getElementById('langMenu');
@@ -30,7 +55,7 @@
 
   // State
   let uploadedFiles = []; // Array of File objects
-  let processedFiles = []; // Array of { original, blob, url, name, originalSize, newSize, width, height }
+  let processedFiles = []; // Array of { original, blob, url, name, originalSize, newSize, width, height, originalUrl }
 
   // ── 2. Multilingual System (Client-Side & URL) ─────────────
   function applyLanguage(langCode) {
@@ -322,39 +347,51 @@
     });
   }
 
-  // ── 7. File Processing Queue ─────────────────────────────────
+  // ── 7. File Processing Queue & Concurrency Controller ──────
   function handleFiles(files) {
-    const newFiles = Array.from(files).filter((file) => file.type.startsWith('image/'));
-    if (newFiles.length === 0) {
-      alert('Please select valid image files (JPG, PNG, WebP, GIF).');
+    const validFiles = Array.from(files).filter((file) => {
+      // Accept any image MIME type or common image extensions
+      return file.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|avif|bmp|tiff)$/i.test(file.name);
+    });
+
+    if (validFiles.length === 0) {
+      alert('Please select valid image files (JPG, PNG, WebP, GIF, AVIF).');
       return;
     }
 
-    uploadedFiles = [...uploadedFiles, ...newFiles];
+    uploadedFiles = [...uploadedFiles, ...validFiles];
     updateQueueUI();
-    processBatch(newFiles);
+    processBatch(validFiles);
   }
 
   function updateQueueUI() {
+    const count = uploadedFiles.length;
     if (queueCount) {
-      queueCount.textContent = `${uploadedFiles.length} image${uploadedFiles.length === 1 ? '' : 's'} queued`;
+      queueCount.textContent = `${count} image${count === 1 ? '' : 's'} queued`;
     }
-    if (uploadedFiles.length > 0) {
+    if (count > 0) {
       clearAllBtn?.classList.remove('hidden');
       resultsContainer?.classList.remove('hidden');
     } else {
       clearAllBtn?.classList.add('hidden');
       downloadAllBtn?.classList.add('hidden');
       resultsContainer?.classList.add('hidden');
+      batchStatsCard?.classList.add('hidden');
     }
   }
 
   if (clearAllBtn) {
     clearAllBtn.addEventListener('click', () => {
       uploadedFiles = [];
-      processedFiles.forEach((f) => URL.revokeObjectURL(f.url));
+      processedFiles.forEach((f) => {
+        if (f.url) URL.revokeObjectURL(f.url);
+        if (f.originalUrl && f.originalUrl.startsWith('blob:')) URL.revokeObjectURL(f.originalUrl);
+      });
       processedFiles = [];
       if (resultsList) resultsList.innerHTML = '';
+      if (progressContainer) progressContainer.classList.add('hidden');
+      if (batchStatsCard) batchStatsCard.classList.add('hidden');
+      if (fileInput) fileInput.value = '';
       updateQueueUI();
     });
   }
@@ -363,13 +400,15 @@
     compressAllBtn.addEventListener('click', () => {
       if (uploadedFiles.length === 0) return;
       if (resultsList) resultsList.innerHTML = '';
-      processedFiles.forEach((f) => URL.revokeObjectURL(f.url));
+      processedFiles.forEach((f) => {
+        if (f.url) URL.revokeObjectURL(f.url);
+      });
       processedFiles = [];
       processBatch(uploadedFiles);
     });
   }
 
-  // ── 8. Core Client-Side Image Compression Logic ──────────────
+  // ── 8. Core Client-Side Image Compression Engine ─────────────
   function formatBytes(bytes, decimals = 1) {
     if (!+bytes) return '0 Bytes';
     const k = 1024;
@@ -379,11 +418,77 @@
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
   }
 
+  /**
+   * Concurrency Queue to process 100 to 500+ images smoothly
+   * Uses 3 concurrent workers so mobile and desktop browsers never freeze or crash.
+   */
   async function processBatch(files) {
-    for (const file of files) {
-      await compressSingleFile(file);
+    if (!files || files.length === 0) return;
+
+    const totalToProcess = files.length;
+    let completedCount = 0;
+
+    // Show and initialize Progress Bar
+    if (progressContainer) {
+      progressContainer.classList.remove('hidden');
+      if (progressBarFill) progressBarFill.style.width = '0%';
+      if (progressPercentage) progressPercentage.textContent = '0%';
+      if (progressStatusText) {
+        progressStatusText.innerHTML = `
+          <svg class="w-4 h-4 text-primary-600 animate-spin inline-block mr-1.5" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Optimizing ${totalToProcess} image${totalToProcess > 1 ? 's' : ''} in browser RAM...
+        `;
+      }
+      if (progressCountText) progressCountText.textContent = `0 of ${totalToProcess} processed`;
     }
-    if (processedFiles.length > 1 && downloadAllBtn) {
+
+    const CONCURRENCY = 3;
+    let index = 0;
+
+    async function worker() {
+      while (index < files.length) {
+        const file = files[index++];
+        try {
+          const itemData = await compressSingleFile(file);
+          processedFiles.push(itemData);
+          renderResultCard(itemData);
+          updateBatchStats();
+        } catch (err) {
+          console.error('Error compressing file:', file.name, err);
+        } finally {
+          completedCount++;
+          const percent = Math.min(100, Math.round((completedCount / totalToProcess) * 100));
+          if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+          if (progressPercentage) progressPercentage.textContent = `${percent}%`;
+          if (progressCountText) progressCountText.textContent = `${completedCount} of ${totalToProcess} processed`;
+        }
+      }
+    }
+
+    const workers = [];
+    const poolSize = Math.min(CONCURRENCY, files.length);
+    for (let i = 0; i < poolSize; i++) {
+      workers.push(worker());
+    }
+
+    await Promise.all(workers);
+
+    // All complete state
+    if (progressStatusText) {
+      progressStatusText.innerHTML = `
+        <span class="inline-flex items-center text-action-700 font-bold">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+          All ${totalToProcess} images compressed successfully!
+        </span>
+      `;
+    }
+
+    if (downloadAllBtn && processedFiles.length > 1) {
       downloadAllBtn.classList.remove('hidden');
       downloadAllBtn.classList.add('inline-flex');
     }
@@ -391,65 +496,149 @@
 
   function compressSingleFile(file) {
     return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = new Image();
-        img.onload = async function () {
-          const userQuality = (parseInt(qualityRange?.value || '80', 10)) / 100;
-          let selectedFormat = formatSelect ? formatSelect.value : 'original';
-          if (selectedFormat === 'original') {
-            selectedFormat = file.type === 'image/png' || file.type === 'image/webp' ? file.type : 'image/jpeg';
+      // Use Blob URL for low memory footprint
+      const originalBlobUrl = URL.createObjectURL(file);
+      const img = new Image();
+      img.decoding = 'async';
+
+      img.onload = async function () {
+        const userQuality = parseInt(qualityRange?.value || '80', 10) / 100;
+        let selectedFormat = formatSelect ? formatSelect.value : 'original';
+
+        if (selectedFormat === 'original') {
+          if (file.type === 'image/png') {
+            selectedFormat = 'image/png';
+          } else if (file.type === 'image/webp') {
+            selectedFormat = 'image/webp';
+          } else {
+            selectedFormat = 'image/jpeg';
           }
+        }
 
-          // Create canvas
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = img.width;
-          canvas.height = img.height;
+        // Clamp excessive dimensions (e.g. 50MP DSLR photos) to max 4096px to protect memory
+        const MAX_DIM = 4096;
+        let targetWidth = img.naturalWidth || img.width;
+        let targetHeight = img.naturalHeight || img.height;
 
-          // Fill white background for transparent PNG converted to JPG
-          if (selectedFormat === 'image/jpeg') {
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (targetWidth > MAX_DIM || targetHeight > MAX_DIM) {
+          if (targetWidth > targetHeight) {
+            targetHeight = Math.round((targetHeight * MAX_DIM) / targetWidth);
+            targetWidth = MAX_DIM;
+          } else {
+            targetWidth = Math.round((targetWidth * MAX_DIM) / targetHeight);
+            targetHeight = MAX_DIM;
           }
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        }
 
-          // Direct quality compression
-          let compressedBlob = await new Promise((res) => canvas.toBlob(res, selectedFormat, userQuality));
+        // Draw onto canvas with high quality smoothing
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d', { alpha: true });
 
-          if (!compressedBlob) {
-            compressedBlob = file; // Fallback
-          }
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
 
-          const blobUrl = URL.createObjectURL(compressedBlob);
-          const extension = selectedFormat.split('/')[1] === 'jpeg' ? 'jpg' : selectedFormat.split('/')[1];
-          const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-          const outputName = `${rawName}-compressed.${extension}`;
+        // White background for JPEG only (prevents black background on transparent PNGs)
+        if (selectedFormat === 'image/jpeg') {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, targetWidth, targetHeight);
+        }
 
-          const itemData = {
-            original: file,
-            blob: compressedBlob,
-            url: blobUrl,
-            name: outputName,
-            originalSize: file.size,
-            newSize: compressedBlob.size,
-            width: img.width,
-            height: img.height,
-          };
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
 
-          processedFiles.push(itemData);
-          renderResultCard(itemData);
-          resolve();
+        // Convert canvas to compressed Blob
+        let compressedBlob = await new Promise((res) => {
+          canvas.toBlob(
+            (blob) => res(blob),
+            selectedFormat,
+            selectedFormat === 'image/png' ? undefined : userQuality
+          );
+        });
+
+        // Fallback safety
+        if (!compressedBlob) {
+          compressedBlob = file;
+        }
+
+        const blobUrl = URL.createObjectURL(compressedBlob);
+        let extension = 'jpg';
+        if (selectedFormat === 'image/png') extension = 'png';
+        else if (selectedFormat === 'image/webp') extension = 'webp';
+        else if (selectedFormat === 'image/jpeg') extension = 'jpg';
+
+        const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+        const outputName = `${rawName}-compressed.${extension}`;
+
+        const itemData = {
+          original: file,
+          blob: compressedBlob,
+          url: blobUrl,
+          name: outputName,
+          originalSize: file.size,
+          newSize: compressedBlob.size,
+          width: targetWidth,
+          height: targetHeight,
+          originalUrl: originalBlobUrl,
         };
-        img.src = e.target.result;
+
+        resolve(itemData);
       };
-      reader.readAsDataURL(file);
+
+      img.onerror = function () {
+        console.warn('Could not decode image:', file.name);
+        resolve({
+          original: file,
+          blob: file,
+          url: originalBlobUrl,
+          name: file.name,
+          originalSize: file.size,
+          newSize: file.size,
+          width: 0,
+          height: 0,
+          originalUrl: originalBlobUrl,
+        });
+      };
+
+      img.src = originalBlobUrl;
     });
   }
 
-  // ── 9. Result Card Rendering ─────────────────────────────────
+  // ── 9. Batch Metrics & Stats Calculation ─────────────────────
+  function updateBatchStats() {
+    if (!batchStatsCard) return;
+
+    const count = processedFiles.length;
+    if (count === 0) {
+      batchStatsCard.classList.add('hidden');
+      return;
+    }
+
+    let totalOrig = 0;
+    let totalNew = 0;
+    processedFiles.forEach((item) => {
+      totalOrig += item.originalSize;
+      totalNew += item.newSize;
+    });
+
+    const totalSaved = Math.max(0, totalOrig - totalNew);
+    const savingsPercent = totalOrig > 0 ? Math.round((totalSaved / totalOrig) * 100) : 0;
+
+    batchStatsCard.classList.remove('hidden');
+
+    if (statTotalCount) statTotalCount.textContent = `${count}`;
+    if (statOriginalSize) statOriginalSize.textContent = formatBytes(totalOrig);
+    if (statNewSize) statNewSize.textContent = formatBytes(totalNew);
+    if (statSavingsPercent) statSavingsPercent.innerHTML = `&darr; ${savingsPercent}% Saved`;
+
+    if (resultsCount) resultsCount.textContent = `${count}`;
+    if (downloadZipBtnText) downloadZipBtnText.textContent = `Download All as ZIP (${count} Files)`;
+  }
+
+  // ── 10. Result Card Rendering with Compare & Download ────────
   function renderResultCard(item) {
     if (!resultsList) return;
+
     const savings = Math.max(0, Math.round(((item.originalSize - item.newSize) / item.originalSize) * 100));
     const isSmaller = item.newSize < item.originalSize;
 
@@ -458,13 +647,19 @@
       'bg-white rounded-2xl p-4 sm:p-5 border border-surface-border shadow-soft flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-in hover:border-primary-300 transition-all';
 
     card.innerHTML = `
-      <div class="flex items-center gap-4 w-full sm:w-auto">
-        <img src="${item.url}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover border border-slate-200 bg-slate-50 flex-shrink-0 shadow-sm" />
+      <div class="flex items-center gap-3.5 w-full sm:w-auto min-w-0">
+        <!-- Thumbnail with preview trigger -->
+        <button type="button" class="preview-btn relative flex-shrink-0 group focus:outline-none rounded-xl overflow-hidden" title="Click to inspect quality">
+          <img src="${item.url}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover border border-slate-200 bg-slate-50 shadow-2xs group-hover:scale-105 transition-transform" />
+          <div class="absolute inset-0 bg-primary-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          </div>
+        </button>
+
         <div class="min-w-0 flex-1">
-          <h5 class="text-sm font-bold text-dark-slate truncate max-w-[220px] sm:max-w-xs" title="${item.name}">${item.name}</h5>
-          <div class="flex items-center gap-2 text-xs text-slate-500 mt-1">
-            <span>${item.width} &times; ${item.height} px</span>
-            <span>•</span>
+          <h5 class="text-xs sm:text-sm font-bold text-dark-slate truncate max-w-[200px] sm:max-w-xs" title="${item.name}">${item.name}</h5>
+          <div class="flex items-center gap-2 text-[11px] sm:text-xs text-slate-500 mt-1 flex-wrap">
+            ${item.width ? `<span>${item.width} &times; ${item.height} px</span><span>•</span>` : ''}
             <span class="line-through text-slate-400">${formatBytes(item.originalSize)}</span>
             <span>&rarr;</span>
             <span class="font-bold text-primary-700">${formatBytes(item.newSize)}</span>
@@ -472,28 +667,140 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+      <div class="flex items-center justify-between sm:justify-end gap-2 sm:gap-2.5 w-full sm:w-auto flex-shrink-0">
+        <!-- Savings Badge -->
         ${
           isSmaller
-            ? `<span class="px-2.5 py-1 text-xs font-bold bg-action-50 text-action-700 border border-action-200 rounded-lg whitespace-nowrap">
+            ? `<span class="px-2.5 py-1 text-[11px] sm:text-xs font-bold bg-action-50 text-action-700 border border-action-200 rounded-lg whitespace-nowrap">
                 &darr; ${savings}% Saved
               </span>`
-            : `<span class="px-2.5 py-1 text-xs font-bold bg-slate-100 text-slate-600 rounded-lg">Optimized</span>`
+            : `<span class="px-2.5 py-1 text-[11px] sm:text-xs font-bold bg-slate-100 text-slate-600 rounded-lg whitespace-nowrap">Optimized</span>`
         }
 
-        <a href="${item.url}" download="${item.name}" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-action-600 hover:bg-action-700 active:scale-95 rounded-xl shadow-sm transition-all">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Compare Button -->
+        <button type="button" class="compare-btn inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all" title="Side-by-side quality comparison">
+          <svg class="w-3.5 h-3.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+          <span class="hidden sm:inline">Compare</span>
+        </button>
+
+        <!-- Individual Download Button -->
+        <a href="${item.url}" download="${item.name}" class="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-2 text-xs font-bold text-white bg-action-600 hover:bg-action-700 active:scale-95 rounded-xl shadow-xs transition-all">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          Download
+          <span>Download</span>
         </a>
       </div>
     `;
 
+    // Hook compare modal events
+    const compareBtn = card.querySelector('.compare-btn');
+    const previewBtn = card.querySelector('.preview-btn');
+    const openModal = () => openCompareModal(item);
+    if (compareBtn) compareBtn.addEventListener('click', openModal);
+    if (previewBtn) previewBtn.addEventListener('click', openModal);
+
     resultsList.appendChild(card);
   }
 
-  // ── 10. Download All Button ──────────────────────────────────
+  // ── 11. Compare Modal Logic ──────────────────────────────────
+  function openCompareModal(item) {
+    if (!compareModal) return;
+    if (compareOrigImg) compareOrigImg.src = item.originalUrl || item.url;
+    if (compareNewImg) compareNewImg.src = item.url;
+    if (compareOrigSize) compareOrigSize.textContent = `${formatBytes(item.originalSize)} (Original)`;
+    if (compareNewSize) compareNewSize.textContent = `${formatBytes(item.newSize)} (Optimized)`;
+
+    compareModal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+  }
+
+  function closeCompareModal() {
+    if (!compareModal) return;
+    compareModal.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  if (closeCompareModalBtn) closeCompareModalBtn.addEventListener('click', closeCompareModal);
+  if (closeCompareModalBottomBtn) closeCompareModalBottomBtn.addEventListener('click', closeCompareModal);
+
+  if (compareModal) {
+    compareModal.addEventListener('click', (e) => {
+      if (e.target === compareModal) {
+        closeCompareModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !compareModal.classList.contains('hidden')) {
+        closeCompareModal();
+      }
+    });
+  }
+
+  // ── 12. Bulk ZIP Download Engine (JSZip) ──────────────────────
+  if (downloadZipBtn) {
+    downloadZipBtn.addEventListener('click', async () => {
+      if (processedFiles.length === 0) return;
+
+      // Check if JSZip is loaded
+      if (typeof window.JSZip === 'undefined') {
+        alert('ZIP library is loading. Please download individually or try again in a moment.');
+        return;
+      }
+
+      downloadZipBtn.disabled = true;
+      const originalText = downloadZipBtnText ? downloadZipBtnText.textContent : 'Download All as ZIP';
+      if (downloadZipBtnText) downloadZipBtnText.textContent = 'Packaging ZIP (0%)...';
+
+      try {
+        const zip = new window.JSZip();
+
+        // Add all processed images into the ZIP
+        processedFiles.forEach((item) => {
+          zip.file(item.name, item.blob);
+        });
+
+        // Generate the ZIP blob with progress
+        const zipBlob = await zip.generateAsync(
+          {
+            type: 'blob',
+            compression: 'DEFLATE',
+            compressionOptions: { level: 6 },
+          },
+          (metadata) => {
+            if (downloadZipBtnText) {
+              downloadZipBtnText.textContent = `Packaging ZIP (${Math.round(metadata.percent)}%)...`;
+            }
+          }
+        );
+
+        // Trigger Download
+        const zipUrl = URL.createObjectURL(zipBlob);
+        const a = document.createElement('a');
+        a.href = zipUrl;
+        a.download = `compressed-images-${Date.now()}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        setTimeout(() => URL.revokeObjectURL(zipUrl), 30000);
+
+        if (downloadZipBtnText) downloadZipBtnText.textContent = 'Download Started!';
+        setTimeout(() => {
+          if (downloadZipBtnText) downloadZipBtnText.textContent = originalText;
+          downloadZipBtn.disabled = false;
+        }, 2000);
+      } catch (err) {
+        console.error('Error generating ZIP:', err);
+        alert('Failed to generate ZIP archive. Falling back to individual downloads.');
+        if (downloadZipBtnText) downloadZipBtnText.textContent = originalText;
+        downloadZipBtn.disabled = false;
+      }
+    });
+  }
+
+  // ── 13. Sequential Multi-Download Fallback ───────────────────
   if (downloadAllBtn) {
     downloadAllBtn.addEventListener('click', () => {
       processedFiles.forEach((item, index) => {
@@ -506,32 +813,6 @@
           document.body.removeChild(a);
         }, index * 250);
       });
-    });
-  }
-
-  // ── 11. Header & Navigation Controls ─────────────────────────
-  if (langToggleBtn && langMenu) {
-    langToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isClosed = langMenu.classList.toggle('hidden');
-      langToggleBtn.setAttribute('aria-expanded', !isClosed);
-      if (langChevron) {
-        langChevron.classList.toggle('rotate-180', !isClosed);
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!langMenu.contains(e.target) && !langToggleBtn.contains(e.target)) {
-        langMenu.classList.add('hidden');
-        langToggleBtn.setAttribute('aria-expanded', 'false');
-        if (langChevron) langChevron.classList.remove('rotate-180');
-      }
-    });
-  }
-
-  if (mobileMenuBtn && mobileDrawer) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileDrawer.classList.toggle('hidden');
     });
   }
 
