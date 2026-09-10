@@ -274,12 +274,31 @@
   function updateActiveFormatCard(targetFormatVal) {
     formatCards.forEach(card => {
       const cardFormat = card.getAttribute('data-format');
-      if (cardFormat === targetFormatVal) {
-        card.classList.remove('border-slate-200', 'bg-white', 'text-slate-700');
-        card.classList.add('border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20');
-      } else {
-        card.classList.remove('border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20');
-        card.classList.add('border-slate-200', 'bg-white', 'text-slate-700');
+      
+      // Base removal
+      card.classList.remove(
+        'border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20',
+        'border-slate-200', 'bg-white', 'text-slate-700', 'hover:border-slate-300', 'hover:bg-slate-100',
+        'is-active', 'bg-slate-100', 'ring-slate-400', 'border-slate-400', 'bg-slate-50/70',
+        'border-blue-600', 'bg-blue-50/70', 'text-blue-900', 'ring-blue-500/20', 'border-blue-200/60', 'bg-blue-50/30', 'text-blue-800', 'hover:border-blue-300', 'hover:bg-blue-50/60',
+        'border-emerald-600', 'bg-emerald-50/70', 'text-emerald-900', 'ring-emerald-500/20', 'border-emerald-200/60', 'bg-emerald-50/30', 'text-emerald-800', 'hover:border-emerald-300', 'hover:bg-emerald-50/60',
+        'border-amber-600', 'bg-amber-50/70', 'text-amber-900', 'ring-amber-500/20', 'border-amber-200/60', 'bg-amber-50/30', 'text-amber-800', 'hover:border-amber-300', 'hover:bg-amber-50/60'
+      );
+      
+      const isActive = (cardFormat === targetFormatVal);
+      
+      if (cardFormat === 'original') {
+         if (isActive) card.classList.add('border-primary-600', 'bg-primary-50/70', 'text-primary-900', 'shadow-sm', 'ring-2', 'ring-primary-500/20');
+         else card.classList.add('border-slate-200', 'bg-slate-50/70', 'text-slate-700', 'hover:border-slate-300', 'hover:bg-slate-100');
+      } else if (cardFormat === 'image/jpeg') {
+         if (isActive) card.classList.add('border-blue-600', 'bg-blue-50/70', 'text-blue-900', 'shadow-sm', 'ring-2', 'ring-blue-500/20');
+         else card.classList.add('border-blue-200/60', 'bg-blue-50/30', 'text-blue-800', 'hover:border-blue-300', 'hover:bg-blue-50/60');
+      } else if (cardFormat === 'image/webp') {
+         if (isActive) card.classList.add('border-emerald-600', 'bg-emerald-50/70', 'text-emerald-900', 'shadow-sm', 'ring-2', 'ring-emerald-500/20');
+         else card.classList.add('border-emerald-200/60', 'bg-emerald-50/30', 'text-emerald-800', 'hover:border-emerald-300', 'hover:bg-emerald-50/60');
+      } else if (cardFormat === 'image/png') {
+         if (isActive) card.classList.add('border-amber-600', 'bg-amber-50/70', 'text-amber-900', 'shadow-sm', 'ring-2', 'ring-amber-500/20');
+         else card.classList.add('border-amber-200/60', 'bg-amber-50/30', 'text-amber-800', 'hover:border-amber-300', 'hover:bg-amber-50/60');
       }
     });
   }
@@ -288,6 +307,13 @@
   if (formatSelect) {
     formatSelect.value = 'original';
     updateActiveFormatCard('original');
+  }
+
+  // UI Improvement: Remove excessive nested borders and padding from the settings wrapper
+  const settingsGrid = document.querySelector('#settingsPanel > .grid');
+  if (settingsGrid) {
+    settingsGrid.classList.remove('bg-slate-50/70', 'p-4', 'sm:p-5', 'rounded-2xl', 'border', 'border-surface-border', 'shadow-soft');
+    settingsGrid.classList.add('pt-2');
   }
 
   if (formatCards.length > 0 && formatSelect) {

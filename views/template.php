@@ -498,7 +498,7 @@ if (!function_exists('getRelativeLangLink')) {
               </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 bg-slate-50/70 p-4 sm:p-5 rounded-2xl border border-surface-border shadow-soft">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 pt-2">
               
               <!-- STEP 1: Quality & Compression Ratio Control -->
               <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
@@ -567,7 +567,10 @@ if (!function_exists('getRelativeLangLink')) {
                   <div class="grid grid-cols-2 gap-2" id="formatCardsGrid">
                     
                     <!-- Original / Auto -->
-                    <button type="button" data-format="original" class="format-card text-left p-2.5 rounded-xl border transition-all relative <?= $targetFormat === 'original' ? 'border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700' ?>">
+                    <button type="button" data-format="original" 
+                      data-active="border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20"
+                      data-inactive="border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_original'] ?? 'Original') ?></span>
                         <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600"><?= htmlspecialchars($t['fmt_auto'] ?? 'Auto') ?></span>
@@ -576,30 +579,39 @@ if (!function_exists('getRelativeLangLink')) {
                     </button>
 
                     <!-- JPG / JPEG -->
-                    <button type="button" data-format="image/jpeg" class="format-card text-left p-2.5 rounded-xl border transition-all relative <?= $targetFormat === 'image/jpeg' ? 'border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700' ?>">
+                    <button type="button" data-format="image/jpeg" 
+                      data-active="border-blue-600 bg-blue-50/70 text-blue-900 shadow-sm ring-2 ring-blue-500/20"
+                      data-inactive="border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60"
+                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_jpg'] ?? 'JPG / JPEG') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-primary-100 text-primary-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-100 text-blue-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_jpg_desc'] ?? 'Best for scenery & photos') ?></div>
+                      <div class="text-[11px] text-blue-600/80 leading-tight"><?= htmlspecialchars($t['fmt_jpg_desc'] ?? 'Best for scenery & photos') ?></div>
                     </button>
 
                     <!-- WebP -->
-                    <button type="button" data-format="image/webp" class="format-card text-left p-2.5 rounded-xl border transition-all relative <?= $targetFormat === 'image/webp' ? 'border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700' ?>">
+                    <button type="button" data-format="image/webp" 
+                      data-active="border-emerald-600 bg-emerald-50/70 text-emerald-900 shadow-sm ring-2 ring-emerald-500/20"
+                      data-inactive="border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60"
+                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_webp'] ?? 'WebP') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-action-100 text-action-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
+                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_webp_desc'] ?? 'Ultra fast web loading') ?></div>
+                      <div class="text-[11px] text-emerald-600/80 leading-tight"><?= htmlspecialchars($t['fmt_webp_desc'] ?? 'Ultra fast web loading') ?></div>
                     </button>
 
                     <!-- PNG -->
-                    <button type="button" data-format="image/png" class="format-card text-left p-2.5 rounded-xl border transition-all relative <?= $targetFormat === 'image/png' ? 'border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-slate-300 bg-white text-slate-700' ?>">
+                    <button type="button" data-format="image/png" 
+                      data-active="border-amber-600 bg-amber-50/70 text-amber-900 shadow-sm ring-2 ring-amber-500/20"
+                      data-inactive="border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60"
+                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_png'] ?? 'PNG') ?></span>
                         <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800"><?= htmlspecialchars($t['fmt_transparent'] ?? 'Transparent') ?></span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_png_desc'] ?? 'Crisp logos & graphics') ?></div>
+                      <div class="text-[11px] text-amber-600/80 leading-tight"><?= htmlspecialchars($t['fmt_png_desc'] ?? 'Crisp logos & graphics') ?></div>
                     </button>
 
                   </div>
@@ -1521,7 +1533,7 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100 text-xs text-slate-500">
               <span class="flex items-center gap-1 font-semibold text-slate-700">
                 <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <?= htmlspecialchars($t['modal_drag_hint'] ?? 'Drag slider or use arrow keys to inspect micro-textures') ?>
+                <?= htmlspecialchars($t['modal_drag_hint'] ?? '<?= htmlspecialchars($t['modal_drag_hint'] ?? 'Drag slider or use arrow keys to inspect micro-textures') ?>') ?>
               </span>
               <span class="font-mono text-[11px] text-primary-600 font-bold hidden sm:inline"><?= htmlspecialchars($t['modal_slider_legend'] ?? 'Left: Original | Right: Optimized') ?></span>
             </div>
