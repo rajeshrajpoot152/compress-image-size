@@ -284,6 +284,12 @@
     });
   }
 
+  // Force 'original' (Auto) format selection by default on all pages
+  if (formatSelect) {
+    formatSelect.value = 'original';
+    updateActiveFormatCard('original');
+  }
+
   if (formatCards.length > 0 && formatSelect) {
     formatCards.forEach(card => {
       card.addEventListener('click', () => {
