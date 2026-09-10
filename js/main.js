@@ -604,8 +604,19 @@
           compressedBlob = file;
         }
 
+        let targetExtension = selectedFormat === 'image/png' ? 'png' : selectedFormat === 'image/webp' ? 'webp' : 'jpg';
+        let originalExtension = file.type === 'image/png' ? 'png' : (file.type === 'image/webp' ? 'webp' : 'jpg');
+
+        if (compressedBlob.size >= file.size) {
+          const isSameFormat = (selectedFormat === 'original' || targetExtension === originalExtension);
+          if (isSameFormat) {
+            compressedBlob = file;
+            targetExtension = originalExtension;
+          }
+        }
+
         const blobUrl = URL.createObjectURL(compressedBlob);
-        const extension = selectedFormat === 'image/png' ? 'png' : selectedFormat === 'image/webp' ? 'webp' : 'jpg';
+        const extension = targetExtension;
 
         const rawName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
         const outputName = `${rawName}-compressed.${extension}`;
@@ -681,8 +692,10 @@
   function renderResultCard(item) {
     if (!resultsList) return;
 
-    const savings = Math.max(0, Math.round(((item.originalSize - item.newSize) / item.originalSize) * 100));
-    const isSmaller = item.newSize < item.originalSize;
+    const savingsRaw = Math.round(((item.originalSize - item.newSize) / item.originalSize) * 100);
+    const isSmaller = item.newSize <= item.originalSize;
+    const absSavings = Math.abs(savingsRaw);
+    
     const fileExt = item.name.split('.').pop().toUpperCase();
 
     const row = document.createElement('div');
@@ -695,6 +708,8 @@
     const badgeClass = isPng 
       ? 'bg-blue-50 text-blue-600 border-blue-200' 
       : (isWebp ? 'bg-purple-50 text-purple-600 border-purple-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200');
+      
+    const percentColorClass = isSmaller ? 'text-emerald-700' : 'text-rose-600';
 
     row.innerHTML = `
       <!-- Left: Thumbnail Preview & File Metadata -->
@@ -721,8 +736,8 @@
       <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
         <!-- Savings Percentage & New Compressed Size -->
         <div class="text-right min-w-[55px] sm:min-w-[70px]">
-          <span class="text-xs sm:text-sm font-black text-emerald-700 font-mono block">
-            ${isSmaller ? `-${savings}%` : '0%'}
+          <span class="text-xs sm:text-sm font-black ${percentColorClass} font-mono block">
+            ${isSmaller ? (absSavings === 0 ? '0%' : `-${absSavings}%`) : `+${absSavings}%`}
           </span>
           <span class="text-[11px] sm:text-xs text-slate-600 font-semibold block">${formatBytes(item.newSize)}</span>
         </div>
