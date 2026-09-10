@@ -373,37 +373,14 @@
 
       
 
-      <!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
-      <div id="progressContainer" class="fixed bottom-6 sm:bottom-8 z-50 hidden text-left transition-all duration-300" style="z-index: 99999 !important; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px;">
-        <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
-          <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3 min-w-0">
-              <svg id="progressSpinner" class="w-4 h-4 text-emerald-600 animate-spin flex-shrink-0" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              <span id="progressStatusText" class="text-xs sm:text-sm font-bold truncate" style="color: #0f172a !important;">
-                ブラウザのメモリ内で画像を圧縮中...              </span>
-            </div>
-            <div class="flex items-center gap-2 flex-shrink-0">
-              <span id="progressCountText" class="text-xs font-mono hidden sm:inline" style="color: #64748b !important;">0 / 0</span>
-              <span id="progressPercentage" class="text-xs font-black px-3 py-0.5 rounded-md font-mono" style="background-color: #ecfdf5 !important; color: #047857 !important; border: 1px solid #a7f3d0 !important;">0%</span>
-            </div>
-          </div>
-          <div class="w-full rounded-full h-2 overflow-hidden shadow-inner mt-3 border border-slate-200" style="background-color: #f1f5f9 !important;">
-            <div id="progressBarFill" class="h-full rounded-full transition-all duration-200 ease-out" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #78c800 100%) !important;"></div>
-          </div>
-        </div>
       </div>
-
-    </div>
   </section>
 
   <!-- 3. RESULTS & MAIN CONTENT SECTION -->
   <main class="relative z-20">
     <!-- Results & Optimization Hub (Full Container Width Matching Main Sections) -->
     <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-      <div id="resultsContainer" class="w-full mb-8 hidden shadow-2xl rounded-2xl overflow-hidden border border-slate-200/90 text-left bg-white relative z-30 ring-1 ring-slate-900/10" style="margin-top: -50px !important;">
+      <div id="resultsContainer" class="w-full mb-8 hidden shadow-2xl rounded-2xl overflow-hidden border border-slate-200/90 text-left bg-white relative z-30 ring-1 ring-slate-900/10" >
         <!-- Top Banner: Dark Charcoal/Slate Header with Lime Green Savings Headline & Big Download Button -->
         <div id="batchStatsCard" class="bg-slate-900 text-white p-4 sm:p-5 border-b border-slate-800">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -1689,5 +1666,29 @@
   <script src="../js/jszip.min.js"></script>
   <script src="../js/translations.js"></script>
   <script src="../js/main.js?v=2.7"></script>
+<!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
+      <div id="progressContainer" class="fixed bottom-6 sm:bottom-8 z-50 hidden text-left transition-all duration-300" style="z-index: 99999 !important; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px;">
+        <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+              <svg id="progressSpinner" class="w-4 h-4 text-emerald-600 animate-spin flex-shrink-0" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span id="progressStatusText" class="text-xs sm:text-sm font-bold truncate" style="color: #0f172a !important;">
+                ブラウザのメモリ内で画像を圧縮中...              </span>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <span id="progressCountText" class="text-xs font-mono hidden sm:inline" style="color: #64748b !important;">0 / 0</span>
+              <span id="progressPercentage" class="text-xs font-black px-3 py-0.5 rounded-md font-mono" style="background-color: #ecfdf5 !important; color: #047857 !important; border: 1px solid #a7f3d0 !important;">0%</span>
+            </div>
+          </div>
+          <div class="w-full rounded-full h-2 overflow-hidden shadow-inner mt-3 border border-slate-200" style="background-color: #f1f5f9 !important;">
+            <div id="progressBarFill" class="h-full rounded-full transition-all duration-200 ease-out" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #78c800 100%) !important;"></div>
+          </div>
+        </div>
+      </div>
+
+    
 </body>
 </html>
