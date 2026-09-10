@@ -367,12 +367,6 @@ if (!function_exists('getRelativeLangLink')) {
         </div>
       </div>
 
-      <!-- Trust & Engine Pill (Below dropzone box with generous bottom breathing room) -->
-      <div class="trust-engine-pill inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-white/20 text-white backdrop-blur-md border border-white/30 shadow-sm" style="margin-top: 1.25rem; margin-bottom: 0.75rem;">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span><?= htmlspecialchars($t['hero_pill'] ?? 'Client-Side Quantization • Zero Server Storage') ?></span>
-      </div>
-
       <!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
       <div id="progressContainer" class="w-full max-w-3xl sm:max-w-4xl mx-auto mt-4 hidden text-left" style="margin-bottom: 3.5rem !important;">
         <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
