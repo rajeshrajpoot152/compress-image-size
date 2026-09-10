@@ -365,7 +365,7 @@ if (!function_exists('getRelativeLangLink')) {
       </div>
 
       <!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
-      <div id="progressContainer" class="w-full max-w-3xl sm:max-w-4xl mx-auto mt-4 hidden text-left" style="margin-bottom: 3.5rem !important;">
+      <div id="progressContainer" class="w-full max-w-3xl sm:max-w-4xl mx-auto mt-4 hidden text-left">
         <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
           <div class="flex items-center justify-between gap-3">
             <div class="flex items-center gap-2.5 min-w-0">
