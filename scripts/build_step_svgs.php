@@ -270,7 +270,7 @@ $step3Svg = <<<SVG
     <rect width="372" height="50" rx="14" fill="url(#s3-btn)"/>
     
     <!-- Download Icon -->
-    <g transform="translate(108, 14)">
+    <g transform="translate(65, 14)">
       <path d="M11 4 L11 16 M5 10 L11 16 L17 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M2 19 L20 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
     </g>
