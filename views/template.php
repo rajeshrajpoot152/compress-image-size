@@ -247,7 +247,7 @@ if (!function_exists('getRelativeLangLink')) {
         <!-- World Top 10 Language Switcher -->
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
-            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-1.5 sm:py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
+            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-2 sm:py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
               <span id="currentLangFlag" class="inline-flex items-center"><?= getFlagSvg($currentLang) ?></span>
               <span id="currentLangText"><?= htmlspecialchars($globalLanguages[$currentLang]['name'] ?? 'English') ?></span>
               <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" id="langChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -257,12 +257,12 @@ if (!function_exists('getRelativeLangLink')) {
 
             <!-- Language Dropdown Menu -->
             <div id="langMenu" class="hidden absolute ltr:right-0 rtl:left-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-[80vh] overflow-y-auto">
-              <div class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
+              <div class="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
               <?php foreach ($globalLanguages as $code => $info): 
                 $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
               ?>
                 <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors <?= $currentLang === $code ? 'font-bold bg-primary-50 text-primary-600' : '' ?>">
-                  <span class="flex items-center gap-2.5">
+                  <span class="flex items-center gap-3">
                     <?= getFlagSvg($code) ?>
                     <span><?= $info['name'] ?></span>
                   </span>
@@ -292,11 +292,11 @@ if (!function_exists('getRelativeLangLink')) {
         <!-- Mobile Language Switcher Grid -->
         <div class="pt-3 border-t border-slate-100">
           <div class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-2"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
-          <div class="grid grid-cols-2 gap-1.5">
+          <div class="grid grid-cols-2 gap-2">
             <?php foreach ($globalLanguages as $code => $info): 
               $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
             ?>
-              <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center gap-2 p-1.5 rounded-lg text-xs <?= $currentLang === $code ? 'bg-primary-50 text-primary-700 font-bold border border-primary-200' : 'text-slate-600 hover:bg-slate-50' ?>">
+              <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center gap-2 p-2 rounded-lg text-xs <?= $currentLang === $code ? 'bg-primary-50 text-primary-700 font-bold border border-primary-200' : 'text-slate-600 hover:bg-slate-50' ?>">
                 <?= getFlagSvg($code) ?>
                 <span class="truncate"><?= $info['name'] ?></span>
               </a>
@@ -333,12 +333,12 @@ if (!function_exists('getRelativeLangLink')) {
           </svg>
         </div>
 
-        <button type="button" id="selectImagesBtn" style="background-color: #ff6c0d; box-shadow: 0 10px 15px -3px rgba(255,108,13,0.35);" class="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white hover:opacity-90 hover:scale-105 active:scale-95 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer">
+        <button type="button" id="selectImagesBtn" style="background-color: #ff6c0d; box-shadow: 0 10px 15px -3px rgba(255,108,13,0.35);" class="inline-flex items-center justify-center gap-3 px-6 py-4 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white hover:opacity-90 hover:scale-105 active:scale-95 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer">
           <span class="sm:hidden"><?= htmlspecialchars($t['tap_to_select'] ?? 'Tap to Select Photos') ?></span>
           <span class="hidden sm:inline" id="selectBtnText"><?= htmlspecialchars($t['select_images_cta'] ?? 'Select Images or Drag & Drop Here') ?></span>
         </button>
         
-        <div class="drop-extra-hints mt-3.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-slate-100">
+        <div class="drop-extra-hints mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-slate-100">
           <span class="font-bold text-white"><?= htmlspecialchars($t['hint_batch'] ?? 'Supports 1 to 500+ Images') ?></span>
           <span class="text-white/60">•</span>
           <span class="font-medium text-white/95"><?= htmlspecialchars($t['hint_no_limits'] ?? 'No file size limits') ?></span>
@@ -354,7 +354,7 @@ if (!function_exists('getRelativeLangLink')) {
         </div>
 
         <!-- EXIF Removal Marketing Feature Badge -->
-        <div class="drop-extra-hints mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-950/70 text-emerald-200 border border-emerald-400/40 shadow-xs backdrop-blur-xs">
+        <div class="drop-extra-hints mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-emerald-950/70 text-emerald-200 border border-emerald-400/40 shadow-xs backdrop-blur-xs">
           <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           <span><?= htmlspecialchars($t['hint_exif'] ?? 'Privacy First: Automatically removes hidden GPS & Camera metadata') ?></span>
         </div>
@@ -362,9 +362,9 @@ if (!function_exists('getRelativeLangLink')) {
 
       <!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
       <div id="progressContainer" class="w-full max-w-3xl sm:max-w-4xl mx-auto mt-4 hidden text-left">
-        <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
+        <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
           <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2.5 min-w-0">
+            <div class="flex items-center gap-3 min-w-0">
               <svg id="progressSpinner" class="w-4 h-4 text-emerald-600 animate-spin flex-shrink-0" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -375,10 +375,10 @@ if (!function_exists('getRelativeLangLink')) {
             </div>
             <div class="flex items-center gap-2 flex-shrink-0">
               <span id="progressCountText" class="text-xs font-mono hidden sm:inline" style="color: #64748b !important;">0 / 0</span>
-              <span id="progressPercentage" class="text-xs font-black px-2.5 py-0.5 rounded-md font-mono" style="background-color: #ecfdf5 !important; color: #047857 !important; border: 1px solid #a7f3d0 !important;">0%</span>
+              <span id="progressPercentage" class="text-xs font-black px-3 py-0.5 rounded-md font-mono" style="background-color: #ecfdf5 !important; color: #047857 !important; border: 1px solid #a7f3d0 !important;">0%</span>
             </div>
           </div>
-          <div class="w-full rounded-full h-2 overflow-hidden shadow-inner mt-2.5 border border-slate-200" style="background-color: #f1f5f9 !important;">
+          <div class="w-full rounded-full h-2 overflow-hidden shadow-inner mt-3 border border-slate-200" style="background-color: #f1f5f9 !important;">
             <div id="progressBarFill" class="h-full rounded-full transition-all duration-200 ease-out" style="width: 0%; background: linear-gradient(90deg, #10b981 0%, #78c800 100%) !important;"></div>
           </div>
         </div>
@@ -399,7 +399,7 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="space-y-1">
               <div class="text-lg sm:text-xl font-black flex items-center gap-2 tracking-tight">
                 <span class="text-white font-black"><?= htmlspecialchars($t['saved_you'] ?? 'Our engine just saved you') ?></span>
-                <span id="statSavingsPercent" class="font-black px-2.5 py-0.5 rounded-lg text-sm sm:text-base tracking-normal shadow-xs" style="background-color: #78c800 !important; color: #0f172a !important; font-weight: 900 !important; display: inline-block !important;">0%</span>
+                <span id="statSavingsPercent" class="font-black px-3 py-0.5 rounded-lg text-sm sm:text-base tracking-normal shadow-xs" style="background-color: #78c800 !important; color: #0f172a !important; font-weight: 900 !important; display: inline-block !important;">0%</span>
                 <span class="font-black" style="color: #78c800 !important;">!</span>
               </div>
               <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-300 font-medium">
@@ -412,20 +412,20 @@ if (!function_exists('getRelativeLangLink')) {
             </div>
 
             <!-- Right: Bulk Actions (Clear All, Re-Compress, Download All) -->
-            <div class="flex flex-wrap items-center gap-2.5">
-              <button type="button" id="clearAllBtn" class="hidden px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all items-center gap-1.5 cursor-pointer" title="Clear all images from queue">
+            <div class="flex flex-wrap items-center gap-3">
+              <button type="button" id="clearAllBtn" class="hidden px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all items-center justify-center gap-2 cursor-pointer" title="Clear all images from queue">
                 <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 <span><?= htmlspecialchars($t['btn_clear'] ?? 'Clear All') ?></span>
               </button>
 
-              <button type="button" id="compressAllBtn" class="px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer" title="Re-compress all with current settings">
+              <button type="button" id="compressAllBtn" class="px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer" title="Re-compress all with current settings">
                 <svg class="w-3.5 h-3.5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
                 <span><?= htmlspecialchars($t['btn_recompress'] ?? 'Re-Compress All') ?></span>
               </button>
 
-              <button type="button" id="downloadZipBtn" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-black text-white hover:bg-action-700 active:scale-95 rounded-xl shadow-lg shadow-emerald-950/40 transition-all cursor-pointer" style="background-color: #15803D !important; color: #ffffff !important;">
+              <button type="button" id="downloadZipBtn" class="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 active:scale-95 rounded-xl shadow-lg shadow-emerald-950/40 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
@@ -439,11 +439,11 @@ if (!function_exists('getRelativeLangLink')) {
         <div id="resultsList" class="flex flex-col divide-y divide-slate-100 bg-white max-h-[580px] overflow-y-auto"></div>
 
         <!-- Bottom Bar: Matching Dark Slate Bar with Download All Button -->
-        <div class="bg-slate-900 text-white p-3.5 sm:p-4 border-t border-slate-800 flex items-center justify-between gap-3">
+        <div class="bg-slate-900 text-white p-4 sm:p-4 border-t border-slate-800 flex items-center justify-between gap-3">
           <div class="text-xs sm:text-sm text-slate-300 font-medium">
             <?= htmlspecialchars($t['processed_images'] ?? 'Processed Images') ?> (<span id="resultsCount">0</span>)
           </div>
-          <button type="button" id="downloadAllBtn" class="inline-flex items-center gap-2 px-5 py-2 text-xs sm:text-sm font-black text-white hover:bg-action-700 active:scale-95 rounded-xl shadow-md transition-all cursor-pointer" style="background-color: #15803D !important; color: #ffffff !important;">
+          <button type="button" id="downloadAllBtn" class="inline-flex items-center justify-center gap-2 px-5 py-2 text-xs sm:text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 active:scale-95 rounded-xl shadow-md transition-all cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
@@ -470,7 +470,7 @@ if (!function_exists('getRelativeLangLink')) {
         <div class="bg-surface-card rounded-3xl shadow-card border border-surface-border p-4 sm:p-6 relative mb-3 sm:mb-4">
           <div id="settingsPanel">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-              <div class="flex items-center gap-2.5">
+              <div class="flex items-center gap-3">
                 <div class="w-7 h-7 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-extrabold shadow-sm shadow-primary-600/30">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
@@ -479,7 +479,7 @@ if (!function_exists('getRelativeLangLink')) {
                   <span id="settingsSub" class="text-xs text-slate-500"><?= htmlspecialchars($t['settings_sub'] ?? 'Fine-tune quality presets and target output format') ?></span>
                 </div>
               </div>
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium self-start sm:self-auto">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium self-start sm:self-auto">
                 <span class="w-1.5 h-1.5 rounded-full bg-action-500"></span>
                 <span><?= htmlspecialchars($t['engine_in_browser'] ?? 'In-Browser Engine') ?></span>
               </div>
@@ -490,7 +490,7 @@ if (!function_exists('getRelativeLangLink')) {
               <!-- STEP 1: Quality & Compression Ratio Control -->
               <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
+                  <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-100">
                     <div class="flex items-center gap-2">
                       <span class="w-5 h-5 rounded-md bg-primary-100 text-primary-700 flex items-center justify-center text-[11px] font-bold">1</span>
                       <div>
@@ -500,7 +500,7 @@ if (!function_exists('getRelativeLangLink')) {
                         <span class="text-[11px] text-slate-600 font-medium"><?= htmlspecialchars($t['balance_hint'] ?? 'Balance file size vs clarity') ?></span>
                       </div>
                     </div>
-                    <span id="qualityVal" class="text-xs font-extrabold text-primary-700 bg-primary-50 border border-primary-200 px-2.5 py-0.5 rounded-md shadow-2xs"><?= $targetQuality ?>%</span>
+                    <span id="qualityVal" class="text-xs font-extrabold text-primary-700 bg-primary-50 border border-primary-200 px-3 py-0.5 rounded-md shadow-2xs"><?= $targetQuality ?>%</span>
                   </div>
 
                   <input type="range" id="qualityRange" min="10" max="100" value="<?= $targetQuality ?>" class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer accent-primary-600 focus:outline-none" />
@@ -513,21 +513,21 @@ if (!function_exists('getRelativeLangLink')) {
 
                 <!-- Quick Quality Preset Chips -->
                 <div class="mt-4 pt-3 border-t border-slate-100">
-                  <div class="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1.5"><?= htmlspecialchars($t['preset_label'] ?? 'Quick Presets:') ?></div>
-                  <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5">
-                    <button type="button" data-quality="50" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border <?= $targetQuality == 50 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
+                  <div class="text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-2"><?= htmlspecialchars($t['preset_label'] ?? 'Quick Presets:') ?></div>
+                  <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                    <button type="button" data-quality="50" class="quality-preset-btn text-[11px] font-semibold py-2 px-2 rounded-lg border <?= $targetQuality == 50 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
                       50% <span class="hidden sm:inline text-[9px] block <?= $targetQuality == 50 ? 'text-primary-600 font-bold' : 'text-slate-500 font-medium' ?>"><?= htmlspecialchars($t['preset_max_save'] ?? 'Max Save') ?></span>
                     </button>
-                    <button type="button" data-quality="55" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border <?= $targetQuality == 55 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
+                    <button type="button" data-quality="55" class="quality-preset-btn text-[11px] font-semibold py-2 px-2 rounded-lg border <?= $targetQuality == 55 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
                       55% <span class="hidden sm:inline text-[9px] block <?= $targetQuality == 55 ? 'text-primary-600 font-bold' : 'text-slate-500 font-medium' ?>"><?= htmlspecialchars($t['preset_balanced'] ?? 'Balanced') ?></span>
                     </button>
-                    <button type="button" data-quality="60" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border <?= $targetQuality == 60 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
+                    <button type="button" data-quality="60" class="quality-preset-btn text-[11px] font-semibold py-2 px-2 rounded-lg border <?= $targetQuality == 60 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
                       60% <span class="hidden sm:inline text-[9px] block <?= $targetQuality == 60 ? 'text-primary-600 font-bold' : 'text-slate-500 font-medium' ?>"><?= htmlspecialchars($t['preset_default'] ?? 'Default') ?></span>
                     </button>
-                    <button type="button" data-quality="75" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border <?= $targetQuality == 75 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
+                    <button type="button" data-quality="75" class="quality-preset-btn text-[11px] font-semibold py-2 px-2 rounded-lg border <?= $targetQuality == 75 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
                       75% <span class="hidden sm:inline text-[9px] block <?= $targetQuality == 75 ? 'text-primary-600 font-bold' : 'text-slate-500 font-medium' ?>"><?= htmlspecialchars($t['preset_high_quality'] ?? 'High Quality') ?></span>
                     </button>
-                    <button type="button" data-quality="95" class="quality-preset-btn text-[11px] font-semibold py-1.5 px-2 rounded-lg border <?= $targetQuality == 95 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
+                    <button type="button" data-quality="95" class="quality-preset-btn text-[11px] font-semibold py-2 px-2 rounded-lg border <?= $targetQuality == 95 ? 'border-primary-300 bg-primary-50 text-primary-700 ring-2 ring-primary-500/20' : 'border-slate-200 hover:border-primary-500 hover:bg-primary-50 hover:text-primary-700 text-slate-600' ?> transition-all text-center cursor-pointer">
                       95% <span class="hidden sm:inline text-[9px] block <?= $targetQuality == 95 ? 'text-primary-600 font-bold' : 'text-slate-500 font-medium' ?>"><?= htmlspecialchars($t['preset_lossless'] ?? 'Lossless') ?></span>
                     </button>
                   </div>
@@ -537,7 +537,7 @@ if (!function_exists('getRelativeLangLink')) {
               <!-- STEP 2: Interactive Output Format Cards -->
               <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
                 <div>
-                  <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
+                  <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-100">
                     <div class="flex items-center gap-2">
                       <span class="w-5 h-5 rounded-md bg-action-100 text-action-700 flex items-center justify-center text-[11px] font-bold">2</span>
                       <div>
@@ -557,10 +557,10 @@ if (!function_exists('getRelativeLangLink')) {
                     <button type="button" data-format="original" 
                       data-active="border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20"
                       data-inactive="border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
-                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_original'] ?? 'Original') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600"><?= htmlspecialchars($t['fmt_auto'] ?? 'Auto') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-slate-100 text-slate-600"><?= htmlspecialchars($t['fmt_auto'] ?? 'Auto') ?></span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_orig_desc'] ?? 'Same as uploaded') ?></div>
                     </button>
@@ -569,10 +569,10 @@ if (!function_exists('getRelativeLangLink')) {
                     <button type="button" data-format="image/jpeg" 
                       data-active="border-blue-600 bg-blue-50/70 text-blue-900 shadow-sm ring-2 ring-blue-500/20"
                       data-inactive="border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60"
-                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60">
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_jpg'] ?? 'JPG / JPEG') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-100 text-blue-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-blue-100 text-blue-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
                       </div>
                       <div class="text-[11px] text-blue-600/80 leading-tight"><?= htmlspecialchars($t['fmt_jpg_desc'] ?? 'Best for scenery & photos') ?></div>
                     </button>
@@ -581,10 +581,10 @@ if (!function_exists('getRelativeLangLink')) {
                     <button type="button" data-format="image/webp" 
                       data-active="border-emerald-600 bg-emerald-50/70 text-emerald-900 shadow-sm ring-2 ring-emerald-500/20"
                       data-inactive="border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60"
-                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60">
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_webp'] ?? 'WebP') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-emerald-100 text-emerald-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
                       </div>
                       <div class="text-[11px] text-emerald-600/80 leading-tight"><?= htmlspecialchars($t['fmt_webp_desc'] ?? 'Ultra fast web loading') ?></div>
                     </button>
@@ -593,10 +593,10 @@ if (!function_exists('getRelativeLangLink')) {
                     <button type="button" data-format="image/png" 
                       data-active="border-amber-600 bg-amber-50/70 text-amber-900 shadow-sm ring-2 ring-amber-500/20"
                       data-inactive="border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60"
-                      class="format-card text-left p-2.5 rounded-xl border transition-all relative border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60">
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_png'] ?? 'PNG') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800"><?= htmlspecialchars($t['fmt_transparent'] ?? 'Transparent') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-amber-100 text-amber-800"><?= htmlspecialchars($t['fmt_transparent'] ?? 'Transparent') ?></span>
                       </div>
                       <div class="text-[11px] text-amber-600/80 leading-tight"><?= htmlspecialchars($t['fmt_png_desc'] ?? 'Crisp logos & graphics') ?></div>
                     </button>
@@ -613,7 +613,7 @@ if (!function_exists('getRelativeLangLink')) {
                 </div>
 
                 <div class="mt-3 pt-2 border-t border-slate-100">
-                  <p class="text-[11px] text-slate-500 flex items-center gap-1.5">
+                  <p class="text-[11px] text-slate-500 flex items-center gap-2">
                     <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -649,7 +649,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Distinct Section Header -->
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 mb-3 shadow-2xs">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 mb-3 shadow-2xs">
             <svg class="w-3.5 h-3.5 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
             <span><?= htmlspecialchars($t['nav_tools'] ?? 'Free Online Utilities') ?></span>
           </span>
@@ -667,9 +667,9 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="w-12 h-12 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center font-bold mb-5 shadow-2xs group-hover:scale-105 transition-transform">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
             </div>
-            <h3 class="font-bold text-dark-slate text-lg mb-1.5 leading-snug"><?= htmlspecialchars($t['explore_c1_title'] ?? 'Resizing & Cropping') ?></h3>
+            <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c1_title'] ?? 'Resizing & Cropping') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c1_desc'] ?? 'Exact pixel dimensions modification and smart aspect ratio cropping.') ?></p>
-            <ul class="space-y-2.5 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
+            <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
               <li><a href="reduce-image-dimensions.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool1'] ?? '• Image Resizer (Custom Pixels)') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
               <li><a href="image-size-reducer.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool2'] ?? '• Smart Image Cropper') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
@@ -680,9 +680,9 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold mb-5 shadow-2xs group-hover:scale-105 transition-transform">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
             </div>
-            <h3 class="font-bold text-dark-slate text-lg mb-1.5 leading-snug"><?= htmlspecialchars($t['explore_c2_title'] ?? 'Format Converters') ?></h3>
+            <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c2_title'] ?? 'Format Converters') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c2_desc'] ?? 'High-demand converters for next-gen web standard performance.') ?></p>
-            <ul class="space-y-2.5 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
+            <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
               <li><a href="convert-png-to-jpg.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
               <li><a href="convert-jpg-to-webp.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
               <li><a href="compress-image-size.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
@@ -694,9 +694,9 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-5 shadow-2xs group-hover:scale-105 transition-transform">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
-            <h3 class="font-bold text-dark-slate text-lg mb-1.5 leading-snug"><?= htmlspecialchars($t['explore_c3_title'] ?? 'Privacy & Editing') ?></h3>
+            <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c3_title'] ?? 'Privacy & Editing') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c3_desc'] ?? 'Protect your metadata and sanitize sensitive photos safely.') ?></p>
-            <ul class="space-y-2.5 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
+            <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
               <li><a href="lossless-image-compressor.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
               <li><a href="compress-image-size.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
             </ul>
@@ -721,11 +721,11 @@ if (!function_exists('getRelativeLangLink')) {
         <!-- Anti-Duplicate Category Content Block (Modernized White Card) -->
         <div class="mb-10 p-6 sm:p-9 rounded-3xl bg-white border border-slate-200/90 shadow-soft">
           <div class="flex flex-wrap items-center gap-2 mb-4">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-primary-50 border border-primary-200 text-primary-700 shadow-2xs">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-primary-50 border border-primary-200 text-primary-700 shadow-2xs">
               <svg class="w-3.5 h-3.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
               <span><?= htmlspecialchars($catContent['badge']) ?></span>
             </span>
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800 shadow-2xs">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800 shadow-2xs">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span>100% Client-Side RAM</span>
             </span>
@@ -738,7 +738,7 @@ if (!function_exists('getRelativeLangLink')) {
           </p>
           
           <!-- Feature Highlight Callout Box -->
-          <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-emerald-50/40 border border-emerald-200/80 flex items-start gap-2.5 shadow-sm">
+          <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-emerald-50/40 border border-emerald-200/80 flex items-start gap-3 shadow-sm">
             <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 shadow-sm" style="margin-top: 2px;">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
@@ -755,10 +755,10 @@ if (!function_exists('getRelativeLangLink')) {
             AR
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap items-center gap-2.5 mb-2">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
               <span class="font-extrabold text-slate-900 text-base sm:text-lg"><?= htmlspecialchars($t['reviewed_by'] ?? 'Reviewed by Alex Rivera') ?></span>
-              <span class="px-2.5 py-0.5 text-xs font-bold bg-primary-50 text-primary-700 border border-primary-200 rounded-full"><?= htmlspecialchars($t['reviewer_role'] ?? 'Lead Performance Architect') ?></span>
-              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full">
+              <span class="px-3 py-0.5 text-xs font-bold bg-primary-50 text-primary-700 border border-primary-200 rounded-full"><?= htmlspecialchars($t['reviewer_role'] ?? 'Lead Performance Architect') ?></span>
+              <span class="inline-flex items-center gap-1 px-3 py-0.5 text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full">
                 <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
                 <?= htmlspecialchars($t['fact_checked'] ?? 'Fact-Checked') ?>
               </span>
@@ -766,16 +766,16 @@ if (!function_exists('getRelativeLangLink')) {
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               <?= htmlspecialchars($t['reviewer_bio'] ?? 'Former CDN Image Pipeline Specialist. Our client-side compression methodology has been empirically verified across 120,000+ files to guarantee zero data leakage (ISO 27001 compliant) and retain a Structural Similarity Index (SSIM) above 0.98.') ?>
             </p>
-            <div class="mt-3.5 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] font-medium text-slate-600">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
+            <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] font-medium text-slate-600">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200">
                 <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 <span><?= htmlspecialchars($t['updated_label'] ?? 'Updated:') ?> <?= date('F Y') ?></span>
               </span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200">
                 <svg class="w-3.5 h-3.5 text-action-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                 <span><?= htmlspecialchars($t['wcag_compliant'] ?? 'W3C WCAG 2.1 AAA Compliant') ?></span>
               </span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100 border border-slate-200">
                 <svg class="w-3.5 h-3.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 <span><?= htmlspecialchars($t['client_side_tag'] ?? '100% Client-Side WebAssembly / Canvas') ?></span>
               </span>
@@ -787,14 +787,14 @@ if (!function_exists('getRelativeLangLink')) {
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-bold bg-primary-50 text-primary-700 border border-primary-200 mb-2">
+              <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-[11px] font-bold bg-primary-50 text-primary-700 border border-primary-200 mb-2">
                 <svg class="w-3 h-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                 <span>Laboratory Benchmarks</span>
               </span>
               <h3 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight"><?= htmlspecialchars($t['benchmarks_title'] ?? 'Empirical Compression Benchmarks & Performance Metrics') ?></h3>
               <p class="text-xs sm:text-sm text-slate-500 mt-1">Laboratory testing across 120,000+ files measuring latency, visual SSIM retention, and reduction efficiency.</p>
             </div>
-            <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl self-start sm:self-center shadow-2xs whitespace-nowrap">
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl self-start sm:self-center shadow-2xs whitespace-nowrap">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               SSIM ≥ 0.98 Verified
             </span>
@@ -804,79 +804,79 @@ if (!function_exists('getRelativeLangLink')) {
             <table class="w-full text-xs text-left bg-white">
               <thead class="bg-slate-50/90 border-b border-slate-200 text-slate-800 text-[11px] font-bold uppercase tracking-wider">
                 <tr>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_source'] ?? 'Source Format') ?></th>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_target'] ?? 'Target Size') ?></th>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_reduction'] ?? 'Avg Reduction') ?></th>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_fidelity'] ?? 'SSIM Fidelity') ?></th>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_latency'] ?? 'Processing Latency') ?></th>
-                  <th class="p-3.5"><?= htmlspecialchars($t['th_security'] ?? 'Security Protocol') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_source'] ?? 'Source Format') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_target'] ?? 'Target Size') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_reduction'] ?? 'Avg Reduction') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_fidelity'] ?? 'SSIM Fidelity') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_latency'] ?? 'Processing Latency') ?></th>
+                  <th class="p-4"><?= htmlspecialchars($t['th_security'] ?? 'Security Protocol') ?></th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100 text-slate-700">
                 <tr class="hover:bg-slate-50/70 transition-colors">
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 font-extrabold font-mono text-[10px] border border-blue-200">JPEG</span>
                       <span class="font-bold text-slate-900">Photos / Web</span>
                     </div>
                   </td>
-                  <td class="p-3.5 font-mono font-semibold text-slate-600">&le; 50 KB</td>
-                  <td class="p-3.5">
-                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-76.4%</span>
+                  <td class="p-4 font-mono font-semibold text-slate-600">&le; 50 KB</td>
+                  <td class="p-4">
+                    <span class="inline-block px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-76.4%</span>
                   </td>
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <span class="font-bold font-mono text-slate-900">0.984</span>
                     <span class="text-[11px] text-slate-500 ml-1"><?= htmlspecialchars($t['val_imperceptible'] ?? '(Imperceptible)') ?></span>
                   </td>
-                  <td class="p-3.5 font-mono font-bold text-primary-700">&lt; 42 ms</td>
-                  <td class="p-3.5">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
+                  <td class="p-4 font-mono font-bold text-primary-700">&lt; 42 ms</td>
+                  <td class="p-4">
+                    <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
                       <svg class="w-3 h-3 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                       <?= htmlspecialchars($t['val_client_mem'] ?? 'Client Memory Only') ?>
                     </span>
                   </td>
                 </tr>
                 <tr class="hover:bg-slate-50/70 transition-colors">
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-extrabold font-mono text-[10px] border border-emerald-200">PNG</span>
                       <span class="font-bold text-slate-900">Logos / Graphics</span>
                     </div>
                   </td>
-                  <td class="p-3.5 font-mono font-semibold text-slate-600">&le; 100 KB</td>
-                  <td class="p-3.5">
-                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-68.2%</span>
+                  <td class="p-4 font-mono font-semibold text-slate-600">&le; 100 KB</td>
+                  <td class="p-4">
+                    <span class="inline-block px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-68.2%</span>
                   </td>
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <span class="font-bold font-mono text-slate-900">0.996</span>
                     <span class="text-[11px] text-slate-500 ml-1"><?= htmlspecialchars($t['val_crystal_clear'] ?? '(Crystal Clear)') ?></span>
                   </td>
-                  <td class="p-3.5 font-mono font-bold text-primary-700">&lt; 58 ms</td>
-                  <td class="p-3.5">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
+                  <td class="p-4 font-mono font-bold text-primary-700">&lt; 58 ms</td>
+                  <td class="p-4">
+                    <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
                       <svg class="w-3 h-3 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                       <?= htmlspecialchars($t['val_client_mem'] ?? 'Client Memory Only') ?>
                     </span>
                   </td>
                 </tr>
                 <tr class="hover:bg-slate-50/70 transition-colors">
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 font-extrabold font-mono text-[10px] border border-purple-200">WebP</span>
                       <span class="font-bold text-slate-900">Modern Format</span>
                     </div>
                   </td>
-                  <td class="p-3.5 font-mono font-semibold text-slate-600">&le; 20 KB</td>
-                  <td class="p-3.5">
-                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-84.9%</span>
+                  <td class="p-4 font-mono font-semibold text-slate-600">&le; 20 KB</td>
+                  <td class="p-4">
+                    <span class="inline-block px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-black font-mono">-84.9%</span>
                   </td>
-                  <td class="p-3.5">
+                  <td class="p-4">
                     <span class="font-bold font-mono text-slate-900">0.981</span>
                     <span class="text-[11px] text-slate-500 ml-1"><?= htmlspecialchars($t['val_high_dynamic'] ?? '(High Dynamic)') ?></span>
                   </td>
-                  <td class="p-3.5 font-mono font-bold text-primary-700">&lt; 35 ms</td>
-                  <td class="p-3.5">
-                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
+                  <td class="p-4 font-mono font-bold text-primary-700">&lt; 35 ms</td>
+                  <td class="p-4">
+                    <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold text-[11px]">
                       <svg class="w-3 h-3 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                       <?= htmlspecialchars($t['val_client_mem'] ?? 'Client Memory Only') ?>
                     </span>
@@ -1005,7 +1005,7 @@ if (!function_exists('getRelativeLangLink')) {
       <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
 
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-primary-100 text-primary-700 mb-3 shadow-2xs">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-primary-100 text-primary-700 mb-3 shadow-2xs">
             <svg class="w-3.5 h-3.5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             <span><?= htmlspecialchars($t['nav_how'] ?? 'Simple 3-Step Process') ?></span>
           </span>
@@ -1063,7 +1063,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Workflow Micro-Badge Guarantee (Clear Top Clearance & Generous Padding) -->
         <div class="mt-12 sm:mt-16 text-center">
-          <span class="inline-flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full border border-slate-200 shadow-2xs">
+          <span class="inline-flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white px-5 py-3 sm:px-6 sm:py-3 rounded-full border border-slate-200 shadow-2xs">
             <svg class="w-4 h-4 text-action-700 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
             <span><?= htmlspecialchars($t['badge_free'] ?? '100% Free & Unlimited • Zero Server Upload • Instant Privacy') ?></span>
           </span>
@@ -1077,7 +1077,7 @@ if (!function_exists('getRelativeLangLink')) {
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-xl mx-auto mb-10">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-action-100 text-action-800 mb-3 shadow-2xs">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-action-100 text-action-800 mb-3 shadow-2xs">
             <svg class="w-3.5 h-3.5 text-action-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span><?= htmlspecialchars($t['nav_faq'] ?? 'FAQ') ?></span>
           </span>
@@ -1089,14 +1089,14 @@ if (!function_exists('getRelativeLangLink')) {
           </p>
         </div>
 
-        <div class="space-y-3.5">
+        <div class="space-y-4">
           <!-- FAQ 1 -->
           <div class="faq-item bg-slate-50/70 hover:bg-slate-50/90 rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden transition-all">
             <button type="button" class="faq-trigger w-full flex items-center justify-between p-5 text-left font-semibold text-dark-slate hover:text-primary-600 transition-colors" aria-expanded="false">
               <span class="text-sm sm:text-base"><?= htmlspecialchars($t['faq1_q'] ?? 'How can I compress an image to exact KB?') ?></span>
               <svg class="faq-arrow w-5 h-5 text-slate-500 transform transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-3.5 leading-relaxed">
+            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-4 leading-relaxed">
               <?= htmlspecialchars($t['faq1_a'] ?? 'Simply adjust the quality slider to reach your target file size.') ?>
             </div>
           </div>
@@ -1107,7 +1107,7 @@ if (!function_exists('getRelativeLangLink')) {
               <span class="text-sm sm:text-base"><?= htmlspecialchars($t['faq2_q'] ?? 'Are my images uploaded to any server?') ?></span>
               <svg class="faq-arrow w-5 h-5 text-slate-500 transform transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-3.5 leading-relaxed">
+            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-4 leading-relaxed">
               <?= htmlspecialchars($t['faq2_a'] ?? 'No, never. 100% processed locally on your device.') ?>
             </div>
           </div>
@@ -1118,7 +1118,7 @@ if (!function_exists('getRelativeLangLink')) {
               <span class="text-sm sm:text-base"><?= htmlspecialchars($t['faq3_q'] ?? 'Which image formats are supported?') ?></span>
               <svg class="faq-arrow w-5 h-5 text-slate-500 transform transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-3.5 leading-relaxed">
+            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-4 leading-relaxed">
               <?= htmlspecialchars($t['faq3_a'] ?? 'Our compressor fully supports JPG, JPEG, PNG, WebP, and GIF images.') ?>
             </div>
           </div>
@@ -1129,7 +1129,7 @@ if (!function_exists('getRelativeLangLink')) {
               <span class="text-sm sm:text-base"><?= htmlspecialchars($t['faq4_q'] ?? 'Is there any daily limit or watermark added?') ?></span>
               <svg class="faq-arrow w-5 h-5 text-slate-500 transform transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
-            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-3.5 leading-relaxed">
+            <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-4 leading-relaxed">
               <?= htmlspecialchars($t['faq4_a'] ?? 'No! CompressImageSize is 100% free with unlimited usage. We never append watermarks, and you do not need to register or provide credit card information.') ?>
             </div>
           </div>
@@ -1146,7 +1146,7 @@ if (!function_exists('getRelativeLangLink')) {
               <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Empirically verified client-side quantization with zero cloud leakage.</p>
             </div>
           </div>
-          <a href="#eeat-authority" class="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-900 hover:text-primary-700 font-bold text-xs sm:text-sm shadow-2xs transition-all whitespace-nowrap">
+          <a href="#eeat-authority" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-900 hover:text-primary-700 font-bold text-xs sm:text-sm shadow-2xs transition-all whitespace-nowrap">
             <?= htmlspecialchars($t['view_benchmarks'] ?? 'View Technical Benchmarks →') ?>
           </a>
         </div>
@@ -1218,22 +1218,22 @@ if (!function_exists('getRelativeLangLink')) {
           </p>
 
           <!-- Live Status Indicator Pill -->
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-[11px] font-semibold text-emerald-800 shadow-2xs">
+          <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-emerald-50 border border-emerald-200/90 text-[11px] font-semibold text-emerald-800 shadow-2xs">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span><?= htmlspecialchars($t['engine_in_browser'] ?? 'In-Browser Engine') ?> • <?= htmlspecialchars($t['footer_status_active'] ?? 'Active & Ready') ?></span>
           </div>
 
           <!-- Trust & Standards Badges -->
           <div class="flex flex-wrap gap-2 pt-1 text-[11px] font-medium text-slate-600">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
               <span>Zero Server Logs</span>
             </span>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
               <span>GDPR Compliant</span>
             </span>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
               <span>W3C AAA</span>
             </span>
@@ -1242,7 +1242,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Column 2: Size Reducers (2 cols on lg) -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
-          <div class="flex items-center gap-2 mb-3.5">
+          <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-primary-600 rounded-full inline-block"></span>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_size'] ?? ($t['cat_matrix']['size']['badge'] ?? 'Size Reducers')) ?></h4>
           </div>
@@ -1265,7 +1265,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Column 3: Format Specific (2 cols on lg) -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
-          <div class="flex items-center gap-2 mb-3.5">
+          <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-action-600 rounded-full inline-block"></span>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_format'] ?? ($t['cat_matrix']['format']['badge'] ?? 'Format Specific')) ?></h4>
           </div>
@@ -1288,7 +1288,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Column 4: Popular Tools (2 cols on lg) -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
-          <div class="flex items-center gap-2 mb-3.5">
+          <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-purple-600 rounded-full inline-block"></span>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_action'] ?? ($t['cat_matrix']['action']['badge'] ?? 'Popular Tools')) ?></h4>
           </div>
@@ -1311,7 +1311,7 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Column 5: Security & Company Standards (2 cols on lg) -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
-          <div class="flex items-center gap-2 mb-3.5">
+          <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-amber-500 rounded-full inline-block"></span>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_trust'] ?? ($t['nav_quality'] ?? 'Security & Legal')) ?></h4>
           </div>
@@ -1369,13 +1369,13 @@ if (!function_exists('getRelativeLangLink')) {
           <span class="text-[11px] text-slate-500 font-medium">Zero server storage in all supported regions</span>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           <?php foreach ($globalLanguages as $lCode => $lData): 
             $langHref = getRelativeLangLink($lCode, $currentSlug, $currentLang);
             $isActive = ($currentLang === $lCode);
           ?>
             <a href="<?= $langHref ?>" 
-               class="footer-lang-pill flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition-all <?= $isActive ? 'bg-primary-50 border border-primary-300 font-bold text-primary-700 shadow-2xs' : 'bg-slate-50/70 border border-slate-200/70 text-slate-600 hover:bg-white hover:border-slate-300 hover:text-dark-slate hover:shadow-2xs' ?>">
+               class="footer-lang-pill flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-all <?= $isActive ? 'bg-primary-50 border border-primary-300 font-bold text-primary-700 shadow-2xs' : 'bg-slate-50/70 border border-slate-200/70 text-slate-600 hover:bg-white hover:border-slate-300 hover:text-dark-slate hover:shadow-2xs' ?>">
               <?= getFlagSvg($lCode) ?>
               <span class="truncate"><?= $lData['name'] ?></span>
               <?php if ($isActive): ?>
@@ -1419,8 +1419,8 @@ if (!function_exists('getRelativeLangLink')) {
     <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200/80 overflow-hidden">
       
       <!-- Modal Top Bar / Header -->
-      <div class="p-3.5 sm:p-4 border-b border-surface-border bg-slate-50/90 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5 min-w-0">
+      <div class="p-4 sm:p-4 border-b border-surface-border bg-slate-50/90 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
           <div class="w-9 h-9 rounded-xl bg-primary-50 border border-primary-200 text-primary-600 flex items-center justify-center flex-shrink-0 shadow-xs">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1442,11 +1442,11 @@ if (!function_exists('getRelativeLangLink')) {
         <div class="flex items-center gap-2 sm:gap-3">
           <!-- View Switcher Tabs: Side-by-Side vs Interactive Slider -->
           <div class="inline-flex p-1 bg-slate-200/80 rounded-xl text-xs font-bold text-slate-600 shadow-inner">
-            <button type="button" id="compareViewSideBtn" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 bg-white text-dark-slate shadow-xs cursor-pointer">
+            <button type="button" id="compareViewSideBtn" class="px-3 py-2 rounded-lg transition-all flex items-center gap-2 bg-white text-dark-slate shadow-xs cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
               <span><?= htmlspecialchars($t['modal_tab_side'] ?? 'Side-by-Side') ?></span>
             </button>
-            <button type="button" id="compareViewSliderBtn" class="px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-slate-600 hover:text-dark-slate cursor-pointer">
+            <button type="button" id="compareViewSliderBtn" class="px-3 py-2 rounded-lg transition-all flex items-center gap-2 text-slate-600 hover:text-dark-slate cursor-pointer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
               <span><?= htmlspecialchars($t['modal_tab_slider'] ?? 'Split Slider') ?></span>
             </button>
@@ -1459,18 +1459,18 @@ if (!function_exists('getRelativeLangLink')) {
       </div>
 
       <!-- Live Comparison Stats Strip -->
-      <div class="bg-slate-900 text-white px-4 py-2.5 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs border-b border-slate-800">
+      <div class="bg-slate-900 text-white px-4 py-3 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs border-b border-slate-800">
         <div class="flex items-center gap-3 sm:gap-6 flex-wrap">
-          <div class="flex items-center gap-1.5">
+          <div class="flex items-center gap-2">
             <span class="text-slate-400 uppercase text-[10px] font-bold tracking-wider"><?= htmlspecialchars($t['modal_stat_orig'] ?? 'Original:') ?></span>
             <span id="compareOrigSizeBadge" class="font-mono font-bold text-slate-200 bg-slate-800 px-2 py-0.5 rounded border border-slate-700">0 KB</span>
           </div>
           <svg class="w-4 h-4 text-emerald-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          <div class="flex items-center gap-1.5">
+          <div class="flex items-center gap-2">
             <span class="text-slate-400 uppercase text-[10px] font-bold tracking-wider"><?= htmlspecialchars($t['modal_stat_opt'] ?? 'Optimized:') ?></span>
             <span id="compareNewSizeBadge" class="font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">0 KB</span>
           </div>
-          <div class="flex items-center gap-1.5">
+          <div class="flex items-center gap-2">
             <span class="text-slate-400 uppercase text-[10px] font-bold tracking-wider"><?= htmlspecialchars($t['modal_stat_save'] ?? 'Savings:') ?></span>
             <span id="compareSavingsBadge" class="font-mono font-black text-slate-950 bg-[#78c800] px-2 py-0.5 rounded text-[11px]">-0%</span>
           </div>
@@ -1488,11 +1488,11 @@ if (!function_exists('getRelativeLangLink')) {
           <!-- Before / Original Card -->
           <div class="flex flex-col bg-white border border-slate-200 rounded-2xl p-3 shadow-xs overflow-hidden">
             <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
-              <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-600">
+              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600">
                 <span class="w-2 h-2 rounded-full bg-slate-400"></span>
                 <span><?= htmlspecialchars($t['modal_before'] ?? 'Before (Original)') ?></span>
               </span>
-              <span id="compareOrigSize" class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200">0 KB</span>
+              <span id="compareOrigSize" class="text-xs font-mono font-bold text-slate-600 bg-slate-100 px-3 py-0.5 rounded-md border border-slate-200">0 KB</span>
             </div>
             <div class="flex-1 min-h-[260px] sm:min-h-[380px] max-h-[52vh] bg-checkered rounded-xl overflow-hidden flex items-center justify-center p-2 relative border border-slate-200/60">
               <img id="compareOrigImg" src="" alt="Original" class="max-h-full max-w-full object-contain rounded drop-shadow-sm transition-transform duration-200" />
@@ -1502,11 +1502,11 @@ if (!function_exists('getRelativeLangLink')) {
           <!-- After / Optimized Card -->
           <div class="flex flex-col bg-white border-2 border-primary-300 rounded-2xl p-3 shadow-sm overflow-hidden relative">
             <div class="flex items-center justify-between pb-2 mb-2 border-b border-primary-100">
-              <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary-700">
+              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary-700">
                 <span class="w-2 h-2 rounded-full bg-primary-500"></span>
                 <span><?= htmlspecialchars($t['modal_after'] ?? 'After (Optimized)') ?></span>
               </span>
-              <span id="compareNewSize" class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">0 KB</span>
+              <span id="compareNewSize" class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-3 py-0.5 rounded-md border border-emerald-200">0 KB</span>
             </div>
             <div class="flex-1 min-h-[260px] sm:min-h-[380px] max-h-[52vh] bg-checkered rounded-xl overflow-hidden flex items-center justify-center p-2 relative border border-primary-200/60">
               <img id="compareNewImg" src="" alt="Compressed" class="max-h-full max-w-full object-contain rounded drop-shadow-sm transition-transform duration-200" />
@@ -1528,14 +1528,14 @@ if (!function_exists('getRelativeLangLink')) {
             <div id="sliderCompareContainer" class="relative w-full flex-1 min-h-[300px] sm:min-h-[420px] max-h-[54vh] overflow-hidden select-none bg-checkered rounded-xl flex items-center justify-center border border-slate-200/80">
               <!-- Base Layer: Original Image -->
               <img id="compareSliderOrigImg" src="" alt="Original" class="max-h-full max-w-full object-contain pointer-events-none" />
-              <div class="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-lg bg-slate-900/85 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-xs">
+              <div class="absolute top-3 left-3 z-10 px-3 py-1 rounded-lg bg-slate-900/85 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-xs">
                 <?= htmlspecialchars($t['modal_tag_orig'] ?? '◀ Original') ?>
               </div>
 
               <!-- Top Clipped Layer: Compressed Image -->
               <div id="compareSliderClip" class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center" style="clip-path: inset(0 0 0 50%);">
                 <img id="compareSliderNewImg" src="" alt="Compressed" class="max-h-full max-w-full object-contain pointer-events-none" />
-                <div class="absolute top-3 right-3 z-10 px-2.5 py-1 rounded-lg bg-primary-600/90 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-xs">
+                <div class="absolute top-3 right-3 z-10 px-3 py-1 rounded-lg bg-primary-600/90 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md backdrop-blur-xs">
                   <?= htmlspecialchars($t['modal_tag_opt'] ?? 'Optimized ▶') ?>
                 </div>
               </div>
@@ -1556,16 +1556,16 @@ if (!function_exists('getRelativeLangLink')) {
       </div>
 
       <!-- Modal Footer -->
-      <div class="p-3.5 sm:p-4 border-t border-surface-border bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="p-4 sm:p-4 border-t border-surface-border bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div class="flex items-center gap-2 text-xs text-slate-500">
           <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           <span><?= htmlspecialchars($t['modal_guarantee'] ?? 'Zero blur or banding. Edges, skin tones & text stay 100% sharp.') ?></span>
         </div>
-        <div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+        <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
           <button type="button" id="closeCompareModalBottomBtn" class="px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl transition-colors cursor-pointer">
             <?= htmlspecialchars($t['modal_close'] ?? 'Close Preview') ?>
           </button>
-          <a id="compareDownloadBtn" href="#" download="" class="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl shadow-md transition-all cursor-pointer">
+          <a id="compareDownloadBtn" href="#" download="" class="inline-flex items-center justify-center gap-3 px-6 py-3 text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 active:scale-95 rounded-xl shadow-md transition-all cursor-pointer">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             <span><?= htmlspecialchars($t['modal_download'] ?? 'Download Optimized Image') ?></span>
           </a>

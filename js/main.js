@@ -550,7 +550,7 @@
     if (progressStatusText) {
       progressStatusText.innerHTML = `
         <span class="inline-flex items-center font-bold" style="color: #047857 !important;">
-          <svg class="w-4 h-4 mr-1.5" style="color: #059669 !important;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 mr-2" style="color: #059669 !important;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
           </svg>
           ${getLangString('progress_done', 'All images compressed successfully!')}
@@ -732,7 +732,7 @@
 
     const row = document.createElement('div');
     row.className =
-      'flex items-center justify-between p-2.5 sm:p-3 hover:bg-slate-50/90 transition-colors gap-2 sm:gap-4 group animate-fade-in';
+      'flex items-center justify-between p-3 sm:p-3 hover:bg-slate-50/90 transition-colors gap-2 sm:gap-4 group animate-fade-in';
 
     // Format badge color accent (like TinyPNG format tags)
     const isPng = fileExt === 'PNG';
@@ -745,7 +745,7 @@
 
     row.innerHTML = `
       <!-- Left: Thumbnail Preview & File Metadata -->
-      <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
+      <div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
         <!-- Thumbnail Preview -->
         <button type="button" class="preview-btn relative flex-shrink-0 focus:outline-none rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shadow-2xs group-hover:border-primary-400 transition-all cursor-pointer" title="Click to preview & compare">
           <img src="${item.url}" alt="${item.name}" class="w-10 h-10 sm:w-11 sm:h-11 object-cover" />
@@ -757,8 +757,8 @@
         <!-- Filename & Original File Size -->
         <div class="min-w-0 flex-1">
           <h5 class="text-xs sm:text-sm font-semibold text-slate-800 truncate" title="${item.name}">${item.name}</h5>
-          <div class="flex items-center gap-1.5 mt-0.5 text-xs">
-            <span class="inline-block px-1.5 py-0.5 text-[10px] font-extrabold uppercase rounded border ${badgeClass} font-mono tracking-wider">${fileExt}</span>
+          <div class="flex items-center gap-2 mt-0.5 text-xs">
+            <span class="inline-block px-2 py-0.5 text-[10px] font-extrabold uppercase rounded border ${badgeClass} font-mono tracking-wider">${fileExt}</span>
             <span class="text-slate-600 font-semibold text-[11px] sm:text-xs">${formatBytes(item.originalSize)}</span>
           </div>
         </div>
@@ -775,12 +775,12 @@
         </div>
 
         <!-- Compare Modal Trigger Button -->
-        <button type="button" class="compare-btn p-1.5 text-slate-500 hover:text-primary-700 hover:bg-slate-100 rounded-lg transition-all cursor-pointer" title="Inspect Original vs Compressed">
+        <button type="button" class="compare-btn p-2 text-slate-500 hover:text-primary-700 hover:bg-slate-100 rounded-lg transition-all cursor-pointer" title="Inspect Original vs Compressed">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
         </button>
 
         <!-- Individual Download Pill Button (TinyPNG Style: Download Icon + Format Tag) -->
-        <a href="${item.url}" download="${item.name}" class="inline-flex items-center justify-center gap-2 px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-white bg-slate-100 hover:bg-emerald-600 border border-slate-200 hover:border-emerald-600 rounded-lg shadow-sm transition-all cursor-pointer group-btn" title="Download ${item.name}">
+        <a href="${item.url}" download="${item.name}" class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-slate-600 hover:text-white bg-slate-100 hover:bg-emerald-600 border border-slate-200 hover:border-emerald-600 rounded-lg shadow-sm transition-all cursor-pointer group-btn" title="Download ${item.name}">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>

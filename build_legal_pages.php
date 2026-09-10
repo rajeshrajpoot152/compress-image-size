@@ -74,7 +74,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         <!-- World Top 10 Language Switcher -->
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
-            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-1.5 sm:py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
+            <button id="langToggleBtn" type="button" aria-haspopup="true" aria-expanded="false" class="flex items-center gap-2 text-xs sm:text-sm font-medium text-dark-body bg-slate-50 hover:bg-slate-100 border border-surface-border px-3 py-2 sm:py-2 rounded-lg transition-all focus:ring-2 focus:ring-primary-600">
               <span id="currentLangFlag" class="inline-flex items-center">
                 {$currentFlag}
               </span>
@@ -86,7 +86,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
 
             <!-- Language Dropdown Menu -->
             <div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-96 overflow-y-auto">
-              <div class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Global Top 10 Languages</div>
+              <div class="px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Global Top 10 Languages</div>
               {$dropdownHtml}
             </div>
           </div>
@@ -129,7 +129,7 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
             : 'bg-slate-50/70 border border-slate-200/70 text-slate-600 hover:bg-white hover:border-slate-300 hover:text-dark-slate hover:shadow-2xs';
         $indicator = $isActive ? '<span class="ml-auto w-1.5 h-1.5 rounded-full bg-primary-600 flex-shrink-0"></span>' : '';
         $footerLangGrid .= "
-            <a href=\"{$link}\" class=\"footer-lang-pill flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition-all {$activeClass}\">
+            <a href=\"{$link}\" class=\"footer-lang-pill flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-all {$activeClass}\">
               {$flagSvg}
               <span class=\"truncate\">{$info['name']}</span>
               {$indicator}
@@ -149,7 +149,7 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
         <a href="{$homeLink}" class="inline-block group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg" aria-label="CompressImageSize">
           <img src="{$prefix}images/logo.png" alt="CompressImageSize" class="h-9 w-auto object-contain" width="190" height="38" />
         </a>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-[11px] font-semibold text-emerald-800 shadow-2xs">
+        <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-emerald-50 border border-emerald-200/90 text-[11px] font-semibold text-emerald-800 shadow-2xs">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span>100% In-Browser Privacy • Zero Server Storage</span>
         </div>
@@ -166,7 +166,7 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
           </div>
           <span class="text-[11px] text-slate-500 font-medium">Zero server storage in all supported regions</span>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {$footerLangGrid}
         </div>
       </div>
@@ -295,7 +295,7 @@ foreach ($languages as $langCode => $langInfo) {
 {$headerPrivacy}
 
   <!-- BREADCRUMBS -->
-  <div class="bg-white border-b border-surface-border py-2.5">
+  <div class="bg-white border-b border-surface-border py-3">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex items-center text-xs text-slate-500 font-medium gap-2">
         <a href="{$prefix}index.html" class="hover:text-primary-600 transition-colors">Home</a>
@@ -523,7 +523,7 @@ HTML;
 {$headerTerms}
 
   <!-- BREADCRUMBS -->
-  <div class="bg-white border-b border-surface-border py-2.5">
+  <div class="bg-white border-b border-surface-border py-3">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex items-center text-xs text-slate-500 font-medium gap-2">
         <a href="{$prefix}index.html" class="hover:text-primary-600 transition-colors">Home</a>

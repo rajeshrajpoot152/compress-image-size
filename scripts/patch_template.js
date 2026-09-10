@@ -93,12 +93,12 @@ content = content.replace(oldNav, newNav);
 
 // 3. Language Switcher Menu & Mobile Drawer
 const oldLangMenu = `<div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50">
-              <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">Global Top 10 Languages</div>
+              <div class="px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">Global Top 10 Languages</div>
               <?php foreach ($globalLanguages as $code => $info): 
                 $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
               ?>
                 <a href="<?= $linkToLang ?>" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors <?= $currentLang === $code ? 'font-bold bg-primary-50 text-primary-600' : '' ?>">
-                  <span class="flex items-center gap-2.5">
+                  <span class="flex items-center gap-3">
                     <?= getFlagSvg($code) ?>
                     <span><?= $info['name'] ?></span>
                   </span>
@@ -108,12 +108,12 @@ const oldLangMenu = `<div id="langMenu" class="hidden absolute right-0 mt-2 w-56
             </div>`;
 
 const newLangMenu = `<div id="langMenu" class="hidden absolute ltr:right-0 rtl:left-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-[80vh] overflow-y-auto">
-              <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
+              <div class="px-3 py-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
               <?php foreach ($globalLanguages as $code => $info): 
                 $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
               ?>
                 <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors <?= $currentLang === $code ? 'font-bold bg-primary-50 text-primary-600' : '' ?>">
-                  <span class="flex items-center gap-2.5">
+                  <span class="flex items-center gap-3">
                     <?= getFlagSvg($code) ?>
                     <span><?= $info['name'] ?></span>
                   </span>
@@ -142,11 +142,11 @@ const newDrawer = `<div id="mobileDrawer" class="hidden md:hidden border-t borde
         <!-- Mobile Language Switcher Grid -->
         <div class="pt-3 border-t border-slate-100">
           <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2"><?= htmlspecialchars($t['lang_menu_header'] ?? 'Global Top 10 Languages') ?></div>
-          <div class="grid grid-cols-2 gap-1.5">
+          <div class="grid grid-cols-2 gap-2">
             <?php foreach ($globalLanguages as $code => $info): 
               $linkToLang = getRelativeLangLink($code, $currentSlug, $currentLang);
             ?>
-              <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center gap-2 p-1.5 rounded-lg text-xs <?= $currentLang === $code ? 'bg-primary-50 text-primary-700 font-bold border border-primary-200' : 'text-slate-600 hover:bg-slate-50' ?>">
+              <a href="<?= $linkToLang ?>" data-lang="<?= $code ?>" class="flex items-center gap-2 p-2 rounded-lg text-xs <?= $currentLang === $code ? 'bg-primary-50 text-primary-700 font-bold border border-primary-200' : 'text-slate-600 hover:bg-slate-50' ?>">
                 <?= getFlagSvg($code) ?>
                 <span class="truncate"><?= $info['name'] ?></span>
               </a>
@@ -257,8 +257,8 @@ content = content.replace(
 );
 
 content = content.replace(
-  '<div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Quick Presets:</div>',
-  '<div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5"><?= htmlspecialchars($t[\'preset_label\'] ?? \'Quick Presets:\') ?></div>'
+  '<div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Quick Presets:</div>',
+  '<div class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2"><?= htmlspecialchars($t[\'preset_label\'] ?? \'Quick Presets:\') ?></div>'
 );
 
 content = content.replace(
@@ -298,12 +298,12 @@ content = content.replace(
 
 // Format Card: Original
 const oldOrigCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight">Original</span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">Auto</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-slate-100 text-slate-600">Auto</span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight">Same as uploaded</div>`;
 
 const newOrigCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_original'] ?? 'Original') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-slate-100 text-slate-600"><?= htmlspecialchars($t['fmt_auto'] ?? 'Auto') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-slate-100 text-slate-600"><?= htmlspecialchars($t['fmt_auto'] ?? 'Auto') ?></span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_orig_desc'] ?? 'Same as uploaded') ?></div>`;
 
@@ -311,12 +311,12 @@ content = content.replace(oldOrigCard, newOrigCard);
 
 // Format Card: JPG
 const oldJpgCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight">JPG / JPEG</span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-primary-100 text-primary-700">Photos</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-primary-100 text-primary-700">Photos</span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight">Best for scenery &amp; photos</div>`;
 
 const newJpgCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_jpg'] ?? 'JPG / JPEG') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-primary-100 text-primary-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-primary-100 text-primary-700"><?= htmlspecialchars($t['fmt_photos'] ?? 'Photos') ?></span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_jpg_desc'] ?? 'Best for scenery & photos') ?></div>`;
 
@@ -324,12 +324,12 @@ content = content.replace(oldJpgCard, newJpgCard);
 
 // Format Card: WebP
 const oldWebpCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight">WebP</span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-action-100 text-action-700 font-semibold">&minus;40% Size</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-action-100 text-action-700 font-semibold">&minus;40% Size</span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight">Ultra fast web loading</div>`;
 
 const newWebpCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_webp'] ?? 'WebP') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-action-100 text-action-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-action-100 text-action-700 font-semibold"><?= htmlspecialchars($t['fmt_savings'] ?? '-40% Size') ?></span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_webp_desc'] ?? 'Ultra fast web loading') ?></div>`;
 
@@ -337,12 +337,12 @@ content = content.replace(oldWebpCard, newWebpCard);
 
 // Format Card: PNG
 const oldPngCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight">PNG</span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800">Transparent</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-amber-100 text-amber-800">Transparent</span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight">Crisp logos &amp; graphics</div>`;
 
 const newPngCard = `<span class="text-xs font-extrabold uppercase font-mono tracking-tight"><?= htmlspecialchars($t['fmt_png'] ?? 'PNG') ?></span>
-                        <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800"><?= htmlspecialchars($t['fmt_transparent'] ?? 'Transparent') ?></span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-amber-100 text-amber-800"><?= htmlspecialchars($t['fmt_transparent'] ?? 'Transparent') ?></span>
                       </div>
                       <div class="text-[11px] text-slate-500 leading-tight"><?= htmlspecialchars($t['fmt_png_desc'] ?? 'Crisp logos & graphics') ?></div>`;
 
@@ -523,7 +523,7 @@ const oldCatLoop = `        <?php
         ?>
           <div>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate mb-3"><?= $catTitle ?></h4>
-            <ul class="space-y-1.5 text-xs">
+            <ul class="space-y-2 text-xs">
               <?php foreach (array_slice($items, 0, 10) as $keySlug => $k): 
                 $link = "{$keySlug}.html";
               ?>
@@ -547,7 +547,7 @@ const newCatLoop = `        <?php
         ?>
           <div>
             <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate mb-3"><?= $catTitle ?></h4>
-            <ul class="space-y-1.5 text-xs">
+            <ul class="space-y-2 text-xs">
               <?php foreach (array_slice($items, 0, 10) as $keySlug => $k): 
                 $locK = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($keySlug, $currentLang, $k) : $k;
                 $link = "{$keySlug}.html";
