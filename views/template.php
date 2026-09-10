@@ -361,7 +361,7 @@ if (!function_exists('getRelativeLangLink')) {
       </div>
 
       <!-- Compact Real-Time Progress Bar for Bulk Processing (Floating Toast) -->
-      <div id="progressContainer" class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 w-[calc(100%-2rem)] sm:w-96 z-50 hidden text-left transition-all duration-300">
+      <div id="progressContainer" class="fixed bottom-6 sm:bottom-8 z-50 hidden text-left transition-all duration-300" style="left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px;">
         <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
           <div class="flex items-center justify-between gap-3">
             <div class="flex items-center gap-3 min-w-0">

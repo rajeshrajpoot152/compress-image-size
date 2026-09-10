@@ -12,8 +12,8 @@ function walk(dir) {
             let content = fs.readFileSync(fullPath, 'utf8');
             let replaced = false;
 
-            const regex = /<div\s+id="progressContainer"\s+class="[^"]*w-full\s+max-w-3xl\s+sm:max-w-4xl\s+mx-auto\s+mt-4[^"]*"[^>]*>/g;
-            const newDiv = '<div id="progressContainer" class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 w-[calc(100%-2rem)] sm:w-96 z-[100] hidden text-left transition-all duration-300">';
+            const regex = /<div id="progressContainer" class="fixed bottom-6 sm:bottom-8 left-1\/2 -translate-x-1\/2 w-\[calc\(100%-2rem\)\] sm:w-\[450px\] z-50 hidden text-left transition-all duration-300">/g;
+            const newDiv = '<div id="progressContainer" class="fixed bottom-6 sm:bottom-8 w-[calc(100%-2rem)] sm:w-[450px] z-50 hidden text-left transition-all duration-300" style="left: 50%; transform: translateX(-50%);">';
             
             if (regex.test(content)) {
                 content = content.replace(regex, newDiv);
@@ -28,4 +28,4 @@ function walk(dir) {
     });
 }
 walk('.');
-console.log('Fixed progress floating in ' + count + ' files');
+console.log('Fixed progress floating inline style in ' + count + ' files');

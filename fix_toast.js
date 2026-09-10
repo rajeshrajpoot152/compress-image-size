@@ -12,8 +12,11 @@ function walk(dir) {
             let content = fs.readFileSync(fullPath, 'utf8');
             let replaced = false;
 
-            if (content.includes('z-[100]')) {
-                content = content.replace(/z-\[100\]/g, 'z-50');
+            const regex = /<div id="progressContainer" class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 w-\[calc\(100%-2rem\)\] sm:w-96 z-50 hidden text-left transition-all duration-300">/g;
+            const newDiv = '<div id="progressContainer" class="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] sm:w-[450px] z-50 hidden text-left transition-all duration-300">';
+            
+            if (regex.test(content)) {
+                content = content.replace(regex, newDiv);
                 replaced = true;
             }
 
@@ -25,4 +28,4 @@ function walk(dir) {
     });
 }
 walk('.');
-console.log('Fixed z-index in ' + count + ' files');
+console.log('Fixed progress floating position in ' + count + ' files');
