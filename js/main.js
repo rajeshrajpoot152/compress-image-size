@@ -40,12 +40,29 @@
 
   // Compare Modal Elements
   const compareModal = document.getElementById('compareModal');
+  const compareFileName = document.getElementById('compareFileName');
   const compareOrigImg = document.getElementById('compareOrigImg');
   const compareNewImg = document.getElementById('compareNewImg');
   const compareOrigSize = document.getElementById('compareOrigSize');
   const compareNewSize = document.getElementById('compareNewSize');
+  const compareOrigSizeBadge = document.getElementById('compareOrigSizeBadge');
+  const compareNewSizeBadge = document.getElementById('compareNewSizeBadge');
+  const compareSavingsBadge = document.getElementById('compareSavingsBadge');
+  const compareDimensionsBadge = document.getElementById('compareDimensionsBadge');
+  const compareDownloadBtn = document.getElementById('compareDownloadBtn');
   const closeCompareModalBtn = document.getElementById('closeCompareModalBtn');
   const closeCompareModalBottomBtn = document.getElementById('closeCompareModalBottomBtn');
+
+  // Modal View Toggle & Split Slider Elements
+  const compareViewSideBtn = document.getElementById('compareViewSideBtn');
+  const compareViewSliderBtn = document.getElementById('compareViewSliderBtn');
+  const compareSideView = document.getElementById('compareSideView');
+  const compareSliderView = document.getElementById('compareSliderView');
+  const compareSliderOrigImg = document.getElementById('compareSliderOrigImg');
+  const compareSliderNewImg = document.getElementById('compareSliderNewImg');
+  const compareSliderClip = document.getElementById('compareSliderClip');
+  const compareSliderDivider = document.getElementById('compareSliderDivider');
+  const compareRangeSlider = document.getElementById('compareRangeSlider');
 
   // Nav & Header
   const langToggleBtn = document.getElementById('langToggleBtn');
@@ -57,62 +74,30 @@
   // State
   let uploadedFiles = []; // Array of File objects
   let processedFiles = []; // Array of { original, blob, url, name, originalSize, newSize, width, height, originalUrl }
+  let currentBatchId = 0; // Guard against race conditions during rapid re-compression / slider movements
+  let liveDebounceTimer = null; // Debounce timer for real-time slider updates
 
-  // ── 2. Multilingual System (Client-Side & URL) ─────────────
-  function applyLanguage(langCode) {
-    if (!window.COMPRESS_LANGS || !window.COMPRESS_LANGS[langCode]) return;
-    const l = window.COMPRESS_LANGS[langCode];
+  // ── 2. Multilingual System (Client-Side & Dynamic Strings) ──
+  const pageLang = document.documentElement.lang || 'en';
 
-    const currentLangText = document.getElementById('currentLangText');
-    if (currentLangText) currentLangText.textContent = l.name;
+  // Synchronize localStorage with current page language
+  try {
+    localStorage.setItem('compress_lang', pageLang);
+  } catch (e) {}
 
-    const badgeText = document.getElementById('badgeText');
-    if (badgeText && l.badge_free) badgeText.textContent = l.badge_free;
-
-    const selectBtnText = document.getElementById('selectBtnText');
-    if (selectBtnText && l.cta) selectBtnText.textContent = l.cta;
-
-    const dropHintText = document.getElementById('dropHintText');
-    if (dropHintText && l.drop_hint) dropHintText.textContent = l.drop_hint;
-
-    const settingsHeading = document.getElementById('settingsHeading');
-    if (settingsHeading && l.settings_title) settingsHeading.textContent = l.settings_title;
-
-    const settingsSub = document.getElementById('settingsSub');
-    if (settingsSub && l.settings_sub) settingsSub.textContent = l.settings_sub;
-
-    const labelQuality = document.getElementById('labelQuality');
-    if (labelQuality && l.quality_label) labelQuality.textContent = l.quality_label;
-
-    const labelFormat = document.getElementById('labelFormat');
-    if (labelFormat && l.format_label) labelFormat.textContent = l.format_label;
-
-    const clearBtnEl = document.getElementById('clearAllBtn');
-    if (clearBtnEl && l.clear_all) clearBtnEl.textContent = l.clear_all;
-
-    const recompressBtnEl = document.getElementById('compressAllBtn');
-    if (recompressBtnEl && l.recompress) {
-      const span = recompressBtnEl.querySelector('span');
-      if (span) span.textContent = l.recompress;
+  function getLangString(key, fallback) {
+    if (window.COMPRESS_LANGS && window.COMPRESS_LANGS[pageLang] && window.COMPRESS_LANGS[pageLang][key]) {
+      return window.COMPRESS_LANGS[pageLang][key];
     }
-
-    const downloadAllBtnEl = document.getElementById('downloadAllBtn');
-    if (downloadAllBtnEl && l.download_all) {
-      const span = downloadAllBtnEl.querySelector('span');
-      if (span) span.textContent = l.download_all;
+    if (window.COMPRESS_LANGS && window.COMPRESS_LANGS['en'] && window.COMPRESS_LANGS['en'][key]) {
+      return window.COMPRESS_LANGS['en'][key];
     }
-
-    localStorage.setItem('compress_lang', langCode);
+    return fallback;
   }
 
   function handleUrlKeywords() {
     const urlParams = new URLSearchParams(window.location.search);
     const toolParam = urlParams.get('tool');
-    const langParam = urlParams.get('lang') || localStorage.getItem('compress_lang') || 'en';
-
-    if (langParam) {
-      applyLanguage(langParam);
-    }
 
     if (toolParam) {
       const pageH1 = document.getElementById('pageH1');
@@ -145,26 +130,14 @@
       if (langChevron) langChevron.classList.toggle('rotate-180', !isOpen);
     });
 
-    // Intercept language clicks for instant live translation
+    // Save selected language on click and allow clean navigation
     langMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.includes('lang=')) {
-          const match = href.match(/lang=([a-z]+)/);
-          if (match && match[1]) {
-            const chosenLang = match[1];
-            applyLanguage(chosenLang);
-            langMenu.classList.add('hidden');
-            langToggleBtn.setAttribute('aria-expanded', 'false');
-            if (langChevron) langChevron.classList.remove('rotate-180');
-            // Update URL without reloading if user prefers instant feel
-            if (window.history && window.history.pushState) {
-              const newUrl = new URL(window.location);
-              newUrl.searchParams.set('lang', chosenLang);
-              window.history.pushState({}, '', newUrl);
-              e.preventDefault();
-            }
-          }
+      link.addEventListener('click', () => {
+        const chosenLang = link.getAttribute('data-lang');
+        if (chosenLang) {
+          try {
+            localStorage.setItem('compress_lang', chosenLang);
+          } catch (e) {}
         }
       });
     });
@@ -175,6 +148,20 @@
         langToggleBtn.setAttribute('aria-expanded', 'false');
         if (langChevron) langChevron.classList.remove('rotate-180');
       }
+    });
+  }
+
+  // Also hook mobile drawer language links
+  if (mobileDrawer) {
+    mobileDrawer.querySelectorAll('a[data-lang]').forEach(link => {
+      link.addEventListener('click', () => {
+        const chosenLang = link.getAttribute('data-lang');
+        if (chosenLang) {
+          try {
+            localStorage.setItem('compress_lang', chosenLang);
+          } catch (e) {}
+        }
+      });
     });
   }
 
@@ -218,18 +205,51 @@
   });
 
   // ── 5. Controls & Events ─────────────────────────────────────
+  function updatePresetHighlights(val) {
+    document.querySelectorAll('.quality-preset-btn').forEach(btn => {
+      if (btn.getAttribute('data-quality') === String(val)) {
+        btn.classList.add('border-primary-300', 'bg-primary-50', 'text-primary-700', 'ring-2', 'ring-primary-500/20');
+        btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+        const span = btn.querySelector('span');
+        if (span) {
+          span.classList.add('text-primary-600', 'font-bold');
+          span.classList.remove('text-slate-500');
+        }
+      } else {
+        btn.classList.remove('border-primary-300', 'bg-primary-50', 'text-primary-700', 'ring-2', 'ring-primary-500/20');
+        btn.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+        const span = btn.querySelector('span');
+        if (span) {
+          span.classList.remove('text-primary-600', 'font-bold');
+          span.classList.add('text-slate-500');
+        }
+      }
+    });
+  }
+
+  function triggerLiveRecompress(delayMs = 180) {
+    if (uploadedFiles.length === 0) return;
+    clearTimeout(liveDebounceTimer);
+    liveDebounceTimer = setTimeout(() => {
+      if (compressAllBtn) {
+        compressAllBtn.click();
+      }
+    }, delayMs);
+  }
+
   if (qualityRange && qualityVal) {
     qualityRange.addEventListener('input', () => {
       qualityVal.textContent = `${qualityRange.value}%`;
-      document.querySelectorAll('.quality-preset-btn').forEach(btn => {
-        if (btn.getAttribute('data-quality') === qualityRange.value) {
-          btn.classList.add('border-primary-300', 'bg-primary-50', 'text-primary-700');
-          btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
-        } else {
-          btn.classList.remove('border-primary-300', 'bg-primary-50', 'text-primary-700');
-          btn.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
-        }
-      });
+      updatePresetHighlights(qualityRange.value);
+      // Run-time real-time optimization smoothly as slider moves
+      triggerLiveRecompress(180);
+    });
+
+    qualityRange.addEventListener('change', () => {
+      qualityVal.textContent = `${qualityRange.value}%`;
+      updatePresetHighlights(qualityRange.value);
+      // Ensure final slider drop immediately triggers if not already triggered
+      triggerLiveRecompress(0);
     });
   }
 
@@ -242,15 +262,8 @@
         if (val) {
           qualityRange.value = val;
           if (qualityVal) qualityVal.textContent = `${val}%`;
-          qualityPresets.forEach(b => {
-            b.classList.remove('border-primary-300', 'bg-primary-50', 'text-primary-700');
-            b.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
-          });
-          btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
-          btn.classList.add('border-primary-300', 'bg-primary-50', 'text-primary-700');
-          if (uploadedFiles.length > 0 && compressAllBtn) {
-            compressAllBtn.click();
-          }
+          updatePresetHighlights(val);
+          triggerLiveRecompress(0);
         }
       });
     });
@@ -439,6 +452,9 @@
   async function processBatch(files) {
     if (!files || files.length === 0) return;
 
+    // Increment batch ID so any previous in-flight compression is invalidated
+    const thisBatchId = ++currentBatchId;
+
     const totalToProcess = files.length;
     let completedCount = 0;
 
@@ -449,9 +465,9 @@
       if (progressPercentage) progressPercentage.textContent = '0%';
       if (progressSpinner) progressSpinner.classList.remove('hidden');
       if (progressStatusText) {
-        progressStatusText.innerHTML = `Optimizing ${totalToProcess} image${totalToProcess > 1 ? 's' : ''} in browser RAM...`;
+        progressStatusText.innerHTML = `<span style="color: #0f172a !important;">${getLangString('progress_optimizing', 'Compressing images in browser RAM...')} (${totalToProcess})</span>`;
       }
-      if (progressCountText) progressCountText.textContent = `0 of ${totalToProcess} processed`;
+      if (progressCountText) progressCountText.textContent = `0 / ${totalToProcess}`;
     }
 
     const CONCURRENCY = 3;
@@ -459,20 +475,29 @@
 
     async function worker() {
       while (index < files.length) {
+        // If a newer batch was triggered (e.g. user dragged slider), abandon this worker immediately
+        if (thisBatchId !== currentBatchId) return;
+
         const file = files[index++];
         try {
           const itemData = await compressSingleFile(file);
+          if (thisBatchId !== currentBatchId) {
+            if (itemData.url) URL.revokeObjectURL(itemData.url);
+            return;
+          }
           processedFiles.push(itemData);
           renderResultCard(itemData);
           updateBatchStats();
         } catch (err) {
           console.error('Error compressing file:', file.name, err);
         } finally {
-          completedCount++;
-          const percent = Math.min(100, Math.round((completedCount / totalToProcess) * 100));
-          if (progressBarFill) progressBarFill.style.width = `${percent}%`;
-          if (progressPercentage) progressPercentage.textContent = `${percent}%`;
-          if (progressCountText) progressCountText.textContent = `${completedCount} of ${totalToProcess} processed`;
+          if (thisBatchId === currentBatchId) {
+            completedCount++;
+            const percent = Math.min(100, Math.round((completedCount / totalToProcess) * 100));
+            if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+            if (progressPercentage) progressPercentage.textContent = `${percent}%`;
+            if (progressCountText) progressCountText.textContent = `${completedCount} / ${totalToProcess}`;
+          }
         }
       }
     }
@@ -485,15 +510,18 @@
 
     await Promise.all(workers);
 
+    // If superseded by a newer batch, do not update final UI state
+    if (thisBatchId !== currentBatchId) return;
+
     // All complete state
     if (progressSpinner) progressSpinner.classList.add('hidden');
     if (progressStatusText) {
       progressStatusText.innerHTML = `
-        <span class="inline-flex items-center text-action-700 font-bold">
-          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span class="inline-flex items-center font-bold" style="color: #047857 !important;">
+          <svg class="w-4 h-4 mr-1.5" style="color: #059669 !important;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
           </svg>
-          All ${totalToProcess} images compressed successfully!
+          ${getLangString('progress_done', 'All images compressed successfully!')}
         </span>
       `;
     }
@@ -506,14 +534,13 @@
 
   function compressSingleFile(file) {
     return new Promise((resolve) => {
-      const startTime = Date.now();
       // Use Blob URL for low memory footprint
       const originalBlobUrl = URL.createObjectURL(file);
       const img = new Image();
       img.decoding = 'async';
 
       img.onload = async function () {
-        const userQuality = parseInt(qualityRange?.value || '80', 10) / 100;
+        const userQuality = parseInt(qualityRange?.value || '60', 10) / 100;
         let selectedFormat = formatSelect ? formatSelect.value : 'original';
 
         if (selectedFormat === 'original') {
@@ -595,12 +622,8 @@
           originalUrl: originalBlobUrl,
         };
 
-        // User Psychology: Perceived value micro-delay (450ms) for high satisfaction feedback
-        const elapsedTime = Date.now() - startTime;
-        const delay = Math.max(0, 450 - elapsedTime);
-        setTimeout(() => {
-          resolve(itemData);
-        }, delay);
+        // Instant resolution without artificial lag so real-time slider updates are snappy
+        resolve(itemData);
       };
 
       img.onerror = function () {
@@ -650,7 +673,8 @@
     if (statSavingsPercent) statSavingsPercent.textContent = `${savingsPercent}%`;
 
     if (resultsCount) resultsCount.textContent = `${count}`;
-    if (downloadZipBtnText) downloadZipBtnText.textContent = count > 1 ? `Download all images (${count})` : 'Download all images';
+    const baseDlText = getLangString('download_all_zip', 'Download all images');
+    if (downloadZipBtnText) downloadZipBtnText.textContent = count > 1 ? `${baseDlText} (${count})` : baseDlText;
   }
 
   // ── 10. Result Row Rendering (TinyPNG-Style High Clarity Strip) ─
@@ -688,7 +712,7 @@
           <h5 class="text-xs sm:text-sm font-semibold text-slate-800 truncate" title="${item.name}">${item.name}</h5>
           <div class="flex items-center gap-1.5 mt-0.5 text-xs">
             <span class="inline-block px-1.5 py-0.5 text-[10px] font-extrabold uppercase rounded border ${badgeClass} font-mono tracking-wider">${fileExt}</span>
-            <span class="text-slate-400 font-medium text-[11px] sm:text-xs">${formatBytes(item.originalSize)}</span>
+            <span class="text-slate-600 font-semibold text-[11px] sm:text-xs">${formatBytes(item.originalSize)}</span>
           </div>
         </div>
       </div>
@@ -697,14 +721,14 @@
       <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
         <!-- Savings Percentage & New Compressed Size -->
         <div class="text-right min-w-[55px] sm:min-w-[70px]">
-          <span class="text-xs sm:text-sm font-black text-emerald-600 font-mono block">
+          <span class="text-xs sm:text-sm font-black text-emerald-700 font-mono block">
             ${isSmaller ? `-${savings}%` : '0%'}
           </span>
-          <span class="text-[11px] sm:text-xs text-slate-500 font-medium block">${formatBytes(item.newSize)}</span>
+          <span class="text-[11px] sm:text-xs text-slate-600 font-semibold block">${formatBytes(item.newSize)}</span>
         </div>
 
         <!-- Compare Modal Trigger Button -->
-        <button type="button" class="compare-btn p-1.5 text-slate-400 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-all cursor-pointer" title="Inspect Original vs Compressed">
+        <button type="button" class="compare-btn p-1.5 text-slate-500 hover:text-primary-700 hover:bg-slate-100 rounded-lg transition-all cursor-pointer" title="Inspect Original vs Compressed">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
         </button>
 
@@ -729,12 +753,87 @@
   }
 
   // ── 11. Compare Modal Logic ──────────────────────────────────
+  function setCompareView(mode) {
+    if (mode === 'side') {
+      if (compareSideView) compareSideView.classList.remove('hidden');
+      if (compareSliderView) compareSliderView.classList.add('hidden');
+
+      if (compareViewSideBtn) {
+        compareViewSideBtn.classList.add('bg-white', 'text-dark-slate', 'shadow-xs');
+        compareViewSideBtn.classList.remove('text-slate-600');
+      }
+      if (compareViewSliderBtn) {
+        compareViewSliderBtn.classList.remove('bg-white', 'text-dark-slate', 'shadow-xs');
+        compareViewSliderBtn.classList.add('text-slate-600');
+      }
+    } else {
+      if (compareSideView) compareSideView.classList.add('hidden');
+      if (compareSliderView) compareSliderView.classList.remove('hidden');
+
+      if (compareViewSliderBtn) {
+        compareViewSliderBtn.classList.add('bg-white', 'text-dark-slate', 'shadow-xs');
+        compareViewSliderBtn.classList.remove('text-slate-600');
+      }
+      if (compareViewSideBtn) {
+        compareViewSideBtn.classList.remove('bg-white', 'text-dark-slate', 'shadow-xs');
+        compareViewSideBtn.classList.add('text-slate-600');
+      }
+    }
+  }
+
   function openCompareModal(item) {
     if (!compareModal) return;
-    if (compareOrigImg) compareOrigImg.src = item.originalUrl || item.url;
-    if (compareNewImg) compareNewImg.src = item.url;
-    if (compareOrigSize) compareOrigSize.textContent = `${formatBytes(item.originalSize)} (Original)`;
-    if (compareNewSize) compareNewSize.textContent = `${formatBytes(item.newSize)} (Optimized)`;
+
+    // Populate images for both views
+    const origSrc = item.originalUrl || item.url;
+    const newSrc = item.url;
+
+    if (compareOrigImg) compareOrigImg.src = origSrc;
+    if (compareNewImg) compareNewImg.src = newSrc;
+    if (compareSliderOrigImg) compareSliderOrigImg.src = origSrc;
+    if (compareSliderNewImg) compareSliderNewImg.src = newSrc;
+
+    // Populate filename
+    if (compareFileName) compareFileName.textContent = item.name || 'Optimized Image';
+
+    // Populate sizes
+    const formattedOrig = formatBytes(item.originalSize);
+    const formattedNew = formatBytes(item.newSize);
+
+    if (compareOrigSize) compareOrigSize.textContent = formattedOrig;
+    if (compareNewSize) compareNewSize.textContent = formattedNew;
+    if (compareOrigSizeBadge) compareOrigSizeBadge.textContent = formattedOrig;
+    if (compareNewSizeBadge) compareNewSizeBadge.textContent = formattedNew;
+
+    // Calculate percentage savings
+    const savings = Math.max(0, Math.round(((item.originalSize - item.newSize) / item.originalSize) * 100));
+    if (compareSavingsBadge) {
+      compareSavingsBadge.textContent = item.newSize < item.originalSize ? `-${savings}%` : '0%';
+    }
+
+    // Populate dimensions
+    if (compareDimensionsBadge) {
+      if (item.width && item.height) {
+        compareDimensionsBadge.textContent = `${item.width} × ${item.height} px`;
+        compareDimensionsBadge.classList.remove('hidden');
+      } else {
+        compareDimensionsBadge.classList.add('hidden');
+      }
+    }
+
+    // Populate direct download button
+    if (compareDownloadBtn) {
+      compareDownloadBtn.href = item.url;
+      compareDownloadBtn.download = item.name || 'compressed-image';
+    }
+
+    // Reset slider to center (50%)
+    if (compareRangeSlider) compareRangeSlider.value = '50';
+    if (compareSliderClip) compareSliderClip.style.clipPath = 'inset(0 0 0 50%)';
+    if (compareSliderDivider) compareSliderDivider.style.left = '50%';
+
+    // Default to Side-by-Side view on modal open
+    setCompareView('side');
 
     compareModal.classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
@@ -744,6 +843,23 @@
     if (!compareModal) return;
     compareModal.classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
+  }
+
+  // Hook toggle tabs
+  if (compareViewSideBtn) {
+    compareViewSideBtn.addEventListener('click', () => setCompareView('side'));
+  }
+  if (compareViewSliderBtn) {
+    compareViewSliderBtn.addEventListener('click', () => setCompareView('slider'));
+  }
+
+  // Hook interactive split slider
+  if (compareRangeSlider) {
+    compareRangeSlider.addEventListener('input', () => {
+      const val = compareRangeSlider.value;
+      if (compareSliderClip) compareSliderClip.style.clipPath = `inset(0 0 0 ${val}%)`;
+      if (compareSliderDivider) compareSliderDivider.style.left = `${val}%`;
+    });
   }
 
   if (closeCompareModalBtn) closeCompareModalBtn.addEventListener('click', closeCompareModal);
@@ -843,6 +959,20 @@
         }, index * 250);
       });
     });
+  }
+
+  // ── 14. Floating Bottom-Right Back To Top Handler ───
+  const floatingBackToTop = document.getElementById('floatingBackToTop');
+  if (floatingBackToTop) {
+    const checkScroll = () => {
+      if (window.scrollY > 150) {
+        floatingBackToTop.classList.add('visible');
+      } else {
+        floatingBackToTop.classList.remove('visible');
+      }
+    };
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
   }
 
   // Initial Run

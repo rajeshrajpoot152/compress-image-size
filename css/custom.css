@@ -25,17 +25,27 @@ body {
   background: #94A3B8;
 }
 
-/* Dropzone styling & states */
+/* Dropzone styling & states (Frosted Glass over banner.jpg) */
 .dropzone {
+  background: rgba(15, 23, 42, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px dashed rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
+  color: #FFFFFF;
 }
 .dropzone:hover {
-  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  background: rgba(15, 23, 42, 0.80);
+  border-color: #FFFFFF;
+  box-shadow: 0 25px 55px -12px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 .dropzone.dragover {
-  border-color: #2563EB !important;
-  background-color: #EFF6FF !important;
-  transform: scale(1.008);
+  border-color: #38BDF8 !important;
+  background-color: rgba(15, 23, 42, 0.88) !important;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.5) !important;
+  transform: scale(1.015);
 }
 
 /* Clean Transparent AdSense Containers (Zero Wireframe Boxes / No Layout Shift) */
@@ -65,6 +75,7 @@ body {
 .dropzone.compact-mode {
   padding: 1rem 1.5rem !important;
   border-width: 1.5px !important;
+  margin-top: 0.5rem !important;
 }
 .dropzone.compact-mode .drop-icon-box {
   width: 2.5rem !important;
@@ -101,6 +112,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background-color: #0F172A;
 }
 
+.hero-banner-content {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+@media (min-width: 640px) {
+  .hero-banner-content {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+.trust-engine-pill {
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
 .hero-banner-bg {
   background-image: url('../images/banner.jpg');
   background-size: cover;
@@ -109,5 +137,158 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .hero-banner-overlay {
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.70) 100%);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.78) 100%);
 }
+
+#resultsContainer {
+  margin-top: -50px !important;
+  position: relative;
+  z-index: 30;
+  width: 100% !important;
+}
+
+#progressContainer {
+  margin-bottom: 3.5rem !important;
+  width: 100% !important;
+}
+
+#progressContainer > div {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.25) !important;
+}
+
+#statSavingsPercent {
+  background-color: #78C800 !important;
+  color: #0F172A !important;
+  font-weight: 900 !important;
+  padding: 0.15rem 0.65rem !important;
+  border-radius: 0.5rem !important;
+  display: inline-block !important;
+}
+
+#downloadZipBtn, #downloadAllBtn {
+  background-color: #78C800 !important;
+  color: #FFFFFF !important;
+}
+#downloadZipBtn:hover, #downloadAllBtn:hover {
+  background-color: #68AD00 !important;
+}
+
+/* ==========================================================================
+   Modern Clean Responsive Footer
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+.footer-trust-card {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 1.25rem !important; /* 20px solid gap */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.footer-trust-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+}
+.footer-trust-card .trust-icon-box {
+  flex-shrink: 0 !important;
+  width: 2.75rem !important;
+  height: 2.75rem !important;
+  margin-right: 0.35rem !important;
+}
+[dir="rtl"] .footer-trust-card .trust-icon-box {
+  margin-right: 0 !important;
+  margin-left: 0.35rem !important;
+}
+
+.footer-link-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #475569;
+  transition: color 0.15s ease, transform 0.15s ease;
+  min-height: 28px;
+}
+.footer-link-item:hover {
+  color: #2563eb !important;
+  transform: translateX(3px);
+}
+[dir="rtl"] .footer-link-item:hover {
+  transform: translateX(-3px);
+}
+
+.footer-lang-pill {
+  transition: all 0.2s ease;
+}
+.footer-lang-pill:hover {
+  transform: translateY(-1px);
+}
+
+.back-to-top-btn {
+  transition: all 0.18s ease;
+}
+.back-to-top-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+.back-to-top-btn:active {
+  transform: translateY(0);
+}
+
+/* Modern Bottom-Right Floating Back To Top Button */
+#floatingBackToTop {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: 9999 !important;
+  width: 2.85rem !important;
+  height: 2.85rem !important;
+  border-radius: 9999px !important;
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35), 0 8px 10px -6px rgba(0, 0, 0, 0.35) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+}
+@media (min-width: 640px) {
+  #floatingBackToTop {
+    bottom: 2rem !important;
+    right: 2rem !important;
+    width: 3.15rem !important;
+    height: 3.15rem !important;
+  }
+}
+#floatingBackToTop.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+#floatingBackToTop:hover {
+  background-color: #2563EB !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.45) !important;
+}
+#floatingBackToTop svg {
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  color: #FFFFFF !important;
+  transition: transform 0.2s ease;
+}
+#floatingBackToTop:hover svg {
+  transform: translateY(-2px);
+}
+
+
+
+

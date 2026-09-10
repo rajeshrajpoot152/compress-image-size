@@ -13,7 +13,7 @@ return [
         'title' => '100% Free Compress Image Size Online | Instant, Lossless & Secure',
         'desc' => 'Instantly compress image size in KB or MB with 100% lossless quality. Zero server uploads, completely private, and ultra-fast. No signup or watermark.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'primary'
     ],
 
@@ -143,7 +143,7 @@ return [
         'title' => '100% Free Compress JPG Online | Ultra-Fast One-Click Optimization',
         'desc' => 'The fastest online JPG compressor. Instantly shrink photo files with lossless visual quality, zero lag, and 100% browser-based security.',
         'format' => 'image/jpeg',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'format'
     ],
     'compress-a-jpg' => [
@@ -188,7 +188,7 @@ return [
         'title' => '100% Free PNG Size Reducer Online | Lossless Quality & Zero Watermark',
         'desc' => 'Effortlessly reduce PNG file size without pixel artifacts. Preserves transparent backgrounds and crisp vector icons with complete in-browser privacy.',
         'format' => 'image/png',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'format'
     ],
     'reduce-png-file-size' => [
@@ -224,7 +224,7 @@ return [
         'title' => '100% Free Compress WebP Online | Ultra-Fast Next-Gen Compression',
         'desc' => 'Instantly optimize WebP files for maximum Google Core Web Vitals speed. Achieve up to 90% space savings with 100% lossless visual fidelity.',
         'format' => 'image/webp',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'format'
     ],
     'convert-png-to-jpg' => [
@@ -233,7 +233,7 @@ return [
         'title' => 'Convert PNG to JPG & Compress Online | 100% Free, Instant & Lossless',
         'desc' => 'Instantly convert PNG images to lightweight JPG photos and shrink file weight by up to 80% with flawless image clarity and zero server uploads.',
         'format' => 'image/jpeg',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'format'
     ],
     'convert-jpg-to-webp' => [
@@ -253,7 +253,7 @@ return [
         'title' => '100% Free Reduce Image Size Online | Instant, Lossless & No Signup',
         'desc' => 'The ultimate free tool to reduce image size online in seconds. Zero quality loss, 100% browser-based privacy, and no registration or watermark.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'photo-size-reducer' => [
@@ -262,7 +262,7 @@ return [
         'title' => 'Ultimate Photo Size Reducer Online | 100% Free & Lossless HD Quality',
         'desc' => 'Instantly shrink photo size in KB or MB without quality loss. Perfectly preserves facial features, natural lighting, and textures with zero server uploads.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'minimize-picture-size' => [
@@ -307,7 +307,7 @@ return [
         'title' => 'Reduce Image Resolution Online Free | 100% Precise & Pixel-Perfect',
         'desc' => 'Easily reduce picture resolution and dimensions for web publishing, email sending, and official forms without distortion or blurriness.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'reduce-image-dimensions' => [
@@ -316,7 +316,7 @@ return [
         'title' => 'Fastest Reduce Image Dimensions Online | 100% Accurate & Lossless',
         'desc' => 'Accurately resize and reduce image dimensions to match strict application requirements perfectly. Free, instant, and 100% private in-browser tool.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'image-compressor-online' => [
@@ -325,7 +325,7 @@ return [
         'title' => 'Best Image Compressor Online Free | 100% Private, Fast & Unlimited',
         'desc' => 'The ultimate free online image compressor. Batch compress unlimited JPG, PNG, and WebP photos in seconds with zero quality loss and no server uploads.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'image-size-reducer' => [
@@ -334,7 +334,7 @@ return [
         'title' => '100% Free Image Size Reducer Online | Instant, Lossless & Secure',
         'desc' => 'High-speed image size reducer tool. Shrink heavy megabytes to light kilobytes in seconds with lossless accuracy and 100% privacy.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'bulk-image-compressor' => [
@@ -343,7 +343,7 @@ return [
         'title' => 'Bulk Image Compressor Online Free | 100% Fast Batch Photo Optimizer',
         'desc' => 'Effortlessly compress hundreds of images at once in your browser. Ultra-fast bulk queue processing, 100% private RAM engine, and one-click ZIP download.',
         'format' => 'original',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
     'lossless-image-compressor' => [
@@ -370,7 +370,7 @@ return [
         'title' => 'Ultimate WordPress Image Reducer Free | Speed Up Website SEO & Speed',
         'desc' => 'Optimize blog photos and hero banners before uploading to WordPress. Pass Google Core Web Vitals effortlessly with 100% lossless compression.',
         'format' => 'image/webp',
-        'quality' => 80,
+        'quality' => 60,
         'category' => 'action'
     ],
 ];

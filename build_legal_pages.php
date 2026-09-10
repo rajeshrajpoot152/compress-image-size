@@ -59,7 +59,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         
         <!-- Logo -->
         <a href="{$homeLink}" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg p-1" aria-label="CompressImageSize Home">
-          <img src="{$prefix}images/logo.svg" alt="CompressImageSize - 100% Free Online Image Compressor" class="h-8 sm:h-9 w-auto" width="225" height="40" />
+          <img src="{$prefix}images/logo.png" alt="CompressImageSize - 100% Free Online Image Compressor" class="h-8 sm:h-9 w-auto object-contain" width="225" height="40" />
         </a>
 
         <!-- Navigation Links -->
@@ -86,7 +86,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
 
             <!-- Language Dropdown Menu -->
             <div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-96 overflow-y-auto">
-              <div class="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100">Global Top 10 Languages</div>
+              <div class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">Global Top 10 Languages</div>
               {$dropdownHtml}
             </div>
           </div>
@@ -123,43 +123,82 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
         $flagSvg = $flags[$code] ?? '';
         $targetPage = ($pageType === 'privacy') ? 'privacy-policy.html' : 'terms-of-service.html';
         $link = ($code === 'en') ? ($prefix === '' ? $targetPage : "../{$targetPage}") : ($prefix === '' ? "{$code}/{$targetPage}" : ($prefix === '../' && $langCode === $code ? $targetPage : "../{$code}/{$targetPage}"));
-        $activeClass = ($langCode === $code) ? 'font-bold text-primary-600' : 'text-slate-600';
+        $isActive = ($langCode === $code);
+        $activeClass = $isActive 
+            ? 'bg-primary-50 border border-primary-300 font-bold text-primary-700 shadow-2xs' 
+            : 'bg-slate-50/70 border border-slate-200/70 text-slate-600 hover:bg-white hover:border-slate-300 hover:text-dark-slate hover:shadow-2xs';
+        $indicator = $isActive ? '<span class="ml-auto w-1.5 h-1.5 rounded-full bg-primary-600 flex-shrink-0"></span>' : '';
         $footerLangGrid .= "
-          <a href=\"{$link}\" class=\"hover:text-primary-600 transition-colors flex items-center gap-1.5 {$activeClass}\">
-            {$flagSvg}
-            <span>{$info['name']}</span>
-          </a>";
+            <a href=\"{$link}\" class=\"footer-lang-pill flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs transition-all {$activeClass}\">
+              {$flagSvg}
+              <span class=\"truncate\">{$info['name']}</span>
+              {$indicator}
+            </a>";
     }
 
     $activePrivacy = ($pageType === 'privacy') ? 'text-primary-600 font-bold' : 'hover:text-primary-600 transition-colors';
     $activeTerms = ($pageType === 'terms') ? 'text-primary-600 font-bold' : 'hover:text-primary-600 transition-colors';
 
     return <<<HTML
-  <!-- FOOTER -->
-  <footer class="bg-white border-t border-surface-border pt-12 pb-8 mt-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- MODERN RESPONSIVE FOOTER -->
+  <footer class="bg-white border-t border-slate-200/90 pt-12 pb-10 mt-16 text-slate-600">
+    <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
       
-      <!-- Language Directory Switcher -->
-      <div class="py-6 border-b border-surface-border">
-        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">Available Worldwide in Top 10 International Languages:</span>
-        <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs">
+      <!-- Brand & Privacy Mission -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-8 border-b border-slate-200/80">
+        <a href="{$homeLink}" class="inline-block group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg" aria-label="CompressImageSize">
+          <img src="{$prefix}images/logo.png" alt="CompressImageSize" class="h-9 w-auto object-contain" width="190" height="38" />
+        </a>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/90 text-[11px] font-semibold text-emerald-800 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>100% In-Browser Privacy • Zero Server Storage</span>
+        </div>
+      </div>
+
+      <!-- Language Directory Switcher Hub -->
+      <div class="py-8 border-b border-slate-200/80">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+            <span class="text-xs font-bold uppercase tracking-wider text-dark-slate">Available Worldwide in Top 10 International Languages:</span>
+          </div>
+          <span class="text-[11px] text-slate-500 font-medium">Zero server storage in all supported regions</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
           {$footerLangGrid}
         </div>
       </div>
 
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-        <div>&copy; 2026 CompressImageSize. All rights reserved. 100% Free &amp; Privacy-Protected.</div>
-        <div class="flex items-center gap-4">
+      <!-- Bottom Bar -->
+      <div class="pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-slate-500">
+        <div class="text-center sm:text-left">
+          &copy; 2026 CompressImageSize. All rights reserved.
+        </div>
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
           <a href="{$privacyLink}" class="{$activePrivacy}">Privacy Policy</a>
           <a href="{$termsLink}" class="{$activeTerms}">Terms of Service</a>
-          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Editorial & Quality Policy</a>
+          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors py-1">Editorial &amp; Quality Policy</a>
         </div>
       </div>
 
     </div>
   </footer>
 
-  <script src="{$prefix}js/main.js"></script>
+  <!-- Floating Bottom-Right Back-to-Top Button (Standard Website Placement) -->
+  <button id="floatingBackToTop" 
+          type="button" 
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+          class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 p-3 rounded-full bg-slate-900 hover:bg-primary-600 text-white border border-slate-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer flex items-center justify-center group"
+          title="Back to top"
+          aria-label="Back to top">
+    <svg class="w-5 h-5 text-white group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script src="{$prefix}js/main.js?v=2.7"></script>
 HTML;
 }
 

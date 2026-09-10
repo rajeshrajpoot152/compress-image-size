@@ -31,7 +31,7 @@ $pageDesc  = $kwData['desc'];
 $pageH1    = $kwData['h1'];
 $pageSubhead = $kwData['desc'];
 $targetFormat = $kwData['format'];
-$targetQuality = $kwData['quality'] ?? 80;
+$targetQuality = $kwData['quality'] ?? 60;
 
 $canonicalUrl = "https://compressimagesize.com/" . ($currentLang !== 'en' ? "{$currentLang}/" : "") . "{$currentSlug}.html";
 

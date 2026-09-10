@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-18">
         <a href="index.html" class="flex items-center gap-3 group">
-          <img src="images/logo.svg" alt="CompressImageSize Logo" class="h-9 sm:h-10 w-auto transition-transform group-hover:scale-105" />
+          <img src="images/logo.png" alt="CompressImageSize Logo" class="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105" />
         </a>
         <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-bold text-primary-600 hover:text-primary-700 bg-primary-50 rounded-xl transition-all">
           Open Image Compressor &rarr;
@@ -99,5 +99,29 @@
     </div>
   </footer>
 
+  <!-- Floating Bottom-Right Back-to-Top Button -->
+  <button id="floatingBackToTop" 
+          type="button" 
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+          class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 p-3 rounded-full bg-slate-900 hover:bg-primary-600 text-white border border-slate-700/50 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer flex items-center justify-center group"
+          title="Back to top"
+          aria-label="Back to top">
+    <svg class="w-5 h-5 text-white group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    const backToTopBtn = document.getElementById('floatingBackToTop');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+    }
+  </script>
 </body>
 </html>

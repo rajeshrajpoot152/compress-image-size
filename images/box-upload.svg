@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- 3D Box Gradients -->
+    <linearGradient id="box-front-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="box-front-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="box-inside" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="flap-top-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="flap-top-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="tape-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <filter id="box-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0284C7" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#box-glow)">
+    <!-- White outer silhouette outline for sticker pop effect -->
+    <!-- Inside cavity (dark depth) -->
+    <polygon points="44,52 80,36 122,50 82,68" fill="url(#box-inside)" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round"/>
+
+    <!-- Back Left Flap (Upright angled) -->
+    <polygon points="44,52 80,36 68,18 32,32" fill="url(#flap-top-left)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Back Right Flap (Upright angled) -->
+    <polygon points="80,36 122,50 134,32 94,18" fill="url(#flap-top-right)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Front Left Side Wall -->
+    <polygon points="44,52 82,68 82,118 44,98" fill="url(#box-front-left)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Front Right Side Wall -->
+    <polygon points="82,68 122,50 122,98 82,118" fill="url(#box-front-right)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Front Left Flap (Folded down over wall) -->
+    <polygon points="44,52 82,68 76,82 36,64" fill="url(#flap-top-left)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Front Right Flap (Folded down over wall) -->
+    <polygon points="82,68 122,50 130,64 88,82" fill="url(#flap-top-right)" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Blue Hanging Tape/Ribbon on Front -->
+    <path d="M54,60 C54,72 58,80 56,92 L50,90 C52,78 48,72 48,60 Z" fill="url(#tape-grad)" opacity="0.9"/>
+  </g>
+</svg>

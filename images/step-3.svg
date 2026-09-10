@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="s3-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFDF5"/>
+      <stop offset="100%" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="s3-btn" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="s3-shadow" x="-10%" y="-10%" width="120%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#064E3B" flood-opacity="0.08"/>
+    </filter>
+    <filter id="s3-btn-shadow" x="-20%" y="-20%" width="140%" height="140%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#059669" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="300" rx="20" fill="url(#s3-bg)"/>
+  
+  <!-- Subtle decorative grid dots -->
+  <g opacity="0.28" fill="#94A3B8">
+    <circle cx="36" cy="36" r="2"/><circle cx="66" cy="36" r="2"/><circle cx="96" cy="36" r="2"/>
+    <circle cx="384" cy="234" r="2"/><circle cx="414" cy="234" r="2"/><circle cx="444" cy="234" r="2"/>
+  </g>
+
+  <!-- Main Success Card -->
+  <g filter="url(#s3-shadow)">
+    <rect x="36" y="28" width="408" height="244" rx="18" fill="#FFFFFF" stroke="#D1FAE5" stroke-width="1.5"/>
+  </g>
+
+  <!-- Step Badge -->
+  <g transform="translate(54, 44)">
+    <rect width="28" height="28" rx="8" fill="#059669"/>
+    <text x="14" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+  </g>
+
+  <!-- Status Header -->
+  <g transform="translate(92, 44)">
+    <text x="0" y="19" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0F172A">Compression Finished!</text>
+  </g>
+  <g transform="translate(316, 44)">
+    <rect width="108" height="28" rx="14" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
+    <circle cx="14" cy="14" r="4" fill="#10B981"/>
+    <text x="60" y="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#059669" text-anchor="middle">100% Ready</text>
+  </g>
+
+  <!-- Completed File Row Preview -->
+  <g transform="translate(54, 88)">
+    <rect width="372" height="56" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+    
+    <!-- Thumbnail Icon with check -->
+    <rect x="12" y="10" width="36" height="36" rx="8" fill="#EFF6FF"/>
+    <path d="M20 28 L27 34 L40 18" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    
+    <!-- File Details -->
+    <text x="58" y="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#0F172A">photo-optimized.webp</text>
+    <text x="58" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="500" fill="#64748B">Original 2.8 MB  •  Saved 83%</text>
+
+    <!-- Size pill -->
+    <g transform="translate(284, 15)">
+      <rect width="76" height="26" rx="13" fill="#DCFCE7"/>
+      <text x="38" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#15803D" text-anchor="middle">480 KB</text>
+    </g>
+  </g>
+
+  <!-- Big Instant Download Action Button -->
+  <g filter="url(#s3-btn-shadow)" transform="translate(54, 160)">
+    <rect width="372" height="50" rx="14" fill="url(#s3-btn)"/>
+    
+    <!-- Download Icon -->
+    <g transform="translate(108, 14)">
+      <path d="M11 4 L11 16 M5 10 L11 16 L17 10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M2 19 L20 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- Button Text -->
+    <text x="196" y="31" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Download All (ZIP / Single)</text>
+  </g>
+
+  <!-- Security & Privacy Guarantee Footer -->
+  <g transform="translate(240, 244)" text-anchor="middle">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500" fill="#64748B">Instant Download • 100% Private (No Cloud Storage)</text>
+  </g>
+</svg>

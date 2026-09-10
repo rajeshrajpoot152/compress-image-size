@@ -6,6 +6,7 @@
  */
 
 $allKeywords = require __DIR__ . '/data/keywords.php';
+require_once __DIR__ . '/data/localized_keywords.php';
 $languages = ['en', 'es', 'fr', 'de', 'pt', 'zh', 'ja', 'ar', 'ru', 'it'];
 
 echo "Starting Generation for Top 10 World Languages...\n";
@@ -25,14 +26,15 @@ foreach ($languages as $lang) {
 
     echo "\nGenerating for Language: [{$lang}] {$langData['lang_name']} ...\n";
 
-    foreach ($allKeywords as $slug => $kwData) {
+    foreach ($allKeywords as $slug => $kwRawData) {
         $currentSlug   = $slug;
-        $pageTitle     = $kwData['title'] . ($lang !== 'en' ? " - {$langData['lang_name']}" : "");
-        $pageDesc      = $kwData['desc'];
+        $kwData        = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($slug, $lang, $kwRawData) : $kwRawData;
+        $pageTitle     = $kwData['title'] . ($lang !== 'en' && strpos($kwData['title'], $langData['lang_name']) === false ? " - {$langData['lang_name']}" : "");
+        $pageDesc      = $kwData['desc'] ?? ($langData['hero_desc'] ?? $kwRawData['desc']);
         $pageH1        = $kwData['h1'];
-        $pageSubhead   = $kwData['desc'];
+        $pageSubhead   = $kwData['desc'] ?? ($langData['hero_desc'] ?? $kwRawData['desc']);
         $targetFormat  = $kwData['format'];
-        $targetQuality = $kwData['quality'] ?? 80;
+        $targetQuality = $kwData['quality'] ?? 60;
         $canonicalUrl  = "https://compressimagesize.com/" . ($lang !== 'en' ? "{$lang}/" : "") . "{$slug}.html";
 
         // Render template
