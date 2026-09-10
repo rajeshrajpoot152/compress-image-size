@@ -124,7 +124,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 #resultsContainer {
-  margin-top: -50px !important;
   position: relative;
   z-index: 30;
   width: 100% !important;
