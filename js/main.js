@@ -427,7 +427,7 @@
       clearAllBtn?.classList.add('inline-flex');
       batchStatsCard?.classList.remove('hidden');
       resultsContainer?.classList.remove('hidden');
-      dropzone?.classList.add('compact-mode');
+      
     } else {
       clearAllBtn?.classList.add('hidden');
       clearAllBtn?.classList.remove('inline-flex');
@@ -435,7 +435,7 @@
       downloadAllBtn?.classList.remove('inline-flex');
       resultsContainer?.classList.add('hidden');
       batchStatsCard?.classList.add('hidden');
-      dropzone?.classList.remove('compact-mode');
+      
     }
   }
 

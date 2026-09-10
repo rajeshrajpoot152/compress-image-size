@@ -71,24 +71,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Compact Dropzone State (Smoothly shrinks when files are active) */
-.dropzone.compact-mode {
-  padding: 1rem 1.5rem !important;
-  border-width: 1.5px !important;
-  margin-top: 0.5rem !important;
-}
-.dropzone.compact-mode .drop-icon-box {
-  width: 2.5rem !important;
-  height: 2.5rem !important;
-  margin-bottom: 0.25rem !important;
-}
-.dropzone.compact-mode .drop-icon-box svg {
-  width: 1.25rem !important;
-  height: 1.25rem !important;
-}
-.dropzone.compact-mode .drop-extra-hints {
-  display: none !important;
-}
+
 
 /* Quality Range Slider styling */
 input[type=range] {
