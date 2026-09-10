@@ -780,8 +780,8 @@
         </button>
 
         <!-- Individual Download Pill Button (TinyPNG Style: Download Icon + Format Tag) -->
-        <a href="${item.url}" download="${item.name}" class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold text-slate-700 hover:text-white bg-slate-100 hover:bg-action-600 border border-slate-200 hover:border-action-600 rounded-lg shadow-2xs transition-all cursor-pointer" title="Download ${item.name}">
-          <svg class="w-3.5 h-3.5 text-slate-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <a href="${item.url}" download="${item.name}" class="inline-flex items-center justify-center gap-2 px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-white bg-slate-100 hover:bg-emerald-600 border border-slate-200 hover:border-emerald-600 rounded-lg shadow-sm transition-all cursor-pointer group-btn" title="Download ${item.name}">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           <span class="font-mono uppercase text-[11px] font-extrabold">${fileExt}</span>
