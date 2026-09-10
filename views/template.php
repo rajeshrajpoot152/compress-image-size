@@ -333,14 +333,10 @@ if (!function_exists('getRelativeLangLink')) {
           </svg>
         </div>
 
-        <button type="button" id="selectImagesBtn" class="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white bg-action-600 hover:bg-action-500 hover:scale-105 active:scale-95 rounded-xl shadow-lg shadow-action-600/35 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-action-400/30 cursor-pointer">
+        <button type="button" id="selectImagesBtn" style="background-color: #ff6c0d; box-shadow: 0 10px 15px -3px rgba(255,108,13,0.35);" class="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white hover:opacity-90 hover:scale-105 active:scale-95 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer">
           <span class="sm:hidden"><?= htmlspecialchars($t['tap_to_select'] ?? 'Tap to Select Photos') ?></span>
-          <span class="hidden sm:inline" id="selectBtnText"><?= htmlspecialchars($t['select_images_cta'] ?? 'Select Images') ?></span>
+          <span class="hidden sm:inline" id="selectBtnText"><?= htmlspecialchars($t['select_images_cta'] ?? 'Select Images or Drag & Drop Here') ?></span>
         </button>
-
-        <p id="dropHintText" class="mt-3 text-xs sm:text-sm font-semibold text-white drop-shadow-sm">
-          <?= htmlspecialchars($t['drop_hint'] ?? 'or Drag & Drop Here') ?>
-        </p>
         
         <div class="drop-extra-hints mt-3.5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-slate-100">
           <span class="font-bold text-white"><?= htmlspecialchars($t['hint_batch'] ?? 'Supports 1 to 500+ Images') ?></span>
