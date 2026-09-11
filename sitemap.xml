@@ -7141,4 +7141,10 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://compressimagesize.com/it/terms-of-service.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://compressimagesize.com/terms-of-service.html" />
   </url>
+  <url>
+    <loc>https://compressimagesize.com/how-it-works/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

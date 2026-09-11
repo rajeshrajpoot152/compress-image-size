@@ -1,0 +1,259 @@
+{
+  "summary": {
+    "totalPages": 452,
+    "totalErrors": 0,
+    "totalWarnings": 30
+  },
+  "schemaIssues": [],
+  "canonicalIssues": [],
+  "hreflangIssues": [],
+  "titleIssues": [],
+  "descIssues": [],
+  "headingIssues": [],
+  "brokenInternalLinks": [],
+  "brokenImages": [],
+  "suspiciousClaimsOrFakeRatings": [],
+  "contactOrAboutGaps": [],
+  "duplicateUrlsOrCannibalization": [
+    {
+      "title": "100% Free Compress Image Size Online | Instant, Lossless &amp; Secure",
+      "count": 2,
+      "files": [
+        "compress-image-size.html",
+        "index.html"
+      ]
+    },
+    {
+      "title": "Privacy Policy - CompressImageSize | Zero-Server Client-Side Guarantee",
+      "count": 2,
+      "files": [
+        "privacy-policy.html",
+        "privacy.html"
+      ]
+    },
+    {
+      "title": "Terms of Service - CompressImageSize | Free Image Optimization Terms",
+      "count": 2,
+      "files": [
+        "terms-of-service.html",
+        "terms.html"
+      ]
+    },
+    {
+      "title": "ضغط حجم الصور أونلاين مجاناً | فوري وبدون فقدان الجودة - العربية",
+      "count": 2,
+      "files": [
+        "ar/compress-image-size.html",
+        "ar/index.html"
+      ]
+    },
+    {
+      "title": "سياسة الخصوصية - CompressImageSize | ضمان المعالجة المحلية 100% في المتصفح",
+      "count": 2,
+      "files": [
+        "ar/privacy-policy.html",
+        "ar/privacy.html"
+      ]
+    },
+    {
+      "title": "شروط الخدمة - CompressImageSize | شروط وضوابط الاستخدام المجاني",
+      "count": 2,
+      "files": [
+        "ar/terms-of-service.html",
+        "ar/terms.html"
+      ]
+    },
+    {
+      "title": "Bildgröße Online Kostenlos Komprimieren | Schnell, Ohne Verlust &amp; Sicher - Deutsch",
+      "count": 2,
+      "files": [
+        "de/compress-image-size.html",
+        "de/index.html"
+      ]
+    },
+    {
+      "title": "Datenschutzerklärung - CompressImageSize | 100% Client-Side Datenschutzgarantie",
+      "count": 2,
+      "files": [
+        "de/privacy-policy.html",
+        "de/privacy.html"
+      ]
+    },
+    {
+      "title": "Nutzungsbedingungen - CompressImageSize | Kostenlose Nutzungsbedingungen",
+      "count": 2,
+      "files": [
+        "de/terms-of-service.html",
+        "de/terms.html"
+      ]
+    },
+    {
+      "title": "Comprimir Imagen Online Gratis | Rápido, Sin Pérdida y Seguro - Español",
+      "count": 2,
+      "files": [
+        "es/compress-image-size.html",
+        "es/index.html"
+      ]
+    },
+    {
+      "title": "Política de Privacidad - CompressImageSize | Garantía 100% en el Navegador",
+      "count": 2,
+      "files": [
+        "es/privacy-policy.html",
+        "es/privacy.html"
+      ]
+    },
+    {
+      "title": "Términos de Servicio - CompressImageSize | Términos de Uso Gratuitos",
+      "count": 2,
+      "files": [
+        "es/terms-of-service.html",
+        "es/terms.html"
+      ]
+    },
+    {
+      "title": "Compresser une Image en Ligne Gratuit | Instantané, Sans Perte et Sécurisé - Français",
+      "count": 2,
+      "files": [
+        "fr/compress-image-size.html",
+        "fr/index.html"
+      ]
+    },
+    {
+      "title": "Politique de Confidentialité - CompressImageSize | Garantie Client-Side 100% Sécurisée",
+      "count": 2,
+      "files": [
+        "fr/privacy-policy.html",
+        "fr/privacy.html"
+      ]
+    },
+    {
+      "title": "Conditions d'Utilisation - CompressImageSize | Conditions du Service Gratuit",
+      "count": 2,
+      "files": [
+        "fr/terms-of-service.html",
+        "fr/terms.html"
+      ]
+    },
+    {
+      "title": "Comprimi Immagine Online Gratis | Veloce, Senza Perdita e Sicuro - Italiano",
+      "count": 2,
+      "files": [
+        "it/compress-image-size.html",
+        "it/index.html"
+      ]
+    },
+    {
+      "title": "Informativa sulla Privacy - CompressImageSize | Garanzia 100% Lato Client",
+      "count": 2,
+      "files": [
+        "it/privacy-policy.html",
+        "it/privacy.html"
+      ]
+    },
+    {
+      "title": "Termini di Servizio - CompressImageSize | Condizioni d'Uso Gratuite",
+      "count": 2,
+      "files": [
+        "it/terms-of-service.html",
+        "it/terms.html"
+      ]
+    },
+    {
+      "title": "オンラインで画像サイズを圧縮 - 100%無料・高画質・安全 - 日本語",
+      "count": 2,
+      "files": [
+        "ja/compress-image-size.html",
+        "ja/index.html"
+      ]
+    },
+    {
+      "title": "プライバシーポリシー - CompressImageSize | 100% ブラウザ内処理の安心保証",
+      "count": 2,
+      "files": [
+        "ja/privacy-policy.html",
+        "ja/privacy.html"
+      ]
+    },
+    {
+      "title": "利用規約 - CompressImageSize | 無料画像最適化ツールの利用規約",
+      "count": 2,
+      "files": [
+        "ja/terms-of-service.html",
+        "ja/terms.html"
+      ]
+    },
+    {
+      "title": "Comprimir Imagem Online Grátis | Rápido, Sem Perdas e Seguro - Português",
+      "count": 2,
+      "files": [
+        "pt/compress-image-size.html",
+        "pt/index.html"
+      ]
+    },
+    {
+      "title": "Política de Privacidade - CompressImageSize | Garantia 100% no Navegador",
+      "count": 2,
+      "files": [
+        "pt/privacy-policy.html",
+        "pt/privacy.html"
+      ]
+    },
+    {
+      "title": "Termos de Serviço - CompressImageSize | Termos de Otimização de Imagem",
+      "count": 2,
+      "files": [
+        "pt/terms-of-service.html",
+        "pt/terms.html"
+      ]
+    },
+    {
+      "title": "Сжать Изображение Онлайн Бесплатно | Быстро, Без Потерь и Безопасно - Русский",
+      "count": 2,
+      "files": [
+        "ru/compress-image-size.html",
+        "ru/index.html"
+      ]
+    },
+    {
+      "title": "Политика Конфиденциальности - CompressImageSize | 100% Локальная Обработка",
+      "count": 2,
+      "files": [
+        "ru/privacy-policy.html",
+        "ru/privacy.html"
+      ]
+    },
+    {
+      "title": "Условия Обслуживания - CompressImageSize | Условия Бесплатного Сервиса",
+      "count": 2,
+      "files": [
+        "ru/terms-of-service.html",
+        "ru/terms.html"
+      ]
+    },
+    {
+      "title": "在线压缩图片大小 - 100%免费、极速、无损且安全 - 中文",
+      "count": 2,
+      "files": [
+        "zh/compress-image-size.html",
+        "zh/index.html"
+      ]
+    },
+    {
+      "title": "隐私政策 - CompressImageSize | 100% 浏览器本地安全处理保证",
+      "count": 2,
+      "files": [
+        "zh/privacy-policy.html",
+        "zh/privacy.html"
+      ]
+    },
+    {
+      "title": "服务条款 - CompressImageSize | 免费图片压缩工具使用协议",
+      "count": 2,
+      "files": [
+        "zh/terms-of-service.html",
+        "zh/terms.html"
+      ]
+    }
+  ]
+}

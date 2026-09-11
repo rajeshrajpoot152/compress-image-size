@@ -96,14 +96,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .hero-banner-content {
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
+  padding-top: 2rem !important;
+  padding-bottom: 3.5rem !important;
 }
 
 @media (min-width: 640px) {
   .hero-banner-content {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 2.5rem !important;
+    padding-bottom: 4rem !important;
   }
 }
 
@@ -127,6 +127,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   position: relative;
   z-index: 30;
   width: 100% !important;
+  margin-top: -30px !important;
 }
 
 #progressContainer {

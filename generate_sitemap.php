@@ -65,6 +65,15 @@ foreach ($legalPages as $page) {
     }
 }
 
+// 3. User Guide & Technical Documentation
+$xml .= "  <url>\n";
+$xml .= "    <loc>{$domain}/how-it-works/</loc>\n";
+$xml .= "    <lastmod>{$today}</lastmod>\n";
+$xml .= "    <changefreq>monthly</changefreq>\n";
+$xml .= "    <priority>0.8</priority>\n";
+$xml .= "  </url>\n";
+$totalUrls++;
+
 $xml .= '</urlset>' . "\n";
 
 file_put_contents(__DIR__ . '/sitemap.xml', $xml);

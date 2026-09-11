@@ -9,6 +9,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
+# Redirect how-it-works.html to canonical /how-it-works/
+RewriteRule ^how-it-works\.html$ /how-it-works/ [R=301,L]
+
+# Redirect /faq and /features to homepage sections
+RewriteRule ^faq/?$ /#faq [R=301,NE,L]
+RewriteRule ^features/?$ /#features [R=301,NE,L]
+
 # 2. Custom 404 Error Page
 ErrorDocument 404 /404.html
 

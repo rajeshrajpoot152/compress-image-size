@@ -65,7 +65,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
           <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Image Compressor</a>
-          <a href="{$homeLink}#how-to" class="hover:text-primary-600 transition-colors">How It Works</a>
+          <a href="{$prefix}how-it-works/" class="hover:text-primary-600 transition-colors">How It Works</a>
           <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Quality & Security</a>
           <a href="{$homeLink}#features" class="hover:text-primary-600 transition-colors">Features</a>
           <a href="{$homeLink}#faq" class="hover:text-primary-600 transition-colors">FAQ</a>
@@ -103,7 +103,7 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
       <!-- Mobile Drawer -->
       <div id="mobileDrawer" class="hidden md:hidden border-t border-surface-border bg-white px-2 pt-3 pb-5 space-y-2">
         <a href="{$homeLink}" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Image Compressor</a>
-        <a href="{$homeLink}#how-to" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">How It Works</a>
+        <a href="{$prefix}how-it-works/" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">How It Works</a>
         <a href="{$homeLink}#eeat-authority" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Quality & Standards</a>
         <a href="{$homeLink}#features" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">Features</a>
         <a href="{$homeLink}#faq" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600">FAQ</a>
