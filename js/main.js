@@ -420,7 +420,7 @@
   function updateQueueUI() {
     const count = uploadedFiles.length;
     if (queueCount) {
-      queueCount.textContent = `${count} image${count === 1 ? '' : 's'} queued`;
+      queueCount.textContent = `${count} ${getLangString('queued_label', 'images queued')}`;
     }
     if (count > 0) {
       clearAllBtn?.classList.remove('hidden');
@@ -747,7 +747,7 @@
       <!-- Left: Thumbnail Preview & File Metadata -->
       <div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
         <!-- Thumbnail Preview -->
-        <button type="button" class="preview-btn relative flex-shrink-0 focus:outline-none rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shadow-2xs group-hover:border-primary-400 transition-all cursor-pointer" title="Click to preview & compare">
+        <button type="button" class="preview-btn relative flex-shrink-0 focus:outline-none rounded-lg overflow-hidden border border-slate-200 bg-slate-100 shadow-2xs group-hover:border-primary-400 transition-all cursor-pointer" title="${getLangString('title_preview', 'Click to preview & compare')}">
           <img src="${item.url}" alt="${item.name}" class="w-10 h-10 sm:w-11 sm:h-11 object-cover" />
           <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>

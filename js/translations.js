@@ -4,6 +4,7 @@
  */
 window.COMPRESS_LANGS = {
   "en": {
+    "title_preview": "Click to preview & compare",
     "name": "English",
     "code": "en",
     "badge_free": "100% Free & Unlimited • Zero Server Upload • Instant Privacy",
@@ -27,6 +28,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Visual Quality Comparison"
   },
   "es": {
+    "title_preview": "Haga clic para vista previa y comparar",
     "name": "Español",
     "code": "es",
     "badge_free": "100% Gratis e Ilimitado • Sin Cargas al Servidor • Privacidad Instantánea",
@@ -50,6 +52,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Comparación Visual de Calidad"
   },
   "fr": {
+    "title_preview": "Cliquez pour prévisualiser et comparer",
     "name": "Français",
     "code": "fr",
     "badge_free": "100% Gratuit & Illimité • Zéro Transfert Serveur • Confidentialité Immédiate",
@@ -73,6 +76,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Comparaison Visuelle de la Qualité"
   },
   "de": {
+    "title_preview": "Klicken Sie zur Vorschau und zum Vergleich",
     "name": "Deutsch",
     "code": "de",
     "badge_free": "100% Kostenlos & Unbegrenzt • Kein Server-Upload • Sofortige Privatsphäre",
@@ -96,6 +100,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Visueller Qualitätsvergleich"
   },
   "pt": {
+    "title_preview": "Clique para visualizar e comparar",
     "name": "Português",
     "code": "pt",
     "badge_free": "100% Grátis e Ilimitado • Sem Envio para Servidor • Privacidade Instantânea",
@@ -119,6 +124,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Comparação Visual de Qualidade"
   },
   "it": {
+    "title_preview": "Clicca per l'anteprima e il confronto",
     "name": "Italiano",
     "code": "it",
     "badge_free": "100% Gratuito e Illimitato • Zero Upload su Server • Privacy Immediata",
@@ -142,6 +148,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Confronto Visivo della Qualità"
   },
   "ru": {
+    "title_preview": "Нажмите для предварительного просмотра и сравнения",
     "name": "Русский",
     "code": "ru",
     "badge_free": "100% Бесплатно и без ограничений • Без загрузки на сервер • Полная конфиденциальность",
@@ -165,6 +172,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "Визуальное сравнение качества"
   },
   "zh": {
+    "title_preview": "点击预览并比较",
     "name": "中文",
     "code": "zh",
     "badge_free": "100% 免费无限制 • 无需上传服务器 • 即时本地隐私保护",
@@ -188,6 +196,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "视觉画质原画对比"
   },
   "ja": {
+    "title_preview": "クリックしてプレビューとプレビューを比較",
     "name": "日本語",
     "code": "ja",
     "badge_free": "100% 完全無料・無制限 • サーバー送信なし • 瞬時に安全",
@@ -211,6 +220,7 @@ window.COMPRESS_LANGS = {
     "modal_title": "画質比較プレビュー"
   },
   "ar": {
+    "title_preview": "انقر للمعاينة والمقارنة",
     "name": "العربية",
     "code": "ar",
     "badge_free": "100% مجاني وغير محدود • بدون رفع إلى الخوادم • خصوصية فورية",
