@@ -588,6 +588,19 @@ if (!function_exists('getRelativeLangLink')) {
                     </svg>
                     <span><?= htmlspecialchars($t['webp_hint'] ?? 'WebP offers up to 40% smaller file size than JPG with zero visual loss.') ?></span>
                   </p>
+
+                  <!-- Dynamic PNG Optimization Suggestion Banner -->
+                  <div id="pngWebpSuggestion" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between gap-3 animate-fade-in">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base flex-shrink-0">💡</span>
+                      <span class="text-[11px] leading-snug">
+                        <?= $t['png_webp_tip_html'] ?? '<strong>Tip:</strong> PNG is lossless. Switch to <strong>WebP</strong> to reduce file size by up to <strong>70%–80%</strong> with full transparency.' ?>
+                      </span>
+                    </div>
+                    <button type="button" id="switchToWebpBtn" class="flex-shrink-0 px-2.5 py-1 text-[11px] font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-lg shadow-2xs transition-all cursor-pointer">
+                      <?= $t['switch_to_webp'] ?? 'Switch to WebP &rarr;' ?>
+                    </button>
+                  </div>
                 </div>
 
               </div>

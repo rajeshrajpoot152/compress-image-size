@@ -587,6 +587,18 @@
                     </svg>
                     <span>WebP形式は、目に見える劣化なしでJPGよりも最大40%軽量化できます。</span>
                   </p>
+                  <!-- Dynamic PNG Optimization Suggestion Banner -->
+                  <div id="pngWebpSuggestion" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between gap-3 animate-fade-in">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base flex-shrink-0">💡</span>
+                      <span class="text-[11px] leading-snug">
+                        <strong>ヒント：</strong>PNGは可逆圧縮です。<strong>WebP</strong> に切り替えると、完全な透明度を維持したままファイルサイズを最大 <strong>70%〜80%</strong> 削減できます。
+                      </span>
+                    </div>
+                    <button type="button" id="switchToWebpBtn" class="flex-shrink-0 px-2.5 py-1 text-[11px] font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-lg shadow-2xs transition-all cursor-pointer">
+                      WebPに切り替え &rarr;
+                    </button>
+                  </div>
                 </div>
 
               </div>
