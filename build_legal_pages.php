@@ -175,6 +175,10 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
       <div class="pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-slate-500">
         <div class="text-center sm:text-left">
           &copy; 2026 CompressImageSize. All rights reserved.
+          <br class="hidden sm:inline" />
+          <div class="mt-2 text-sm text-slate-500">
+            Powered by <a href="https://growautoai.com" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors">GrowAutoAI</a>
+          </div>
         </div>
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
           <a href="{$privacyLink}" class="{$activePrivacy}">Privacy Policy</a>

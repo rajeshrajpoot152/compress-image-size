@@ -1382,6 +1382,10 @@ if (!function_exists('getRelativeLangLink')) {
       <div class="pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-slate-500">
         <div class="text-center sm:text-left">
           <span>&copy; 2026 CompressImageSize. <?= htmlspecialchars($t['footer_rights'] ?? 'All rights reserved.') ?></span>
+          <br class="hidden sm:inline" />
+          <div class="mt-2 text-sm text-slate-500">
+            Powered by <a href="https://growautoai.com" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors">GrowAutoAI</a>
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
@@ -1512,7 +1516,7 @@ if (!function_exists('getRelativeLangLink')) {
             <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100 text-xs text-slate-500">
               <span class="flex items-center gap-1 font-semibold text-slate-700">
                 <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <?= htmlspecialchars($t['modal_drag_hint'] ?? '<?= htmlspecialchars($t['modal_drag_hint'] ?? 'Drag slider or use arrow keys to inspect micro-textures') ?>') ?>
+                <?= htmlspecialchars($t['modal_drag_hint'] ?? 'Drag slider or use arrow keys to inspect micro-textures') ?>
               </span>
               <span class="font-mono text-[11px] text-primary-600 font-bold hidden sm:inline"><?= htmlspecialchars($t['modal_slider_legend'] ?? 'Left: Original | Right: Optimized') ?></span>
             </div>

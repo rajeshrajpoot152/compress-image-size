@@ -336,12 +336,9 @@
         </div>
 
         <button type="button" id="selectImagesBtn" style="background-color: #ff6c0d; box-shadow: 0 10px 15px -3px rgba(255,108,13,0.35);" class="inline-flex items-center justify-center gap-3 px-6 py-4 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white hover:opacity-90 hover:scale-105 active:scale-95 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer">
-          
           <span class="sm:hidden">タップして写真を選択</span>
           <span class="hidden sm:inline" id="selectBtnText">画像を選択 または ここにドロップ</span>
         </button>
-
-        
         
         <div class="drop-extra-hints mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-slate-100">
           <span class="font-bold text-white">1枚から500枚以上の一括処理に対応</span>
@@ -363,8 +360,6 @@
           <span>プライバシー最優先：非公開のGPSや撮影メタデータを自動消去</span>
         </div>
       </div>
-
-      
 
       </div>
   </section>
@@ -395,12 +390,12 @@
 
             <!-- Right: Bulk Actions (Clear All, Re-Compress, Download All) -->
             <div class="flex flex-wrap items-center gap-3">
-              <button type="button" id="clearAllBtn" class="hidden px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all items-center justify-center gap-2 cursor-pointer" title="キューからすべての画像をクリア">
+              <button type="button" id="clearAllBtn" class="hidden px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all items-center justify-center gap-2 cursor-pointer" title="Clear all images from queue">
                 <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 <span>すべて消去</span>
               </button>
 
-              <button type="button" id="compressAllBtn" class="px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer" title="現在の設定ですべて再圧縮">
+              <button type="button" id="compressAllBtn" class="px-3 py-2 text-xs font-bold text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-700 rounded-xl transition-all inline-flex items-center justify-center gap-2 cursor-pointer" title="Re-compress all with current settings">
                 <svg class="w-3.5 h-3.5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
@@ -467,7 +462,7 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 bg-slate-50/70 p-4 sm:p-5 rounded-2xl border border-surface-border shadow-soft">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 pt-2">
               
               <!-- STEP 1: Quality & Compression Ratio Control -->
               <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
@@ -534,7 +529,10 @@
                   <div class="grid grid-cols-2 gap-2" id="formatCardsGrid">
                     
                     <!-- Original / Auto -->
-                    <button type="button" data-format="original" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="original" 
+                      data-active="border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20"
+                      data-inactive="border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">元の形式のまま</span>
                         <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-slate-100 text-slate-600">自動</span>
@@ -543,30 +541,39 @@
                     </button>
 
                     <!-- JPG / JPEG -->
-                    <button type="button" data-format="image/jpeg" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="image/jpeg" 
+                      data-active="border-blue-600 bg-blue-50/70 text-blue-900 shadow-sm ring-2 ring-blue-500/20"
+                      data-inactive="border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">JPG / JPEG</span>
-                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-primary-100 text-primary-700">写真向け</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-blue-100 text-blue-700">写真向け</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">風景や人物写真に最適</div>
+                      <div class="text-[11px] text-blue-600/80 leading-tight">風景や人物写真に最適</div>
                     </button>
 
                     <!-- WebP -->
-                    <button type="button" data-format="image/webp" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="image/webp" 
+                      data-active="border-emerald-600 bg-emerald-50/70 text-emerald-900 shadow-sm ring-2 ring-emerald-500/20"
+                      data-inactive="border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">WebP</span>
-                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-action-100 text-action-700 font-semibold">容量40%削減</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-emerald-100 text-emerald-700 font-semibold">容量40%削減</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">Webサイトの高速表示に最適</div>
+                      <div class="text-[11px] text-emerald-600/80 leading-tight">Webサイトの高速表示に最適</div>
                     </button>
 
                     <!-- PNG -->
-                    <button type="button" data-format="image/png" class="format-card text-left p-3 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
+                    <button type="button" data-format="image/png" 
+                      data-active="border-amber-600 bg-amber-50/70 text-amber-900 shadow-sm ring-2 ring-amber-500/20"
+                      data-inactive="border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">PNG</span>
                         <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-amber-100 text-amber-800">透過対応</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">ロゴやテキスト画像の輪郭をくっきり保持</div>
+                      <div class="text-[11px] text-amber-600/80 leading-tight">ロゴやテキスト画像の輪郭をくっきり保持</div>
                     </button>
 
                   </div>
@@ -587,17 +594,16 @@
                     </svg>
                     <span>WebP形式は、目に見える劣化なしでJPGよりも最大40%軽量化できます。</span>
                   </p>
+
                   <!-- Dynamic PNG Optimization Suggestion Banner -->
                   <div id="pngWebpSuggestion" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between gap-3 animate-fade-in">
                     <div class="flex items-center gap-2 min-w-0">
                       <span class="text-base flex-shrink-0">💡</span>
                       <span class="text-[11px] leading-snug">
-                        <strong>ヒント：</strong>PNGは可逆圧縮です。<strong>WebP</strong> に切り替えると、完全な透明度を維持したままファイルサイズを最大 <strong>70%〜80%</strong> 削減できます。
-                      </span>
+                        <strong>Tip:</strong> PNG is lossless. Switch to <strong>WebP</strong> to reduce file size by up to <strong>70%–80%</strong> with full transparency.                      </span>
                     </div>
                     <button type="button" id="switchToWebpBtn" class="flex-shrink-0 px-2.5 py-1 text-[11px] font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-lg shadow-2xs transition-all cursor-pointer">
-                      WebPに切り替え &rarr;
-                    </button>
+                      Switch to WebP &rarr;                    </button>
                   </div>
                 </div>
 
@@ -685,7 +691,7 @@
         <div class="mt-12 text-center">
           <span class="inline-flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 shadow-2xs">
             <svg class="w-4 h-4 text-action-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            <span>すべてのユーティリティはブラウザ内で100%動作します • データ保持ゼロ • 無制限の利用</span>
+            <span>All utilities run 100% in your browser • Zero data retention • Unlimited usage</span>
           </span>
         </div>
 
@@ -726,7 +732,7 @@
         </div>
 
         <!-- Author & Editorial Credentials Card (E-E-A-T Verified Panel) -->
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
           <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center font-black text-2xl flex-shrink-0 shadow-md ring-4 ring-blue-50" style="background: linear-gradient(135deg, #2563EB, #1E3A8A); color: white;">
             AR
           </div>
@@ -763,10 +769,10 @@
             <div>
               <span class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-[11px] font-bold bg-primary-50 text-primary-700 border border-primary-200 mb-2">
                 <svg class="w-3 h-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                <span>ラボベンチマーク</span>
+                <span>Laboratory Benchmarks</span>
               </span>
               <h3 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">実測圧縮ベンチマークと性能データ</h3>
-              <p class="text-xs sm:text-sm text-slate-500 mt-1">レイテンシ、視覚的SSIM保持、および削減効率を測定する12万以上のファイルにわたるラボテスト。</p>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">Laboratory testing across 120,000+ files measuring latency, visual SSIM retention, and reduction efficiency.</p>
             </div>
             <span class="inline-flex items-center gap-1 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-200 px-3 py-2 rounded-xl self-start sm:self-center shadow-2xs whitespace-nowrap">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -791,7 +797,7 @@
                   <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 font-extrabold font-mono text-[10px] border border-blue-200">JPEG</span>
-                      <span class="font-bold text-slate-900">写真 / Web</span>
+                      <span class="font-bold text-slate-900">Photos / Web</span>
                     </div>
                   </td>
                   <td class="p-4 font-mono font-semibold text-slate-600">&le; 50 KB</td>
@@ -813,7 +819,7 @@
                   <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 font-extrabold font-mono text-[10px] border border-emerald-200">PNG</span>
-                      <span class="font-bold text-slate-900">ロゴ / グラフィック</span>
+                      <span class="font-bold text-slate-900">Logos / Graphics</span>
                     </div>
                   </td>
                   <td class="p-4 font-mono font-semibold text-slate-600">&le; 100 KB</td>
@@ -835,7 +841,7 @@
                   <td class="p-4">
                     <div class="flex items-center gap-2">
                       <span class="px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 font-extrabold font-mono text-[10px] border border-purple-200">WebP</span>
-                      <span class="font-bold text-slate-900">モダンフォーマット</span>
+                      <span class="font-bold text-slate-900">Modern Format</span>
                     </div>
                   </td>
                   <td class="p-4 font-mono font-semibold text-slate-600">&le; 20 KB</td>
@@ -858,7 +864,7 @@
           </div>
           <div class="mt-4 flex items-center gap-2 text-[11px] text-slate-500">
             <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span>SSIM &gt; 0.98は、100%の表示スケールにおいて、知覚的な違いが人間の目には数学的に知覚できないことを示します。</span>
+            <span>SSIM (Structural Similarity Index) &gt; 0.98 indicates perceptual difference is mathematically imperceptible to human eye at 100% display scale.</span>
           </div>
         </div>
 
@@ -1118,7 +1124,7 @@
             </div>
             <div class="min-w-0">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 leading-snug">品質と安全性</h4>
-              <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">クラウドルーケージのない、経験的に検証されたクライアント側の量子化。</p>
+              <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">Empirically verified client-side quantization with zero cloud leakage.</p>
             </div>
           </div>
           <a href="#eeat-authority" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-900 hover:text-primary-700 font-bold text-xs sm:text-sm shadow-2xs transition-all whitespace-nowrap">
@@ -1200,11 +1206,11 @@
           <div class="flex flex-wrap gap-2 pt-1 text-[11px] font-medium text-slate-600">
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
-              <span>サーバーログゼロ</span>
+              <span>Zero Server Logs</span>
             </span>
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
-              <span>GDPR準拠</span>
+              <span>GDPR Compliant</span>
             </span>
             <span class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-100/90 border border-slate-200/80">
               <svg class="w-3.5 h-3.5 text-action-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
@@ -1444,7 +1450,7 @@
             </svg>
             <span class="text-xs font-bold uppercase tracking-wider text-dark-slate">世界の主要10言語に対応：</span>
           </div>
-          <span class="text-[11px] text-slate-500 font-medium">サポートされているすべてのリージョンでサーバーのストレージがゼロ</span>
+          <span class="text-[11px] text-slate-500 font-medium">Zero server storage in all supported regions</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
@@ -1496,6 +1502,10 @@
       <div class="pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-slate-500">
         <div class="text-center sm:text-left">
           <span>&copy; 2026 CompressImageSize. 無断転載を禁じます。完全無料＆プライバシー保護。</span>
+          <br class="hidden sm:inline" />
+          <div class="mt-2 text-sm text-slate-500">
+            Powered by <a href="https://growautoai.com" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors">GrowAutoAI</a>
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
@@ -1558,7 +1568,7 @@
             </button>
           </div>
 
-          <button type="button" id="closeCompareModalBtn" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer" aria-label="モーダルを閉じる" title="閉じる (Esc)">
+          <button type="button" id="closeCompareModalBtn" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer" aria-label="Close modal" title="Close (Esc)">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
@@ -1681,7 +1691,7 @@
   <script src="../js/jszip.min.js"></script>
   <script src="../js/translations.js"></script>
   <script src="../js/main.js?v=2.7"></script>
-<!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
+<!-- Compact Real-Time Progress Bar for Bulk Processing (Floating Toast) -->
       <div id="progressContainer" class="fixed bottom-6 sm:bottom-8 z-50 hidden text-left transition-all duration-300" style="z-index: 99999 !important; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px;">
         <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
           <div class="flex items-center justify-between gap-3">

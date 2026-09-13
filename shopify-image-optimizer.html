@@ -336,12 +336,9 @@
         </div>
 
         <button type="button" id="selectImagesBtn" style="background-color: #ff6c0d; box-shadow: 0 10px 15px -3px rgba(255,108,13,0.35);" class="inline-flex items-center justify-center gap-3 px-6 py-4 sm:px-8 sm:py-4 text-sm sm:text-base font-extrabold text-white hover:opacity-90 hover:scale-105 active:scale-95 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-500/30 cursor-pointer">
-          
           <span class="sm:hidden">Tap to Select Photos</span>
           <span class="hidden sm:inline" id="selectBtnText">Select Images or Drag &amp; Drop Here</span>
         </button>
-
-        
         
         <div class="drop-extra-hints mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-slate-100">
           <span class="font-bold text-white">Supports 1 to 500+ Images</span>
@@ -363,8 +360,6 @@
           <span>Privacy First: Automatically removes hidden GPS &amp; Camera metadata</span>
         </div>
       </div>
-
-      
 
       </div>
   </section>
@@ -467,7 +462,7 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 bg-slate-50/70 p-4 sm:p-5 rounded-2xl border border-surface-border shadow-soft">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 pt-2">
               
               <!-- STEP 1: Quality & Compression Ratio Control -->
               <div class="bg-white p-4 sm:p-5 rounded-xl border border-surface-border/80 shadow-xs flex flex-col justify-between">
@@ -534,7 +529,10 @@
                   <div class="grid grid-cols-2 gap-2" id="formatCardsGrid">
                     
                     <!-- Original / Auto -->
-                    <button type="button" data-format="original" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="original" 
+                      data-active="border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20"
+                      data-inactive="border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">Original</span>
                         <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-slate-100 text-slate-600">Auto</span>
@@ -543,30 +541,39 @@
                     </button>
 
                     <!-- JPG / JPEG -->
-                    <button type="button" data-format="image/jpeg" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="image/jpeg" 
+                      data-active="border-blue-600 bg-blue-50/70 text-blue-900 shadow-sm ring-2 ring-blue-500/20"
+                      data-inactive="border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-blue-200/60 bg-blue-50/30 text-blue-800 hover:border-blue-300 hover:bg-blue-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">JPG / JPEG</span>
-                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-primary-100 text-primary-700">Photos</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-blue-100 text-blue-700">Photos</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">Best for scenery &amp; photos</div>
+                      <div class="text-[11px] text-blue-600/80 leading-tight">Best for scenery &amp; photos</div>
                     </button>
 
                     <!-- WebP -->
-                    <button type="button" data-format="image/webp" class="format-card text-left p-3 rounded-xl border transition-all relative border-primary-600 bg-primary-50/70 text-primary-900 shadow-sm ring-2 ring-primary-500/20">
+                    <button type="button" data-format="image/webp" 
+                      data-active="border-emerald-600 bg-emerald-50/70 text-emerald-900 shadow-sm ring-2 ring-emerald-500/20"
+                      data-inactive="border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-emerald-200/60 bg-emerald-50/30 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">WebP</span>
-                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-action-100 text-action-700 font-semibold">-40% Size</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-emerald-100 text-emerald-700 font-semibold">-40% Size</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">Ultra fast web loading</div>
+                      <div class="text-[11px] text-emerald-600/80 leading-tight">Ultra fast web loading</div>
                     </button>
 
                     <!-- PNG -->
-                    <button type="button" data-format="image/png" class="format-card text-left p-3 rounded-xl border transition-all relative border-slate-200 hover:border-slate-300 bg-white text-slate-700">
+                    <button type="button" data-format="image/png" 
+                      data-active="border-amber-600 bg-amber-50/70 text-amber-900 shadow-sm ring-2 ring-amber-500/20"
+                      data-inactive="border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60"
+                      class="format-card text-left p-3 rounded-xl border transition-all relative border-amber-200/60 bg-amber-50/30 text-amber-800 hover:border-amber-300 hover:bg-amber-50/60">
                       <div class="flex items-center justify-between mb-0.5">
                         <span class="text-xs font-extrabold uppercase font-mono tracking-tight">PNG</span>
                         <span class="text-[9px] font-bold px-2 py-0.2 rounded bg-amber-100 text-amber-800">Transparent</span>
                       </div>
-                      <div class="text-[11px] text-slate-500 leading-tight">Crisp logos &amp; graphics</div>
+                      <div class="text-[11px] text-amber-600/80 leading-tight">Crisp logos &amp; graphics</div>
                     </button>
 
                   </div>
@@ -587,17 +594,16 @@
                     </svg>
                     <span>WebP offers up to 40% smaller file size than JPG with zero visual loss.</span>
                   </p>
+
                   <!-- Dynamic PNG Optimization Suggestion Banner -->
                   <div id="pngWebpSuggestion" class="hidden mt-2 p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between gap-3 animate-fade-in">
                     <div class="flex items-center gap-2 min-w-0">
                       <span class="text-base flex-shrink-0">💡</span>
                       <span class="text-[11px] leading-snug">
-                        <strong>Tip:</strong> PNG is lossless. Switch to <strong>WebP</strong> to reduce file size by up to <strong>70%–80%</strong> with full transparency.
-                      </span>
+                        <strong>Tip:</strong> PNG is lossless. Switch to <strong>WebP</strong> to reduce file size by up to <strong>70%–80%</strong> with full transparency.                      </span>
                     </div>
                     <button type="button" id="switchToWebpBtn" class="flex-shrink-0 px-2.5 py-1 text-[11px] font-bold bg-amber-600 hover:bg-amber-700 text-white rounded-lg shadow-2xs transition-all cursor-pointer">
-                      Switch to WebP &rarr;
-                    </button>
+                      Switch to WebP &rarr;                    </button>
                   </div>
                 </div>
 
@@ -726,7 +732,7 @@
         </div>
 
         <!-- Author & Editorial Credentials Card (E-E-A-T Verified Panel) -->
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-soft mb-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5">
           <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center font-black text-2xl flex-shrink-0 shadow-md ring-4 ring-blue-50" style="background: linear-gradient(135deg, #2563EB, #1E3A8A); color: white;">
             AR
           </div>
@@ -1496,6 +1502,10 @@
       <div class="pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-xs text-slate-500">
         <div class="text-center sm:text-left">
           <span>&copy; 2026 CompressImageSize. All rights reserved. 100% Free &amp; Privacy-Protected.</span>
+          <br class="hidden sm:inline" />
+          <div class="mt-2 text-sm text-slate-500">
+            Powered by <a href="https://growautoai.com" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700 font-semibold transition-colors">GrowAutoAI</a>
+          </div>
         </div>
 
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
@@ -1681,7 +1691,7 @@
   <script src="js/jszip.min.js"></script>
   <script src="js/translations.js"></script>
   <script src="js/main.js?v=2.7"></script>
-<!-- Compact Real-Time Progress Bar for Bulk Processing (Inside Banner - Clean White Card) -->
+<!-- Compact Real-Time Progress Bar for Bulk Processing (Floating Toast) -->
       <div id="progressContainer" class="fixed bottom-6 sm:bottom-8 z-50 hidden text-left transition-all duration-300" style="z-index: 99999 !important; left: 50%; transform: translateX(-50%); width: 92%; max-width: 450px;">
         <div class="rounded-2xl border border-slate-200 px-4 py-3 sm:px-5 sm:py-4 shadow-2xl ring-1 ring-slate-900/10" style="background-color: #ffffff !important; color: #0f172a !important;">
           <div class="flex items-center justify-between gap-3">
