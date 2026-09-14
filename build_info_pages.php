@@ -224,9 +224,9 @@ foreach ($languages as $langCode => $langInfo) {
     </div>
 
     <!-- Main Content Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
       
-      <div class="lg:col-span-7 space-y-8">
+      <div class="space-y-8">
         <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-8">
           <h2 class="text-2xl font-bold text-dark-slate mb-4 flex items-center gap-3">
             <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -247,7 +247,7 @@ foreach ($languages as $langCode => $langInfo) {
       </div>
 
       <!-- Sidebar Features -->
-      <div class="lg:col-span-5 space-y-6">
+      <div class="space-y-6">
         <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
           <h3 class="text-lg font-bold text-primary-900 mb-4">Why Choose Us?</h3>
           <ul class="space-y-4">
@@ -328,10 +328,10 @@ HTML;
       <p class="text-lg text-slate-600 max-w-2xl mx-auto">Have a question about our compression technology, feedback on the tool, or a business inquiry? We'd love to hear from you.</p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
       
       <!-- Contact Information Sidebar -->
-      <div class="lg:col-span-1 space-y-6">
+      <div class="space-y-6">
         <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-6 sm:p-8">
           <h2 class="text-xl font-bold text-dark-slate mb-6">Contact Information</h2>
           
@@ -361,7 +361,7 @@ HTML;
       </div>
 
       <!-- Contact Form -->
-      <div class="lg:col-span-2">
+      <div>
         <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-6 sm:p-10 relative overflow-hidden">
           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary-400 to-primary-600"></div>
           <h2 class="text-2xl font-bold text-dark-slate mb-6">Send a Message</h2>
