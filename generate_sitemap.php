@@ -16,31 +16,29 @@ $xml .= '        xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
 $today = date('Y-m-d');
 $totalUrls = 0;
 
-// 1. Programmatic Keywords URLs
-foreach ($allKeywords as $slug => $kwData) {
-    $priority = ($slug === 'compress-image-size') ? '1.0' : (($kwData['category'] === 'size') ? '0.9' : '0.8');
-    $changefreq = ($slug === 'compress-image-size') ? 'daily' : 'weekly';
+// 1. Root Pages (index.html)
+$slug = 'compress-image-size';
+$priority = '1.0';
+$changefreq = 'daily';
 
-    foreach ($languages as $lang) {
-        $isRoot = ($slug === 'compress-image-size');
-        $loc = ($lang === 'en') ? "{$domain}/" . ($isRoot ? "" : "{$slug}.html") : "{$domain}/{$lang}/" . ($isRoot ? "" : "{$slug}.html");
-        
-        $xml .= "  <url>\n";
-        $xml .= "    <loc>{$loc}</loc>\n";
-        $xml .= "    <lastmod>{$today}</lastmod>\n";
-        $xml .= "    <changefreq>{$changefreq}</changefreq>\n";
-        $xml .= "    <priority>{$priority}</priority>\n";
+foreach ($languages as $lang) {
+    $loc = ($lang === 'en') ? "{$domain}/" : "{$domain}/{$lang}/";
+    
+    $xml .= "  <url>\n";
+    $xml .= "    <loc>{$loc}</loc>\n";
+    $xml .= "    <lastmod>{$today}</lastmod>\n";
+    $xml .= "    <changefreq>{$changefreq}</changefreq>\n";
+    $xml .= "    <priority>{$priority}</priority>\n";
 
-        // Multi-language hreflang alternates
-        foreach ($languages as $altLang) {
-            $altLoc = ($altLang === 'en') ? "{$domain}/" . ($isRoot ? "" : "{$slug}.html") : "{$domain}/{$altLang}/" . ($isRoot ? "" : "{$slug}.html");
-            $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
-        }
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/" . ($isRoot ? "" : "{$slug}.html") . "\" />\n";
-        $xml .= "  </url>\n";
-        
-        $totalUrls++;
+    // Multi-language hreflang alternates
+    foreach ($languages as $altLang) {
+        $altLoc = ($altLang === 'en') ? "{$domain}/" : "{$domain}/{$altLang}/";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
     }
+    $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/\" />\n";
+    $xml .= "  </url>\n";
+    
+    $totalUrls++;
 }
 
 // 2. Legal & Mandatory Pages (Privacy Policy, Terms of Service, About Us, Contact Us)

@@ -57,10 +57,11 @@ if (!function_exists('getFlagSvg')) {
 
 if (!function_exists('getRelativeLangLink')) {
     function getRelativeLangLink($targetLang, $targetSlug, $currentLang) {
+        $slugPath = ($targetSlug === 'compress-image-size') ? 'index.html' : "{$targetSlug}.html";
         if ($targetLang === 'en') {
-            return ($currentLang === 'en') ? "{$targetSlug}.html" : "../{$targetSlug}.html";
+            return ($currentLang === 'en') ? $slugPath : "../{$slugPath}";
         } else {
-            return ($currentLang === 'en') ? "{$targetLang}/{$targetSlug}.html" : ($currentLang === $targetLang ? "{$targetSlug}.html" : "../{$targetLang}/{$targetSlug}.html");
+            return ($currentLang === 'en') ? "{$targetLang}/{$slugPath}" : ($currentLang === $targetLang ? $slugPath : "../{$targetLang}/{$slugPath}");
         }
     }
 }
@@ -76,10 +77,14 @@ if (!function_exists('getRelativeLangLink')) {
   <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl) ?>" />
   
   <!-- Multi-Language Hreflang SEO Interlinking (10 Global Languages) -->
-  <?php foreach ($globalLanguages as $lCode => $lInfo): ?>
-    <link rel="alternate" hreflang="<?= $lCode ?>" href="https://compressimagesize.com/<?= ($lCode !== 'en' ? $lCode . '/' : '') . $currentSlug ?>.html" />
+  <?php foreach (['en', 'es', 'fr', 'de', 'pt', 'zh', 'ja', 'ar', 'ru', 'it'] as $lCode): ?>
+    <?php 
+       $hrefSlug = ($currentSlug === 'compress-image-size') ? '' : $currentSlug . '.html';
+       $hrefUrl = "https://compressimagesize.com/" . ($lCode !== 'en' ? $lCode . '/' : '') . $hrefSlug;
+    ?>
+    <link rel="alternate" hreflang="<?= $lCode ?>" href="<?= $hrefUrl ?>" />
   <?php endforeach; ?>
-  <link rel="alternate" hreflang="x-default" href="https://compressimagesize.com/<?= $currentSlug ?>.html" />
+  <link rel="alternate" hreflang="x-default" href="https://compressimagesize.com/<?= ($currentSlug === 'compress-image-size') ? '' : $currentSlug . '.html' ?>" />
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="website" />
@@ -651,8 +656,8 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c1_title'] ?? 'Resizing & Cropping') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c1_desc'] ?? 'Exact pixel dimensions modification and smart aspect ratio cropping.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="reduce-image-dimensions.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool1'] ?? '• Image Resizer (Custom Pixels)') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
-              <li><a href="image-size-reducer.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool2'] ?? '• Smart Image Cropper') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool1'] ?? '• Image Resizer (Custom Pixels)') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool2'] ?? '• Smart Image Cropper') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
           </div>
 
@@ -664,8 +669,8 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c2_title'] ?? 'Format Converters') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c2_desc'] ?? 'High-demand converters for next-gen web standard performance.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="convert-png-to-jpg.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
-              <li><a href="convert-jpg-to-webp.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
               <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
           </div>
@@ -678,7 +683,7 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c3_title'] ?? 'Privacy & Editing') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c3_desc'] ?? 'Protect your metadata and sanitize sensitive photos safely.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="lossless-image-compressor.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
               <li><a href="index.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
             </ul>
           </div>
@@ -887,38 +892,6 @@ if (!function_exists('getRelativeLangLink')) {
     </section>
 
 
-    <!-- 4. CONTEXTUAL SEO INTERLINKING (Related Tools Grid) -->
-    <section class="py-12 bg-surface-light border-b border-surface-border">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="text-base font-bold text-dark-slate mb-4 flex items-center gap-2">
-          <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-          <?= htmlspecialchars($t['related_tools_title'] ?? 'Related High-Volume Compression Tools') ?>
-        </h3>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <?php
-          // Get 6 contextual sibling links, excluding the current page
-          $siblings = [];
-          foreach ($allKeywords as $sibKey => $sibVal) {
-            if ($sibKey !== $currentSlug) {
-              $siblings[] = $sibKey;
-            }
-            if (count($siblings) === 6) break;
-          }
-          foreach ($siblings as $sibSlug):
-            $sibData = $allKeywords[$sibSlug];
-            $locSib = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($sibSlug, $currentLang, $sibData) : $sibData;
-            $linkPath = "{$sibSlug}.html";
-          ?>
-            <a href="<?= $linkPath ?>" class="p-3 rounded-xl bg-white border border-surface-border hover:border-primary-500 hover:shadow-soft transition-all text-xs font-semibold text-dark-slate flex items-center justify-between group">
-              <span class="truncate"><?= htmlspecialchars($locSib['h1']) ?></span>
-              <span class="text-primary-600 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
-            </a>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
-
 
     <!-- 5. TRUST & FEATURES (3-Column Grid) -->
     <section id="features" class="py-16 bg-white border-b border-surface-border">
@@ -1088,7 +1061,7 @@ if (!function_exists('getRelativeLangLink')) {
               <svg class="faq-arrow w-5 h-5 text-slate-500 transform transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
             </button>
             <div class="faq-content hidden px-5 pb-5 text-sm text-dark-body border-t border-slate-200/60 pt-4 leading-relaxed">
-              <?= htmlspecialchars($t['faq1_a'] ?? 'Simply adjust the quality slider to reach your target file size.') ?>
+              <?= htmlspecialchars($t['faq1_a'] ?? 'Simply upload your photo and adjust the quality slider to reach your exact target file size. You can easily compress images to 10KB, 20KB, 50KB, 100KB, 200KB or any specific MB size required for online forms and applications.') ?>
             </div>
           </div>
 
@@ -1231,72 +1204,66 @@ if (!function_exists('getRelativeLangLink')) {
           </div>
         </div>
 
-        <!-- Column 2: Size Reducers (2 cols on lg) -->
+        <!-- Column 2: Popular Features -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
           <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-primary-600 rounded-full inline-block"></span>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_size'] ?? ($t['cat_matrix']['size']['badge'] ?? 'Size Reducers')) ?></h4>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate">Popular Features</h4>
           </div>
-          <ul class="space-y-1 text-xs">
-            <?php 
-            $sizeItems = array_filter($allKeywords, fn($k) => $k['category'] === 'size');
-            foreach (array_slice($sizeItems, 0, 8) as $keySlug => $k): 
-              $locK = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($keySlug, $currentLang, $k) : $k;
-              $link = "{$keySlug}.html";
-            ?>
-              <li>
-                <a href="<?= $link ?>" class="footer-link-item <?= $currentSlug === $keySlug ? 'text-primary-600 font-bold' : '' ?>">
-                  <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                  <span class="truncate"><?= htmlspecialchars($locK['h1']) ?></span>
-                </a>
-              </li>
-            <?php endforeach; ?>
+          <ul class="space-y-1 text-xs text-slate-500">
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>Compress Image to 50KB</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>Reduce Size of JPG</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>Convert JPG to WebP</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>Compress Image to 100KB</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>Lossless Image Compressor</li>
           </ul>
         </div>
 
-        <!-- Column 3: Format Specific (2 cols on lg) -->
+        <!-- Column 3: Format specific -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
           <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-action-600 rounded-full inline-block"></span>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_format'] ?? ($t['cat_matrix']['format']['badge'] ?? 'Format Specific')) ?></h4>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate">Format Types</h4>
           </div>
-          <ul class="space-y-1 text-xs">
-            <?php 
-            $formatItems = array_filter($allKeywords, fn($k) => $k['category'] === 'format');
-            foreach (array_slice($formatItems, 0, 8) as $keySlug => $k): 
-              $locK = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($keySlug, $currentLang, $k) : $k;
-              $link = "{$keySlug}.html";
-            ?>
-              <li>
-                <a href="<?= $link ?>" class="footer-link-item <?= $currentSlug === $keySlug ? 'text-primary-600 font-bold' : '' ?>">
-                  <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                  <span class="truncate"><?= htmlspecialchars($locK['h1']) ?></span>
-                </a>
-              </li>
-            <?php endforeach; ?>
+          <ul class="space-y-1 text-xs text-slate-500">
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>PNG Compressor</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>JPEG Size Reducer</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>GIF Optimizer</li>
+            <li class="py-1 flex items-center"><svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>WebP Compression</li>
           </ul>
         </div>
 
-        <!-- Column 4: Popular Tools (2 cols on lg) -->
+        <!-- Column 4: Quick Links -->
         <div class="col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2">
           <div class="flex items-center gap-2 mb-4">
             <span class="w-1.5 h-3.5 bg-purple-600 rounded-full inline-block"></span>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate"><?= htmlspecialchars($t['cat_action'] ?? ($t['cat_matrix']['action']['badge'] ?? 'Popular Tools')) ?></h4>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-dark-slate">Quick Links</h4>
           </div>
           <ul class="space-y-1 text-xs">
-            <?php 
-            $actionItems = array_filter($allKeywords, fn($k) => in_array($k['category'], ['action', 'primary']));
-            foreach (array_slice($actionItems, 0, 8) as $keySlug => $k): 
-              $locK = function_exists('getLocalizedKeywordData') ? getLocalizedKeywordData($keySlug, $currentLang, $k) : $k;
-              $link = "{$keySlug}.html";
-            ?>
-              <li>
-                <a href="<?= $link ?>" class="footer-link-item <?= $currentSlug === $keySlug ? 'text-primary-600 font-bold' : '' ?>">
-                  <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                  <span class="truncate"><?= htmlspecialchars($locK['h1']) ?></span>
-                </a>
-              </li>
-            <?php endforeach; ?>
+            <li>
+              <a href="index.html" class="footer-link-item">
+                <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                <span>Image Compressor</span>
+              </a>
+            </li>
+            <li>
+              <a href="how-it-works/" class="footer-link-item">
+                <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                <span>How It Works</span>
+              </a>
+            </li>
+            <li>
+              <a href="about-us.html" class="footer-link-item">
+                <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                <span>About Us</span>
+              </a>
+            </li>
+            <li>
+              <a href="contact-us.html" class="footer-link-item">
+                <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                <span>Contact Us</span>
+              </a>
+            </li>
           </ul>
         </div>
 
