@@ -23,7 +23,7 @@ if (!$name || !$email || !$message) {
 // SMTP Configuration (Google Workspace / Gmail)
 $smtp_server   = "smtp.gmail.com";
 $smtp_port     = 465;
-$smtp_username = "hello@compressimagesize.com"; // Your email
+$smtp_username = "compressimagesize@gmail.com"; // Your email
 $smtp_password = "svzlpoymzinxjaxm"; // Your App Password
 
 // Email Headers
@@ -107,6 +107,6 @@ try {
     echo "<body style='font-family:sans-serif;text-align:center;padding:50px;'>";
     echo "<h2>Sorry, there was an error sending your message.</h2>";
     echo "<p>Please try again later or email us directly.</p>";
-    // echo "<p><small>Error details: " . htmlspecialchars($e->getMessage()) . "</small></p>"; // Uncomment for debugging
+    echo "<p><small>Error details: " . htmlspecialchars($e->getMessage()) . "</small></p>"; // Uncomment for debugging
     echo "</body></html>";
 }
