@@ -22,7 +22,8 @@ foreach ($allKeywords as $slug => $kwData) {
     $changefreq = ($slug === 'compress-image-size') ? 'daily' : 'weekly';
 
     foreach ($languages as $lang) {
-        $loc = ($lang === 'en') ? "{$domain}/{$slug}.html" : "{$domain}/{$lang}/{$slug}.html";
+        $isRoot = ($slug === 'compress-image-size');
+        $loc = ($lang === 'en') ? "{$domain}/" . ($isRoot ? "" : "{$slug}.html") : "{$domain}/{$lang}/" . ($isRoot ? "" : "{$slug}.html");
         
         $xml .= "  <url>\n";
         $xml .= "    <loc>{$loc}</loc>\n";
@@ -32,18 +33,18 @@ foreach ($allKeywords as $slug => $kwData) {
 
         // Multi-language hreflang alternates
         foreach ($languages as $altLang) {
-            $altLoc = ($altLang === 'en') ? "{$domain}/{$slug}.html" : "{$domain}/{$altLang}/{$slug}.html";
+            $altLoc = ($altLang === 'en') ? "{$domain}/" . ($isRoot ? "" : "{$slug}.html") : "{$domain}/{$altLang}/" . ($isRoot ? "" : "{$slug}.html");
             $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
         }
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/{$slug}.html\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/" . ($isRoot ? "" : "{$slug}.html") . "\" />\n";
         $xml .= "  </url>\n";
         
         $totalUrls++;
     }
 }
 
-// 2. Legal & Mandatory Pages (Privacy Policy, Terms of Service)
-$legalPages = ['privacy-policy', 'terms-of-service'];
+// 2. Legal & Mandatory Pages (Privacy Policy, Terms of Service, About Us, Contact Us)
+$legalPages = ['privacy-policy', 'terms-of-service', 'about-us', 'contact-us'];
 foreach ($legalPages as $page) {
     foreach ($languages as $lang) {
         $loc = ($lang === 'en') ? "{$domain}/{$page}.html" : "{$domain}/{$lang}/{$page}.html";

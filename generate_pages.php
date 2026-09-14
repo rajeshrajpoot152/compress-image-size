@@ -35,19 +35,24 @@ foreach ($languages as $lang) {
         $pageSubhead   = $kwData['desc'] ?? ($langData['hero_desc'] ?? $kwRawData['desc']);
         $targetFormat  = $kwData['format'];
         $targetQuality = $kwData['quality'] ?? 60;
-        $canonicalUrl  = "https://compressimagesize.com/" . ($lang !== 'en' ? "{$lang}/" : "") . "{$slug}.html";
+        $isRoot = ($slug === 'compress-image-size');
+        $canonicalUrl = "https://compressimagesize.com/" . ($lang !== 'en' ? "{$lang}/" : "") . ($isRoot ? "" : "{$slug}.html");
 
         // Render template
         ob_start();
         require __DIR__ . '/views/template.php';
         $html = ob_get_clean();
 
-        $outputFile = "{$destDir}/{$slug}.html";
-        file_put_contents($outputFile, $html);
-
-        // Primary brand & domain tool: 'compress-image-size' generates index.html for that language folder!
-        if ($slug === 'compress-image-size') {
-            file_put_contents("{$destDir}/index.html", $html);
+        if ($isRoot) {
+            $outputFile = "{$destDir}/index.html";
+            file_put_contents($outputFile, $html);
+            // Delete the old duplicate file if it exists
+            if (file_exists("{$destDir}/compress-image-size.html")) {
+                unlink("{$destDir}/compress-image-size.html");
+            }
+        } else {
+            $outputFile = "{$destDir}/{$slug}.html";
+            file_put_contents($outputFile, $html);
         }
 
         $totalGenerated++;

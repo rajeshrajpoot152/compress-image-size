@@ -666,7 +666,7 @@ if (!function_exists('getRelativeLangLink')) {
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
               <li><a href="convert-png-to-jpg.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
               <li><a href="convert-jpg-to-webp.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
-              <li><a href="compress-image-size.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
           </div>
 
@@ -679,7 +679,7 @@ if (!function_exists('getRelativeLangLink')) {
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c3_desc'] ?? 'Protect your metadata and sanitize sensitive photos safely.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
               <li><a href="lossless-image-compressor.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
-              <li><a href="compress-image-size.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
+              <li><a href="index.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
             </ul>
           </div>
         </div>
