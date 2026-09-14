@@ -212,6 +212,8 @@ echo "Building Privacy Policy and Terms of Service Pages for all 10 languages...
 foreach ($languages as $langCode => $langInfo) {
     $prefix = $langInfo['prefix'];
     $destDir = ($langCode === 'en') ? __DIR__ : __DIR__ . "/{$langCode}";
+    $robotsTag = ($langCode === 'en') ? 'index, follow' : 'noindex, follow';
+    $canonicalRoot = 'https://compressimagesize.com/';
     if (!is_dir($destDir)) {
         mkdir($destDir, 0777, true);
     }
@@ -239,8 +241,8 @@ foreach ($languages as $langCode => $langInfo) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - CompressImageSize | Zero-Server Client-Side Guarantee</title>
   <meta name="description" content="Discover how CompressImageSize protects your confidentiality with 100% in-browser client-side WebAssembly compression. No images ever touch external cloud servers. GDPR & CCPA compliant.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="{$canonicalPrivacy}">
+  <meta name="robots" content="{$robotsTag}">
+  <link rel="canonical" href="https://compressimagesize.com/privacy-policy.html">
 {$privacyHreflang}
 
   <!-- Open Graph & Social Cards -->
@@ -467,8 +469,8 @@ HTML;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service - CompressImageSize | Free Image Optimization Terms</title>
   <meta name="description" content="Read the CompressImageSize Terms of Service. Understand your rights, 100% file copyright ownership, acceptable usage, and warranty disclaimers for our free compression utility.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="{$canonicalTerms}">
+  <meta name="robots" content="{$robotsTag}">
+  <link rel="canonical" href="https://compressimagesize.com/terms-of-service.html">
 {$termsHreflang}
 
   <!-- Open Graph & Social Cards -->

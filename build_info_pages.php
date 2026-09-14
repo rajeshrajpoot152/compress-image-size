@@ -159,6 +159,8 @@ echo "Building About Us, Contact Us, and Thank You Pages for all 10 languages...
 foreach ($languages as $langCode => $langInfo) {
     $prefix = $langInfo['prefix'];
     $destDir = ($langCode === 'en') ? __DIR__ : __DIR__ . "/{$langCode}";
+    $robotsTag = ($langCode === 'en') ? 'index, follow' : 'noindex, follow';
+    $canonicalRoot = 'https://compressimagesize.com/';
     if (!is_dir($destDir)) {
         mkdir($destDir, 0777, true);
     }
@@ -201,8 +203,8 @@ foreach ($languages as $langCode => $langInfo) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - CompressImageSize | Client-Side Image Compression</title>
   <meta name="description" content="Learn about CompressImageSize. We provide ultra-fast, 100% private, client-side WebAssembly image compression. Your files never leave your device.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="{$canonicalAbout}">
+  <meta name="robots" content="{$robotsTag}">
+  <link rel="canonical" href="https://compressimagesize.com/about-us.html">
 {$aboutHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,8 +313,8 @@ HTML;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - CompressImageSize | Get in Touch</title>
   <meta name="description" content="Contact the CompressImageSize support team for inquiries, feedback, and technical assistance. We are here to help.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="{$canonicalContact}">
+  <meta name="robots" content="{$robotsTag}">
+  <link rel="canonical" href="https://compressimagesize.com/contact-us.html">
 {$contactHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -422,7 +424,7 @@ HTML;
   <title>Thank You - CompressImageSize</title>
   <meta name="description" content="Thank you for contacting CompressImageSize. We have received your message.">
   <meta name="robots" content="noindex, follow"> <!-- Excluded from indexing as per SEO best practices -->
-  <link rel="canonical" href="{$canonicalThanks}">
+  <link rel="canonical" href="https://compressimagesize.com/thank-you.html">
 {$thanksHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
