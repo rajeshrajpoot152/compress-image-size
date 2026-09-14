@@ -95,11 +95,16 @@ try {
     send_smtp_command($socket, "QUIT", '221');
     fclose($socket);
 
-    // Redirect to a success page or show success message
-    echo "<!DOCTYPE html><html><head><title>Success</title><meta http-equiv='refresh' content='3;url=/'></head>";
-    echo "<body style='font-family:sans-serif;text-align:center;padding:50px;'>";
-    echo "<h2>Message sent successfully!</h2><p>Thank you for contacting us. We will get back to you shortly.</p>";
-    echo "<p>Redirecting to home...</p></body></html>";
+    // Determine redirect URL based on language
+    $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
+    $redirectUrl = "/thank-you.html";
+    if ($lang && $lang !== 'en') {
+        $redirectUrl = "/" . $lang . "/thank-you.html";
+    }
+
+    // Redirect to success page
+    header("Location: " . $redirectUrl);
+    exit;
 
 } catch (Exception $e) {
     http_response_code(500);
