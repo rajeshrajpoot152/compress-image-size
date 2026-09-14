@@ -27,7 +27,7 @@ $smtp_username = "compressimagesize@gmail.com"; // Your email
 $smtp_password = "svzlpoymzinxjaxm"; // Your App Password
 
 // Email Headers
-$to      = "hello@compressimagesize.com"; // Where to send the message
+$to      = "compressimagesize@gmail.com"; // Where to send the message
 $subject = "New Contact Form Submission from " . $name;
 
 // Construct the email body
