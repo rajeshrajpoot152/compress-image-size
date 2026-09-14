@@ -61,6 +61,8 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
           <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Image Compressor</a>
           <a href="{$prefix}how-it-works/" class="hover:text-primary-600 transition-colors">How It Works</a>
+          <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
+          <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
         </nav>
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
