@@ -181,6 +181,8 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
+          <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors py-1">About Us</a>
+          <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors py-1">Contact Us</a>
           <a href="{$privacyLink}" class="{$activePrivacy}">Privacy Policy</a>
           <a href="{$termsLink}" class="{$activeTerms}">Terms of Service</a>
           <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors py-1">Editorial &amp; Quality Policy</a>
@@ -417,7 +419,7 @@ foreach ($languages as $langCode => $langInfo) {
           <p class="mb-4 text-sm text-slate-600">For privacy questions, compliance requests, or legal inquiries, reach out to our dedicated privacy desk:</p>
           <div class="bg-white border border-surface-border rounded-xl p-5 space-y-2 text-sm">
             <p><strong>CompressImageSize Privacy Governance Team</strong></p>
-            <p class="text-slate-600">Email: <a href="mailto:privacy@compressimagesize.com" class="text-primary-600 font-medium underline">privacy@compressimagesize.com</a></p>
+            <p class="text-slate-600">Email: <a href="mailto:hello@compressimagesize.com" class="text-primary-600 font-medium underline">hello@compressimagesize.com</a></p>
             <p class="text-slate-600">Website: <a href="https://compressimagesize.com" class="text-primary-600 font-medium underline">https://compressimagesize.com</a></p>
           </div>
         </section>
@@ -634,7 +636,7 @@ HTML;
           <p class="mb-4 text-sm text-slate-600">For legal notices, compliance queries, or rights verifications, please reach out to:</p>
           <div class="bg-white border border-surface-border rounded-xl p-5 space-y-2 text-sm">
             <p><strong>CompressImageSize Legal Department</strong></p>
-            <p class="text-slate-600">Email: <a href="mailto:legal@compressimagesize.com" class="text-primary-600 font-medium underline">legal@compressimagesize.com</a></p>
+            <p class="text-slate-600">Email: <a href="mailto:hello@compressimagesize.com" class="text-primary-600 font-medium underline">hello@compressimagesize.com</a></p>
             <p class="text-slate-600">Website: <a href="https://compressimagesize.com" class="text-primary-600 font-medium underline">https://compressimagesize.com</a></p>
           </div>
         </section>
