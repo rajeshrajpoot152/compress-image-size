@@ -228,8 +228,8 @@ foreach ($languages as $langCode => $langInfo) {
     <!-- Main Content Layout -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
       
-      <div class="space-y-8">
-        <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-8">
+      <div class="flex flex-col gap-8">
+        <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-8 flex-1">
           <h2 class="text-2xl font-bold text-dark-slate mb-4 flex items-center gap-3">
             <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
             Our Mission
@@ -238,7 +238,7 @@ foreach ($languages as $langCode => $langInfo) {
           <p class="text-slate-600 leading-relaxed">We've changed the paradigm by utilizing advanced HTML5 Canvas and WebAssembly. CompressImageSize processes and optimizes your images directly in your device's memory, ensuring unmatched speed and absolute confidentiality.</p>
         </div>
 
-        <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-8">
+        <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-8 flex-1">
           <h2 class="text-2xl font-bold text-dark-slate mb-4 flex items-center gap-3">
             <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             Privacy First Commitment
@@ -249,7 +249,7 @@ foreach ($languages as $langCode => $langInfo) {
       </div>
 
       <!-- Sidebar Features -->
-      <div class="space-y-6">
+      <div class="flex flex-col gap-6">
         <div class="bg-primary-50 rounded-2xl p-6 border border-primary-100">
           <h3 class="text-lg font-bold text-primary-900 mb-4">Why Choose Us?</h3>
           <ul class="space-y-4">
@@ -333,11 +333,11 @@ HTML;
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
       
       <!-- Contact Information Sidebar -->
-      <div class="space-y-6">
+      <div class="flex flex-col gap-6">
         <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-6 sm:p-8">
           <h2 class="text-xl font-bold text-dark-slate mb-6">Contact Information</h2>
           
-          <div class="space-y-6">
+          <div class="flex flex-col gap-6">
             <div class="flex items-start gap-4">
               <div class="p-3 bg-primary-50 rounded-xl text-primary-600 shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -368,7 +368,7 @@ HTML;
           <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary-400 to-primary-600"></div>
           <h2 class="text-2xl font-bold text-dark-slate mb-6">Send a Message</h2>
           
-          <form action="{$handlerUrl}" method="POST" class="space-y-6">
+          <form action="{$handlerUrl}" method="POST" class="flex flex-col gap-6">
             <input type="hidden" name="lang" value="{$langCode}">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>

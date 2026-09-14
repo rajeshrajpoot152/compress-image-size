@@ -68,9 +68,6 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
           <a href="{$prefix}how-it-works/" class="hover:text-primary-600 transition-colors">How It Works</a>
           <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
           <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
-          <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors">Quality & Security</a>
-          <a href="{$homeLink}#features" class="hover:text-primary-600 transition-colors">Features</a>
-          <a href="{$homeLink}#faq" class="hover:text-primary-600 transition-colors">FAQ</a>
         </nav>
 
         <!-- World Top 10 Language Switcher -->

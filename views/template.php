@@ -230,11 +230,8 @@ if (!function_exists('getRelativeLangLink')) {
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
-          <a href="#uploader" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_tools'] ?? 'Tools') ?></a>
+          <a href="<?= ($currentLang === 'en' ? '' : '../') ?>index.html" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['header_home'] ?? 'Image Compressor') ?></a>
           <a href="<?= ($currentLang === 'en' ? '' : '../') ?>how-it-works/" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_how'] ?? 'How It Works') ?></a>
-          <a href="#eeat-authority" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_quality'] ?? 'Quality & Security') ?></a>
-          <a href="#features" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_features'] ?? 'Features') ?></a>
-          <a href="#faq" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_faq'] ?? 'FAQ') ?></a>
           <a href="<?= ($currentLang === 'en' ? '' : '../') ?>about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
           <a href="<?= ($currentLang === 'en' ? '' : '../') ?>contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
         </nav>
