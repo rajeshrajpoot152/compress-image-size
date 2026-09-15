@@ -33,7 +33,7 @@ $pageSubhead = $kwData['desc'];
 $targetFormat = $kwData['format'];
 $targetQuality = $kwData['quality'] ?? 60;
 
-$canonicalUrl = "https://compressimagesize.com/" . ($currentLang !== 'en' ? "{$currentLang}/" : "") . "{$currentSlug}.html";
+$canonicalUrl = "https://compressimagesize.com/" . ($currentLang !== 'en' ? "{$currentLang}/" : "") . ($currentSlug === 'compress-image-size' ? '' : $currentSlug);
 
 // Render View
 require __DIR__ . '/views/template.php';

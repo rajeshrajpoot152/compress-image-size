@@ -35,12 +35,12 @@ $htaccessContent .= "RewriteEngine On\n\n";
 foreach ($mergeMap as $oldSlug => $newSlug) {
     foreach ($languages as $lang) {
         $prefix = ($lang === 'en') ? "" : "{$lang}/";
-        $oldUrl = "^" . $prefix . $oldSlug . "\.html$";
+        $oldUrl = "^" . $prefix . $oldSlug . "(\.html)?$";
         
         if ($newSlug === '') {
             $newUrl = "/" . ($lang === 'en' ? "" : $lang . "/");
         } else {
-            $newUrl = "/" . $prefix . $newSlug . ".html";
+            $newUrl = "/" . $prefix . $newSlug;
         }
         
         $htaccessContent .= "RewriteRule {$oldUrl} {$newUrl} [R=301,L]\n";
@@ -52,8 +52,8 @@ $htaccessFile = __DIR__ . '/.htaccess';
 $existing = file_exists($htaccessFile) ? file_get_contents($htaccessFile) : '';
 
 // Remove old block if exists
-$existing = preg_replace('/# --- SEO PHASE 5:.*# --- END SEO REDIRECTS ---\n/s', '', $existing);
+$existing = preg_replace('/# --- SEO PHASE 5:.*# --- END SEO REDIRECTS ---\r?\n?/s', '', $existing);
 
-file_put_contents($htaccessFile, $existing . $htaccessContent);
+file_put_contents($htaccessFile, trim($existing) . "\n\n" . $htaccessContent);
 
 echo "Successfully appended 301 redirects to .htaccess for " . count($mergeMap) . " duplicate pages across all 10 languages.\n";

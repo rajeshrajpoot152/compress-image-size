@@ -32,10 +32,12 @@ foreach ($keepKeywords as $keywordKey) {
     $slug = $allKeywords[$keywordKey]['slug'];
     $priority = ($keywordKey === 'compress-image-size') ? '1.0' : '0.9';
     $changefreq = 'weekly';
-    $filename = ($keywordKey === 'compress-image-size') ? '' : "{$slug}.html";
+    $cleanPath = ($keywordKey === 'compress-image-size') ? '' : "{$slug}";
 
     foreach ($languages as $lang) {
-        $loc = ($lang === 'en') ? "{$domain}/{$filename}" : "{$domain}/{$lang}/{$filename}";
+        $loc = ($lang === 'en') 
+            ? ($cleanPath === '' ? "{$domain}/" : "{$domain}/{$cleanPath}") 
+            : ($cleanPath === '' ? "{$domain}/{$lang}/" : "{$domain}/{$lang}/{$cleanPath}");
         
         $xml .= "  <url>\n";
         $xml .= "    <loc>{$loc}</loc>\n";
@@ -44,10 +46,13 @@ foreach ($keepKeywords as $keywordKey) {
         $xml .= "    <priority>{$priority}</priority>\n";
 
         foreach ($languages as $altLang) {
-            $altLoc = ($altLang === 'en') ? "{$domain}/{$filename}" : "{$domain}/{$altLang}/{$filename}";
+            $altLoc = ($altLang === 'en') 
+                ? ($cleanPath === '' ? "{$domain}/" : "{$domain}/{$cleanPath}") 
+                : ($cleanPath === '' ? "{$domain}/{$altLang}/" : "{$domain}/{$altLang}/{$cleanPath}");
             $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
         }
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/{$filename}\" />\n";
+        $xDefaultLoc = ($cleanPath === '' ? "{$domain}/" : "{$domain}/{$cleanPath}");
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$xDefaultLoc}\" />\n";
         $xml .= "  </url>\n";
         
         $totalUrls++;
@@ -58,7 +63,7 @@ foreach ($keepKeywords as $keywordKey) {
 $legalPages = ['privacy-policy', 'terms-of-service', 'about-us', 'contact-us'];
 foreach ($legalPages as $page) {
     foreach ($languages as $lang) {
-        $loc = ($lang === 'en') ? "{$domain}/{$page}.html" : "{$domain}/{$lang}/{$page}.html";
+        $loc = ($lang === 'en') ? "{$domain}/{$page}" : "{$domain}/{$lang}/{$page}";
         
         $xml .= "  <url>\n";
         $xml .= "    <loc>{$loc}</loc>\n";
@@ -67,10 +72,10 @@ foreach ($legalPages as $page) {
         $xml .= "    <priority>0.5</priority>\n";
 
         foreach ($languages as $altLang) {
-            $altLoc = ($altLang === 'en') ? "{$domain}/{$page}.html" : "{$domain}/{$altLang}/{$page}.html";
+            $altLoc = ($altLang === 'en') ? "{$domain}/{$page}" : "{$domain}/{$altLang}/{$page}";
             $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
         }
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/{$page}.html\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/{$page}\" />\n";
         $xml .= "  </url>\n";
 
         $totalUrls++;

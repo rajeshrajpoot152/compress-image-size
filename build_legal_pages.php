@@ -33,13 +33,13 @@ $flags = [
 function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
     $currentFlag = $flags[$langCode] ?? '';
     $currentName = $languages[$langCode]['name'] ?? 'English';
-    $homeLink = $prefix . ($langCode === 'en' ? 'index.html' : "{$langCode}/index.html");
+    $homeLink = ($langCode === 'en' ? '/' : "/{$langCode}/");
     
     $dropdownHtml = '';
     foreach ($languages as $code => $info) {
         $flagSvg = $flags[$code] ?? '';
-        $targetPage = ($pageType === 'privacy') ? 'privacy-policy.html' : 'terms-of-service.html';
-        $link = ($code === 'en') ? ($prefix === '' ? $targetPage : "../{$targetPage}") : ($prefix === '' ? "{$code}/{$targetPage}" : ($prefix === '../' && $langCode === $code ? $targetPage : "../{$code}/{$targetPage}"));
+        $targetPage = ($pageType === 'privacy') ? 'privacy-policy' : 'terms-of-service';
+        $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
         $activeClass = ($langCode === $code) ? 'font-bold bg-primary-50 text-primary-600' : '';
         $dropdownHtml .= "
           <a href=\"{$link}\" class=\"flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors {$activeClass}\">
@@ -50,6 +50,10 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
             <span class=\"text-[10px] uppercase font-mono text-slate-400\">{$code}</span>
           </a>";
     }
+
+    $aboutNav = ($langCode === 'en' ? '/about-us' : "/{$langCode}/about-us");
+    $contactNav = ($langCode === 'en' ? '/contact-us' : "/{$langCode}/contact-us");
+    $howNav = ($langCode === 'en' ? '/how-it-works/' : "/{$langCode}/how-it-works/");
 
     return <<<HTML
   <!-- 1. HEADER (Full-Width Header with Contained Content) -->
@@ -65,9 +69,9 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
           <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Image Compressor</a>
-          <a href="{$prefix}how-it-works/" class="hover:text-primary-600 transition-colors">How It Works</a>
-          <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
-          <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
+          <a href="{$howNav}" class="hover:text-primary-600 transition-colors">How It Works</a>
+          <a href="{$aboutNav}" class="hover:text-primary-600 transition-colors">About Us</a>
+          <a href="{$contactNav}" class="hover:text-primary-600 transition-colors">Contact Us</a>
         </nav>
 
         <!-- World Top 10 Language Switcher -->
@@ -113,15 +117,17 @@ HTML;
 }
 
 function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
-    $homeLink = $prefix . ($langCode === 'en' ? 'index.html' : "{$langCode}/index.html");
-    $privacyLink = ($prefix === '') ? 'privacy-policy.html' : 'privacy-policy.html';
-    $termsLink = ($prefix === '') ? 'terms-of-service.html' : 'terms-of-service.html';
+    $homeLink = $prefix === '' ? '/' : "/{$langCode}/";
+    $privacyLink = ($langCode === 'en') ? '/privacy-policy' : "/{$langCode}/privacy-policy";
+    $termsLink = ($langCode === 'en') ? '/terms-of-service' : "/{$langCode}/terms-of-service";
+    $aboutLink = ($langCode === 'en') ? '/about-us' : "/{$langCode}/about-us";
+    $contactLink = ($langCode === 'en') ? '/contact-us' : "/{$langCode}/contact-us";
 
     $footerLangGrid = '';
     foreach ($languages as $code => $info) {
         $flagSvg = $flags[$code] ?? '';
-        $targetPage = ($pageType === 'privacy') ? 'privacy-policy.html' : 'terms-of-service.html';
-        $link = ($code === 'en') ? ($prefix === '' ? $targetPage : "../{$targetPage}") : ($prefix === '' ? "{$code}/{$targetPage}" : ($prefix === '../' && $langCode === $code ? $targetPage : "../{$code}/{$targetPage}"));
+        $targetPage = ($pageType === 'privacy') ? 'privacy-policy' : 'terms-of-service';
+        $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
         $isActive = ($langCode === $code);
         $activeClass = $isActive 
             ? 'bg-primary-50 border border-primary-300 font-bold text-primary-700 shadow-2xs' 
@@ -180,8 +186,8 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
-          <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors py-1">About Us</a>
-          <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors py-1">Contact Us</a>
+          <a href="{$aboutLink}" class="hover:text-primary-600 transition-colors py-1">About Us</a>
+          <a href="{$contactLink}" class="hover:text-primary-600 transition-colors py-1">Contact Us</a>
           <a href="{$privacyLink}" class="{$activePrivacy}">Privacy Policy</a>
           <a href="{$termsLink}" class="{$activeTerms}">Terms of Service</a>
           <a href="{$homeLink}#eeat-authority" class="hover:text-primary-600 transition-colors py-1">Editorial &amp; Quality Policy</a>
@@ -218,31 +224,41 @@ foreach ($languages as $langCode => $langInfo) {
         mkdir($destDir, 0777, true);
     }
     $cssPath = "{$prefix}css/style.css";
+    $homeLink = ($langCode === 'en') ? '/' : "/{$langCode}/";
 
     // ─────────────────────────────────────────────────────────────
     // 1. PRIVACY POLICY
     // ─────────────────────────────────────────────────────────────
     $headerPrivacy = getCommonHeader($langCode, $prefix, $languages, $flags, 'privacy');
     $footerPrivacy = getCommonFooter($langCode, $prefix, $languages, $flags, 'privacy');
-    $canonicalPrivacy = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "privacy-policy.html";
+    $canonicalPrivacy = "https://compressimagesize.com/" . ($langCode === 'en' ? 'privacy-policy' : "{$langCode}/privacy-policy");
 
     $privacyHreflang = '';
     foreach ($languages as $lCode => $lInfo) {
-        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "privacy-policy.html";
+        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? 'privacy-policy' : "{$lCode}/privacy-policy");
         $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrl}\" />\n";
     }
-    $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/privacy-policy.html\" />";
+    $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/privacy-policy\" />";
 
     $privacyHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - CompressImageSize | Zero-Server Client-Side Guarantee</title>
   <meta name="description" content="Discover how CompressImageSize protects your confidentiality with 100% in-browser client-side WebAssembly compression. No images ever touch external cloud servers. GDPR & CCPA compliant.">
   <meta name="robots" content="{$robotsTag}">
-  <link rel="canonical" href="https://compressimagesize.com/privacy-policy.html">
+  <link rel="canonical" href="{$canonicalPrivacy}">
 {$privacyHreflang}
 
   <!-- Open Graph & Social Cards -->
@@ -305,7 +321,7 @@ foreach ($languages as $langCode => $langInfo) {
   <div class="bg-white border-b border-surface-border py-3">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex items-center text-xs text-slate-500 font-medium gap-2">
-        <a href="{$prefix}index.html" class="hover:text-primary-600 transition-colors">Home</a>
+        <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Home</a>
         <span>/</span>
         <span class="text-dark-slate font-semibold">Privacy Policy</span>
       </nav>
@@ -428,7 +444,7 @@ foreach ($languages as $langCode => $langInfo) {
       </div>
 
       <div class="mt-12 text-center">
-        <a href="{$prefix}index.html" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl shadow-md transition-all">
+        <a href="{$homeLink}" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl shadow-md transition-all">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
@@ -452,25 +468,34 @@ HTML;
     // ─────────────────────────────────────────────────────────────
     $headerTerms = getCommonHeader($langCode, $prefix, $languages, $flags, 'terms');
     $footerTerms = getCommonFooter($langCode, $prefix, $languages, $flags, 'terms');
-    $canonicalTerms = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "terms-of-service.html";
+    $canonicalTerms = "https://compressimagesize.com/" . ($langCode === 'en' ? 'terms-of-service' : "{$langCode}/terms-of-service");
 
     $termsHreflang = '';
     foreach ($languages as $lCode => $lInfo) {
-        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "terms-of-service.html";
+        $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? 'terms-of-service' : "{$lCode}/terms-of-service");
         $termsHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrl}\" />\n";
     }
-    $termsHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/terms-of-service.html\" />";
+    $termsHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/terms-of-service\" />";
 
     $termsHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms of Service - CompressImageSize | Free Image Optimization Terms</title>
   <meta name="description" content="Read the CompressImageSize Terms of Service. Understand your rights, 100% file copyright ownership, acceptable usage, and warranty disclaimers for our free compression utility.">
   <meta name="robots" content="{$robotsTag}">
-  <link rel="canonical" href="https://compressimagesize.com/terms-of-service.html">
+  <link rel="canonical" href="{$canonicalTerms}">
 {$termsHreflang}
 
   <!-- Open Graph & Social Cards -->
@@ -533,7 +558,7 @@ HTML;
   <div class="bg-white border-b border-surface-border py-3">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <nav class="flex items-center text-xs text-slate-500 font-medium gap-2">
-        <a href="{$prefix}index.html" class="hover:text-primary-600 transition-colors">Home</a>
+        <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Home</a>
         <span>/</span>
         <span class="text-dark-slate font-semibold">Terms of Service</span>
       </nav>
@@ -645,7 +670,7 @@ HTML;
       </div>
 
       <div class="mt-12 text-center">
-        <a href="{$prefix}index.html" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl shadow-md transition-all">
+        <a href="{$homeLink}" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white bg-primary-600 hover:bg-primary-700 rounded-xl shadow-md transition-all">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>

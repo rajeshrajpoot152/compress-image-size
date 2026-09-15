@@ -20,14 +20,14 @@ if (!$name || !$email || !$message) {
     exit;
 }
 
-// SMTP Configuration (Google Workspace / Gmail)
-$smtp_server   = "smtp.gmail.com";
+// SMTP Configuration (Custom Domain Mail Server)
+$smtp_server   = "mail.compressimagesize.com";
 $smtp_port     = 465;
-$smtp_username = "compressimagesize@gmail.com"; // Your email
-$smtp_password = "svzlpoymzinxjaxm"; // Your App Password
+$smtp_username = "hello@compressimagesize.com";
+$smtp_password = 'zG{%nOsnPFyO';
 
 // Email Headers
-$to      = "compressimagesize@gmail.com"; // Where to send the message
+$to      = "hello@compressimagesize.com";
 $subject = "New Contact Form Submission from " . $name;
 
 // Construct the email body
@@ -56,7 +56,14 @@ function send_smtp_command($socket, $command, $expected_code) {
 
 try {
     // 1. Connect to SMTP server via SSL
-    $socket = fsockopen("ssl://" . $smtp_server, $smtp_port, $errno, $errstr, 15);
+    $context = stream_context_create([
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ]
+    ]);
+    $socket = stream_socket_client("ssl://" . $smtp_server . ":" . $smtp_port, $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $context);
     if (!$socket) {
         throw new Exception("Could not connect to SMTP host: $errno - $errstr");
     }
@@ -65,7 +72,8 @@ try {
     send_smtp_command($socket, null, '220');
 
     // 3. EHLO
-    send_smtp_command($socket, "EHLO " . $_SERVER['SERVER_NAME'], '250');
+    $hostname = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'compressimagesize.com';
+    send_smtp_command($socket, "EHLO " . $hostname, '250');
 
     // 4. Authenticate
     send_smtp_command($socket, "AUTH LOGIN", '334');
@@ -81,7 +89,7 @@ try {
 
     // 7. Construct message headers and body
     // RFC 2822 format
-    $headers  = "From: Contact Form <" . $smtp_username . ">\r\n";
+    $headers  = "From: CompressImageSize Contact Form <" . $smtp_username . ">\r\n";
     $headers .= "To: <" . $to . ">\r\n";
     $headers .= "Reply-To: " . $name . " <" . $email . ">\r\n";
     $headers .= "Subject: " . $subject . "\r\n";
@@ -97,9 +105,9 @@ try {
 
     // Determine redirect URL based on language
     $lang = filter_input(INPUT_POST, 'lang', FILTER_SANITIZE_STRING);
-    $redirectUrl = "/thank-you.html";
+    $redirectUrl = "/thank-you";
     if ($lang && $lang !== 'en') {
-        $redirectUrl = "/" . $lang . "/thank-you.html";
+        $redirectUrl = "/" . $lang . "/thank-you";
     }
 
     // Redirect to success page

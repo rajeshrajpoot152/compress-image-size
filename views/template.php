@@ -57,11 +57,11 @@ if (!function_exists('getFlagSvg')) {
 
 if (!function_exists('getRelativeLangLink')) {
     function getRelativeLangLink($targetLang, $targetSlug, $currentLang) {
-        $slugPath = ($targetSlug === 'compress-image-size') ? 'index.html' : "{$targetSlug}.html";
+        $slugPath = ($targetSlug === 'compress-image-size') ? '' : $targetSlug;
         if ($targetLang === 'en') {
-            return ($currentLang === 'en') ? $slugPath : "../{$slugPath}";
+            return ($slugPath === '') ? '/' : "/{$slugPath}";
         } else {
-            return ($currentLang === 'en') ? "{$targetLang}/{$slugPath}" : ($currentLang === $targetLang ? $slugPath : "../{$targetLang}/{$slugPath}");
+            return ($slugPath === '') ? "/{$targetLang}/" : "/{$targetLang}/{$slugPath}";
         }
     }
 }
@@ -69,6 +69,15 @@ if (!function_exists('getRelativeLangLink')) {
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($currentLang) ?>" dir="<?= $isRTL ? 'rtl' : 'ltr' ?>">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?= htmlspecialchars($pageTitle) ?></title>
@@ -79,12 +88,12 @@ if (!function_exists('getRelativeLangLink')) {
   <!-- Multi-Language Hreflang SEO Interlinking (10 Global Languages) -->
   <?php foreach (['en', 'es', 'fr', 'de', 'pt', 'zh', 'ja', 'ar', 'ru', 'it'] as $lCode): ?>
     <?php 
-       $hrefSlug = ($currentSlug === 'compress-image-size') ? '' : $currentSlug . '.html';
+       $hrefSlug = ($currentSlug === 'compress-image-size') ? '' : $currentSlug;
        $hrefUrl = "https://compressimagesize.com/" . ($lCode !== 'en' ? $lCode . '/' : '') . $hrefSlug;
     ?>
     <link rel="alternate" hreflang="<?= $lCode ?>" href="<?= $hrefUrl ?>" />
   <?php endforeach; ?>
-  <link rel="alternate" hreflang="x-default" href="https://compressimagesize.com/<?= ($currentSlug === 'compress-image-size') ? '' : $currentSlug . '.html' ?>" />
+  <link rel="alternate" hreflang="x-default" href="https://compressimagesize.com/<?= ($currentSlug === 'compress-image-size') ? '' : $currentSlug ?>" />
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="website" />
@@ -229,16 +238,16 @@ if (!function_exists('getRelativeLangLink')) {
       <div class="flex items-center justify-between h-16 sm:h-17">
         
         <!-- Logo -->
-        <a href="index.html" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg p-1" aria-label="CompressImageSize Home">
+        <a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg p-1" aria-label="CompressImageSize Home">
           <img src="<?= ($currentLang === 'en' ? '' : '../') ?>images/logo.png" alt="CompressImageSize - 100% Free Online Image Compressor" class="h-8 sm:h-9 w-auto object-contain" width="225" height="40" />
         </a>
 
         <!-- Navigation Links -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
-          <a href="<?= ($currentLang === 'en' ? '' : '../') ?>index.html" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['header_home'] ?? 'Image Compressor') ?></a>
-          <a href="<?= ($currentLang === 'en' ? '' : '../') ?>how-it-works/" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_how'] ?? 'How It Works') ?></a>
-          <a href="<?= ($currentLang === 'en' ? '' : '../') ?>about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
-          <a href="<?= ($currentLang === 'en' ? '' : '../') ?>contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
+          <a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['header_home'] ?? 'Image Compressor') ?></a>
+          <a href="<?= ($currentLang === 'en' ? '/how-it-works/' : "/{$currentLang}/how-it-works/") ?>" class="hover:text-primary-600 transition-colors"><?= htmlspecialchars($t['nav_how'] ?? 'How It Works') ?></a>
+          <a href="<?= ($currentLang === 'en' ? '/about-us' : "/{$currentLang}/about-us") ?>" class="hover:text-primary-600 transition-colors">About Us</a>
+          <a href="<?= ($currentLang === 'en' ? '/contact-us' : "/{$currentLang}/contact-us") ?>" class="hover:text-primary-600 transition-colors">Contact Us</a>
         </nav>
 
         <!-- World Top 10 Language Switcher -->
@@ -281,7 +290,7 @@ if (!function_exists('getRelativeLangLink')) {
       <!-- Mobile Drawer -->
       <div id="mobileDrawer" class="hidden md:hidden border-t border-surface-border bg-white px-3 pt-3 pb-5 space-y-2">
         <a href="#uploader" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_tools'] ?? 'Tools') ?></a>
-        <a href="<?= ($currentLang === 'en' ? '' : '../') ?>how-it-works/" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_how'] ?? 'How It Works') ?></a>
+        <a href="<?= ($currentLang === 'en' ? '/how-it-works/' : "/{$currentLang}/how-it-works/") ?>" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_how'] ?? 'How It Works') ?></a>
         <a href="#eeat-authority" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_quality'] ?? 'Quality & Security') ?></a>
         <a href="#features" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_features'] ?? 'Features') ?></a>
         <a href="#faq" class="block py-2 text-sm font-medium text-dark-slate hover:text-primary-600"><?= htmlspecialchars($t['nav_faq'] ?? 'FAQ') ?></a>
@@ -656,8 +665,8 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c1_title'] ?? 'Resizing & Cropping') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c1_desc'] ?? 'Exact pixel dimensions modification and smart aspect ratio cropping.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="index.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool1'] ?? '• Image Resizer (Custom Pixels)') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
-              <li><a href="index.html" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool2'] ?? '• Smart Image Cropper') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool1'] ?? '• Image Resizer (Custom Pixels)') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-primary-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c1_tool2'] ?? '• Smart Image Cropper') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
           </div>
 
@@ -669,9 +678,9 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c2_title'] ?? 'Format Converters') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c2_desc'] ?? 'High-demand converters for next-gen web standard performance.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
-              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
-              <li><a href="index.html" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool1'] ?? '• HEIC to JPG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_popular'] ?? 'Popular →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool2'] ?? '• WebP to PNG Converter') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_fast'] ?? 'Fast →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-indigo-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c2_tool3'] ?? '• Image to PDF Maker') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_free_tool'] ?? 'Free →') ?></span></a></li>
             </ul>
           </div>
 
@@ -683,8 +692,8 @@ if (!function_exists('getRelativeLangLink')) {
             <h3 class="font-bold text-dark-slate text-lg mb-2 leading-snug"><?= htmlspecialchars($t['explore_c3_title'] ?? 'Privacy & Editing') ?></h3>
             <p class="text-xs sm:text-sm text-dark-body mb-5 leading-relaxed flex-1"><?= htmlspecialchars($t['explore_c3_desc'] ?? 'Protect your metadata and sanitize sensitive photos safely.') ?></p>
             <ul class="space-y-3 text-xs font-semibold text-slate-700 border-t border-slate-200/80 pt-4">
-              <li><a href="index.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
-              <li><a href="index.html" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool1'] ?? '• EXIF Data & GPS Remover') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_secure'] ?? 'Secure →') ?></span></a></li>
+              <li><a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="flex items-center justify-between hover:text-emerald-600 py-1 transition-colors"><span><?= htmlspecialchars($t['explore_c3_tool2'] ?? '• Instant Watermark Adder') ?></span><span class="text-slate-600 font-bold text-[10px] bg-white border border-slate-200 px-2 py-0.5 rounded-md shadow-2xs"><?= htmlspecialchars($t['badge_new'] ?? 'New →') ?></span></a></li>
             </ul>
           </div>
         </div>
@@ -1173,7 +1182,7 @@ if (!function_exists('getRelativeLangLink')) {
         
         <!-- Column 1: Brand, Mission, Live Status & Trust Badges (4 cols on lg) -->
         <div class="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-4 space-y-4">
-          <a href="<?= ($currentLang === 'en' ? 'index.html' : 'index.html') ?>" class="inline-block group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg" aria-label="CompressImageSize">
+          <a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="inline-block group focus:outline-none focus:ring-2 focus:ring-primary-600 rounded-lg" aria-label="CompressImageSize">
             <img src="<?= ($currentLang === 'en' ? '' : '../') ?>images/logo.png" alt="CompressImageSize" class="h-9 w-auto object-contain" width="190" height="38" />
           </a>
           
@@ -1241,25 +1250,25 @@ if (!function_exists('getRelativeLangLink')) {
           </div>
           <ul class="space-y-1 text-xs">
             <li>
-              <a href="index.html" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/' : "/{$currentLang}/") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span>Image Compressor</span>
               </a>
             </li>
             <li>
-              <a href="how-it-works/" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/how-it-works/' : "/{$currentLang}/how-it-works/") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span>How It Works</span>
               </a>
             </li>
             <li>
-              <a href="about-us.html" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/about-us' : "/{$currentLang}/about-us") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span>About Us</span>
               </a>
             </li>
             <li>
-              <a href="contact-us.html" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/contact-us' : "/{$currentLang}/contact-us") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span>Contact Us</span>
               </a>
@@ -1275,13 +1284,13 @@ if (!function_exists('getRelativeLangLink')) {
           </div>
           <ul class="space-y-1 text-xs">
             <li>
-              <a href="privacy-policy.html" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/privacy-policy' : "/{$currentLang}/privacy-policy") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span><?= htmlspecialchars($t['footer_privacy_policy'] ?? 'Privacy Policy') ?></span>
               </a>
             </li>
             <li>
-              <a href="terms-of-service.html" class="footer-link-item">
+              <a href="<?= ($currentLang === 'en' ? '/terms-of-service' : "/{$currentLang}/terms-of-service") ?>" class="footer-link-item">
                 <svg class="w-2.5 h-2.5 text-slate-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 <span><?= htmlspecialchars($t['footer_terms'] ?? 'Terms of Service') ?></span>
               </a>
@@ -1355,10 +1364,10 @@ if (!function_exists('getRelativeLangLink')) {
         </div>
 
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-8">
-          <a href="about-us.html" class="hover:text-primary-600 transition-colors py-1">About Us</a>
-          <a href="contact-us.html" class="hover:text-primary-600 transition-colors py-1">Contact Us</a>
-          <a href="privacy-policy.html" class="hover:text-primary-600 transition-colors py-1"><?= htmlspecialchars($t['footer_privacy_policy'] ?? 'Privacy Policy') ?></a>
-          <a href="terms-of-service.html" class="hover:text-primary-600 transition-colors py-1"><?= htmlspecialchars($t['footer_terms'] ?? 'Terms of Service') ?></a>
+          <a href="<?= ($currentLang === 'en' ? '/about-us' : "/{$currentLang}/about-us") ?>" class="hover:text-primary-600 transition-colors py-1">About Us</a>
+          <a href="<?= ($currentLang === 'en' ? '/contact-us' : "/{$currentLang}/contact-us") ?>" class="hover:text-primary-600 transition-colors py-1">Contact Us</a>
+          <a href="<?= ($currentLang === 'en' ? '/privacy-policy' : "/{$currentLang}/privacy-policy") ?>" class="hover:text-primary-600 transition-colors py-1"><?= htmlspecialchars($t['footer_privacy_policy'] ?? 'Privacy Policy') ?></a>
+          <a href="<?= ($currentLang === 'en' ? '/terms-of-service' : "/{$currentLang}/terms-of-service") ?>" class="hover:text-primary-600 transition-colors py-1"><?= htmlspecialchars($t['footer_terms'] ?? 'Terms of Service') ?></a>
           <a href="#eeat-authority" class="hover:text-primary-600 transition-colors py-1"><?= htmlspecialchars($t['footer_editorial'] ?? 'Quality & Standards') ?></a>
         </div>
       </div>

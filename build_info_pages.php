@@ -33,13 +33,13 @@ $flags = [
 function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
     $currentFlag = $flags[$langCode] ?? '';
     $currentName = $languages[$langCode]['name'] ?? 'English';
-    $homeLink = $prefix . ($langCode === 'en' ? 'index.html' : "{$langCode}/index.html");
+    $homeLink = ($langCode === 'en' ? '/' : "/{$langCode}/");
     
     $dropdownHtml = '';
     foreach ($languages as $code => $info) {
         $flagSvg = $flags[$code] ?? '';
-        $targetPage = ($pageType === 'about') ? 'about-us.html' : (($pageType === 'contact') ? 'contact-us.html' : 'thank-you.html');
-        $link = ($code === 'en') ? ($prefix === '' ? $targetPage : "../{$targetPage}") : ($prefix === '' ? "{$code}/{$targetPage}" : ($prefix === '../' && $langCode === $code ? $targetPage : "../{$code}/{$targetPage}"));
+        $targetPage = ($pageType === 'about') ? 'about-us' : (($pageType === 'contact') ? 'contact-us' : 'thank-you');
+        $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
         $activeClass = ($langCode === $code) ? 'font-bold bg-primary-50 text-primary-600' : '';
         $dropdownHtml .= "
           <a href=\"{$link}\" class=\"flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors {$activeClass}\">
@@ -51,6 +51,10 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
           </a>";
     }
 
+    $aboutNav = ($langCode === 'en' ? '/about-us' : "/{$langCode}/about-us");
+    $contactNav = ($langCode === 'en' ? '/contact-us' : "/{$langCode}/contact-us");
+    $howNav = ($langCode === 'en' ? '/how-it-works/' : "/{$langCode}/how-it-works/");
+
     return <<<HTML
   <header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-surface-border shadow-xs transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,9 +64,9 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         </a>
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-sm font-medium text-dark-body">
           <a href="{$homeLink}" class="hover:text-primary-600 transition-colors">Image Compressor</a>
-          <a href="{$prefix}how-it-works/" class="hover:text-primary-600 transition-colors">How It Works</a>
-          <a href="{$prefix}about-us.html" class="hover:text-primary-600 transition-colors">About Us</a>
-          <a href="{$prefix}contact-us.html" class="hover:text-primary-600 transition-colors">Contact Us</a>
+          <a href="{$howNav}" class="hover:text-primary-600 transition-colors">How It Works</a>
+          <a href="{$aboutNav}" class="hover:text-primary-600 transition-colors">About Us</a>
+          <a href="{$contactNav}" class="hover:text-primary-600 transition-colors">Contact Us</a>
         </nav>
         <div class="flex items-center gap-3">
           <div class="relative" id="langDropdownContainer">
@@ -91,13 +95,13 @@ HTML;
 }
 
 function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
-    $homeLink = $prefix . ($langCode === 'en' ? 'index.html' : "{$langCode}/index.html");
+    $homeLink = ($langCode === 'en' ? '/' : "/{$langCode}/");
     
     $footerLangGrid = '';
     foreach ($languages as $code => $info) {
         $flagSvg = $flags[$code] ?? '';
-        $targetPage = ($pageType === 'about') ? 'about-us.html' : (($pageType === 'contact') ? 'contact-us.html' : 'thank-you.html');
-        $link = ($code === 'en') ? ($prefix === '' ? $targetPage : "../{$targetPage}") : ($prefix === '' ? "{$code}/{$targetPage}" : ($prefix === '../' && $langCode === $code ? $targetPage : "../{$code}/{$targetPage}"));
+        $targetPage = ($pageType === 'about') ? 'about-us' : (($pageType === 'contact') ? 'contact-us' : 'thank-you');
+        $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
         $footerLangGrid .= "
           <a href=\"{$link}\" class=\"flex items-center gap-2 p-2 rounded-lg hover:bg-white/60 transition-colors border border-transparent hover:border-slate-200 group\">
             {$flagSvg}
@@ -105,10 +109,10 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
           </a>";
     }
 
-    $privacyLink = ($langCode === 'en' ? $prefix . 'privacy-policy.html' : $prefix . "{$langCode}/privacy-policy.html");
-    $termsLink = ($langCode === 'en' ? $prefix . 'terms-of-service.html' : $prefix . "{$langCode}/terms-of-service.html");
-    $aboutLink = ($langCode === 'en' ? $prefix . 'about-us.html' : $prefix . "{$langCode}/about-us.html");
-    $contactLink = ($langCode === 'en' ? $prefix . 'contact-us.html' : $prefix . "{$langCode}/contact-us.html");
+    $privacyLink = ($langCode === 'en' ? '/privacy-policy' : "/{$langCode}/privacy-policy");
+    $termsLink = ($langCode === 'en' ? '/terms-of-service' : "/{$langCode}/terms-of-service");
+    $aboutLink = ($langCode === 'en' ? '/about-us' : "/{$langCode}/about-us");
+    $contactLink = ($langCode === 'en' ? '/contact-us' : "/{$langCode}/contact-us");
 
     return <<<HTML
   <footer class="bg-slate-50 border-t border-surface-border mt-auto">
@@ -165,6 +169,8 @@ foreach ($languages as $langCode => $langInfo) {
         mkdir($destDir, 0777, true);
     }
     $cssPath = "{$prefix}css/style.css";
+    $homeLink = ($langCode === 'en') ? '/' : "/{$langCode}/";
+    $contactLink = ($langCode === 'en') ? '/contact-us' : "/{$langCode}/contact-us";
 
     // ─────────────────────────────────────────────────────────────
     // HREFLANG TAG GENERATOR
@@ -174,18 +180,18 @@ foreach ($languages as $langCode => $langInfo) {
     $thanksHreflang = '';
     
     foreach ($languages as $lCode => $lInfo) {
-        $lUrlAbout = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "about-us.html";
+        $lUrlAbout = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "about-us";
         $aboutHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrlAbout}\" />\n";
         
-        $lUrlContact = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "contact-us.html";
+        $lUrlContact = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "contact-us";
         $contactHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrlContact}\" />\n";
         
-        $lUrlThanks = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "thank-you.html";
+        $lUrlThanks = "https://compressimagesize.com/" . ($lCode === 'en' ? '' : "{$lCode}/") . "thank-you";
         $thanksHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrlThanks}\" />\n";
     }
-    $aboutHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/about-us.html\" />";
-    $contactHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/contact-us.html\" />";
-    $thanksHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/thank-you.html\" />";
+    $aboutHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/about-us\" />";
+    $contactHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/contact-us\" />";
+    $thanksHreflang .= "  <link rel=\"alternate\" hreflang=\"x-default\" href=\"https://compressimagesize.com/thank-you\" />";
 
 
     // ─────────────────────────────────────────────────────────────
@@ -193,18 +199,27 @@ foreach ($languages as $langCode => $langInfo) {
     // ─────────────────────────────────────────────────────────────
     $headerAbout = getCommonHeader($langCode, $prefix, $languages, $flags, 'about');
     $footerAbout = getCommonFooter($langCode, $prefix, $languages, $flags, 'about');
-    $canonicalAbout = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "about-us.html";
+    $canonicalAbout = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "about-us";
 
     $aboutHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - CompressImageSize | Client-Side Image Compression</title>
   <meta name="description" content="Learn about CompressImageSize. We provide ultra-fast, 100% private, client-side WebAssembly image compression. Your files never leave your device.">
   <meta name="robots" content="{$robotsTag}">
-  <link rel="canonical" href="https://compressimagesize.com/about-us.html">
+  <link rel="canonical" href="{$canonicalAbout}">
 {$aboutHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -282,7 +297,7 @@ foreach ($languages as $langCode => $langInfo) {
         <div class="bg-white border border-surface-border rounded-2xl shadow-sm p-6 text-center">
           <h3 class="text-lg font-bold text-dark-slate mb-2">Have Questions?</h3>
           <p class="text-sm text-slate-500 mb-4">We're here to help you get the most out of our tool.</p>
-          <a href="{$prefix}contact-us.html" class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-slate-900 hover:bg-primary-600 text-white text-sm font-semibold rounded-xl transition-colors">
+          <a href="{$contactLink}" class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-slate-900 hover:bg-primary-600 text-white text-sm font-semibold rounded-xl transition-colors">
             Contact Support
           </a>
         </div>
@@ -302,19 +317,28 @@ HTML;
     // ─────────────────────────────────────────────────────────────
     $headerContact = getCommonHeader($langCode, $prefix, $languages, $flags, 'contact');
     $footerContact = getCommonFooter($langCode, $prefix, $languages, $flags, 'contact');
-    $canonicalContact = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "contact-us.html";
+    $canonicalContact = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "contact-us";
     $handlerUrl = $prefix . "contact-handler.php";
 
     $contactHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - CompressImageSize | Get in Touch</title>
   <meta name="description" content="Contact the CompressImageSize support team for inquiries, feedback, and technical assistance. We are here to help.">
   <meta name="robots" content="{$robotsTag}">
-  <link rel="canonical" href="https://compressimagesize.com/contact-us.html">
+  <link rel="canonical" href="{$canonicalContact}">
 {$contactHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -413,18 +437,27 @@ HTML;
     // ─────────────────────────────────────────────────────────────
     $headerThanks = getCommonHeader($langCode, $prefix, $languages, $flags, 'thank-you');
     $footerThanks = getCommonFooter($langCode, $prefix, $languages, $flags, 'thank-you');
-    $canonicalThanks = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "thank-you.html";
+    $canonicalThanks = "https://compressimagesize.com/" . ($langCode === 'en' ? '' : "{$langCode}/") . "thank-you";
 
     $thanksHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="{$langCode}" dir="{$langInfo['dir']}">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-36FRWYXN2P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-36FRWYXN2P');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You - CompressImageSize</title>
   <meta name="description" content="Thank you for contacting CompressImageSize. We have received your message.">
   <meta name="robots" content="noindex, follow"> <!-- Excluded from indexing as per SEO best practices -->
-  <link rel="canonical" href="https://compressimagesize.com/thank-you.html">
+  <link rel="canonical" href="{$canonicalThanks}">
 {$thanksHreflang}
   <link rel="icon" href="{$prefix}images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -445,7 +478,7 @@ HTML;
       <h1 class="text-3xl font-black text-dark-slate mb-4">Message Sent!</h1>
       <p class="text-slate-600 mb-8 leading-relaxed">Thank you for getting in touch with us. We have received your message and our team will get back to you shortly.</p>
       
-      <a href="{$prefix}index.html" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg shadow-primary-600/25 transition-all transform hover:-translate-y-0.5">
+      <a href="{$homeLink}" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl shadow-lg shadow-primary-600/25 transition-all transform hover:-translate-y-0.5">
         Return to Home
       </a>
     </div>

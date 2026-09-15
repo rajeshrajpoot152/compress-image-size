@@ -54,7 +54,7 @@ foreach ($languages as $lang) {
         
         // File naming: master goes to index.html, others to slug.html
         $filename = ($keywordKey === 'compress-image-size') ? 'index.html' : "{$currentSlug}.html";
-        $canonicalUrl = "https://compressimagesize.com/" . ($lang !== 'en' ? "{$lang}/" : "") . ($keywordKey === 'compress-image-size' ? '' : $filename);
+        $canonicalUrl = "https://compressimagesize.com/" . ($lang !== 'en' ? "{$lang}/" : "") . ($keywordKey === 'compress-image-size' ? '' : $currentSlug);
 
         ob_start();
         require __DIR__ . '/views/template.php';
