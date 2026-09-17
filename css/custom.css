@@ -123,6 +123,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.58) 0%, rgba(15, 23, 42, 0.78) 100%);
 }
 
+/* Hero Banner Typography: Pure readable white text with drop-shadow */
+.hero-banner-section h1,
+.hero-banner-content h1,
+.hero-banner-section #pageH1,
+.hero-banner-content #pageH1 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+
+.hero-banner-section h1 span,
+.hero-banner-content h1 span {
+  color: #38BDF8 !important; /* Sky blue accent for emphasis keywords */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+
+.hero-banner-section p,
+.hero-banner-content p,
+.hero-banner-section #pageSubhead,
+.hero-banner-content #pageSubhead {
+  color: #F1F5F9 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.hero-banner-content .text-dark-slate {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+}
+
 #resultsContainer {
   position: relative;
   z-index: 30;
@@ -270,6 +298,133 @@ html {
 }
 #floatingBackToTop:hover svg {
   transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Language Dropdown UI & Flags System
+   ========================================================================== */
+#langDropdownContainer {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+#langToggleBtn {
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background-color: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 0.5rem !important;
+  padding: 0.45rem 0.75rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+  transition: all 0.2s ease !important;
+}
+
+#langToggleBtn:hover {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+#langToggleBtn[aria-expanded="true"] {
+  border-color: #2563EB !important;
+  background-color: #EFF6FF !important;
+  color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+#langChevron {
+  transition: transform 0.2s ease !important;
+}
+
+#langToggleBtn[aria-expanded="true"] #langChevron,
+.rotate-180 {
+  transform: rotate(180deg) !important;
+}
+
+/* Dropdown Menu Container: Anchored right so it never extends off-screen */
+#langMenu {
+  position: absolute !important;
+  top: calc(100% + 6px) !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 14.5rem !important; /* 232px */
+  max-width: calc(100vw - 1.5rem) !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 0.85rem !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.1) !important;
+  padding: 0.35rem 0 !important;
+  z-index: 1000 !important;
+  max-height: min(80vh, 420px) !important;
+  overflow-y: auto !important;
+}
+
+/* RTL Support for Arabic */
+[dir="rtl"] #langMenu {
+  right: auto !important;
+  left: 0 !important;
+}
+
+/* Dropdown Menu Header / Title */
+#langMenu > div:first-child,
+#langMenu .lang-menu-title {
+  padding: 0.45rem 0.85rem 0.35rem !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: #64748B !important;
+  border-bottom: 1px solid #F1F5F9 !important;
+  margin-bottom: 0.25rem !important;
+}
+
+/* Dropdown Menu Links */
+#langMenu a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.45rem 0.85rem !important;
+  font-size: 0.8125rem !important;
+  color: #1E293B !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease, color 0.15s ease !important;
+  border-radius: 0.375rem !important;
+  margin: 0.1rem 0.35rem !important;
+}
+
+#langMenu a:hover {
+  background-color: #F8FAFC !important;
+  color: #2563EB !important;
+}
+
+/* Active Selected Language in Dropdown */
+#langMenu a.active,
+#langMenu a.bg-primary-50,
+#langMenu a[class*="bg-primary-50"],
+#langMenu a[class*="text-primary-600"] {
+  background-color: #EFF6FF !important;
+  color: #2563EB !important;
+  font-weight: 700 !important;
+}
+
+/* Flag SVG standard styling */
+#currentLangFlag svg,
+#langMenu svg,
+.footer-lang-pill svg,
+#mobileDrawer svg {
+  width: 1.15rem !important;
+  height: 0.85rem !important;
+  min-width: 1.15rem !important;
+  border-radius: 2px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.25) !important;
 }
 
 

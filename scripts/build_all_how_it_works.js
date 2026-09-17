@@ -910,8 +910,14 @@ for (const [code, langInfo] of Object.entries(languages)) {
     `<span id="currentLangText">${langInfo.name}</span>`);
 
   // Language Dropdown Menu
-  const langMenuRegex = /<div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-\[80vh\] overflow-y-auto">[\s\S]*?<\/div>/i;
-  const newLangMenu = `<div id="langMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-[80vh\] overflow-y-auto">\n${getLangDropdownHtml(code)}\n            </div>`;
+  const langMenuRegex = /<!-- Language Dropdown Menu -->[\s\S]*?<\/div>\s*<\/div>\s*<!-- Mobile Menu Button -->/i;
+  const newLangMenu = `<!-- Language Dropdown Menu -->
+            <div id="langMenu" class="hidden absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-56 bg-white rounded-xl shadow-card border border-surface-border py-2 z-50 max-h-[80vh] overflow-y-auto">
+${getLangDropdownHtml(code)}
+            </div>
+          </div>
+
+          <!-- Mobile Menu Button -->`;
   page = page.replace(langMenuRegex, newLangMenu);
 
   // Mobile Drawer Links
@@ -930,7 +936,7 @@ for (const [code, langInfo] of Object.entries(languages)) {
 
   // 8. Hero
   page = page.replace(/<h1\b[^>]*>[\s\S]*?<\/h1>/i,
-    `<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-dark-slate tracking-tight leading-tight mb-4 sm:mb-6">${t.h1}</h1>`);
+    `<h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-md tracking-tight leading-tight mb-4 sm:mb-6">${t.h1}</h1>`);
   page = page.replace(/<p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-normal">[\s\S]*?<\/p>/i,
     `<p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-normal">${t.subhead}</p>`);
   page = page.replace(/100% Client-Side Engine • Zero Server Storage/g, t.badge);
