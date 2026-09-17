@@ -19,6 +19,11 @@ RewriteRule ^(.*?/)?index\.html$ /%1 [R=301,L]
 RewriteCond %{THE_REQUEST} \s/+how-it-works\.html[\s?] [NC]
 RewriteRule ^how-it-works\.html$ /how-it-works/ [R=301,L]
 
+# Redirect /<lang>/how-it-works.html -> /<lang>/how-it-works/
+RewriteCond %{THE_REQUEST} \s/+([a-z]{2})/how-it-works\.html[\s?] [NC]
+RewriteRule ^([a-z]{2})/how-it-works\.html$ /%1/how-it-works/ [R=301,L]
+
+
 # 3. Redirect any other request ending in .html to extensionless URL
 RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
 RewriteRule ^(.+?)\.html$ /%1 [R=301,L]

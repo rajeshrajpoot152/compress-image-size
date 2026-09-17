@@ -107,7 +107,7 @@ if (!function_exists('getRelativeLangLink')) {
   <meta name="twitter:description" content="<?= htmlspecialchars($pageDesc) ?>" />
   <meta name="twitter:image" content="https://compressimagesize.com/images/og-image.jpg" />
 
-  <link rel="icon" href="<?= ($currentLang === 'en' ? '' : '../') ?>images/favicon.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- Tailwind CSS Local -->
   <link rel="stylesheet" href="<?= ($currentLang === 'en' ? '' : '../') ?>css/style.css" />

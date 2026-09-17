@@ -82,14 +82,25 @@ foreach ($legalPages as $page) {
     }
 }
 
-// 3. User Guide
-$xml .= "  <url>\n";
-$xml .= "    <loc>{$domain}/how-it-works/</loc>\n";
-$xml .= "    <lastmod>{$today}</lastmod>\n";
-$xml .= "    <changefreq>monthly</changefreq>\n";
-$xml .= "    <priority>0.8</priority>\n";
-$xml .= "  </url>\n";
-$totalUrls++;
+// 3. User Guide (How It Works for all 10 languages)
+foreach ($languages as $lang) {
+    $loc = ($lang === 'en') ? "{$domain}/how-it-works/" : "{$domain}/{$lang}/how-it-works/";
+    
+    $xml .= "  <url>\n";
+    $xml .= "    <loc>{$loc}</loc>\n";
+    $xml .= "    <lastmod>{$today}</lastmod>\n";
+    $xml .= "    <changefreq>monthly</changefreq>\n";
+    $xml .= "    <priority>0.8</priority>\n";
+
+    foreach ($languages as $altLang) {
+        $altLoc = ($altLang === 'en') ? "{$domain}/how-it-works/" : "{$domain}/{$altLang}/how-it-works/";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
+    }
+    $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"{$domain}/how-it-works/\" />\n";
+    $xml .= "  </url>\n";
+
+    $totalUrls++;
+}
 
 $xml .= '</urlset>' . "\n";
 

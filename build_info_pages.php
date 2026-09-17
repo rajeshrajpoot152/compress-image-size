@@ -221,7 +221,7 @@ foreach ($languages as $langCode => $langInfo) {
   <meta name="robots" content="{$robotsTag}">
   <link rel="canonical" href="{$canonicalAbout}">
 {$aboutHreflang}
-  <link rel="icon" href="{$prefix}images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -340,7 +340,7 @@ HTML;
   <meta name="robots" content="{$robotsTag}">
   <link rel="canonical" href="{$canonicalContact}">
 {$contactHreflang}
-  <link rel="icon" href="{$prefix}images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -459,7 +459,7 @@ HTML;
   <meta name="robots" content="noindex, follow"> <!-- Excluded from indexing as per SEO best practices -->
   <link rel="canonical" href="{$canonicalThanks}">
 {$thanksHreflang}
-  <link rel="icon" href="{$prefix}images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

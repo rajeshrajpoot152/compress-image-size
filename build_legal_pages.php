@@ -273,7 +273,7 @@ foreach ($languages as $langCode => $langInfo) {
   <meta name="twitter:description" content="Zero-Server Privacy Guarantee: All image compression executes locally in your browser.">
   <meta name="twitter:image" content="https://compressimagesize.com/images/og-image.jpg">
 
-  <link rel="icon" href="{$prefix}images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -510,7 +510,7 @@ HTML;
   <meta name="twitter:description" content="Terms of Service: Free, client-side image compression with 100% user copyright retention.">
   <meta name="twitter:image" content="https://compressimagesize.com/images/og-image.jpg">
 
-  <link rel="icon" href="{$prefix}images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
