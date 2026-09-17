@@ -40,6 +40,9 @@ function getCommonHeader($langCode, $prefix, $languages, $flags, $pageType) {
         $flagSvg = $flags[$code] ?? '';
         $targetPage = ($pageType === 'privacy') ? 'privacy-policy' : 'terms-of-service';
         $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
+        if ($pageType === 'privacy' && $code === 'pt') {
+            $link = "/privacy-policy";
+        }
         $activeClass = ($langCode === $code) ? 'font-bold bg-primary-50 text-primary-600' : '';
         $dropdownHtml .= "
           <a href=\"{$link}\" class=\"flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-dark-slate hover:bg-primary-50 hover:text-primary-600 transition-colors {$activeClass}\">
@@ -118,7 +121,7 @@ HTML;
 
 function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
     $homeLink = $prefix === '' ? '/' : "/{$langCode}/";
-    $privacyLink = ($langCode === 'en') ? '/privacy-policy' : "/{$langCode}/privacy-policy";
+    $privacyLink = ($langCode === 'en' || $langCode === 'pt') ? '/privacy-policy' : "/{$langCode}/privacy-policy";
     $termsLink = ($langCode === 'en') ? '/terms-of-service' : "/{$langCode}/terms-of-service";
     $aboutLink = ($langCode === 'en') ? '/about-us' : "/{$langCode}/about-us";
     $contactLink = ($langCode === 'en') ? '/contact-us' : "/{$langCode}/contact-us";
@@ -128,6 +131,9 @@ function getCommonFooter($langCode, $prefix, $languages, $flags, $pageType) {
         $flagSvg = $flags[$code] ?? '';
         $targetPage = ($pageType === 'privacy') ? 'privacy-policy' : 'terms-of-service';
         $link = ($code === 'en') ? "/{$targetPage}" : "/{$code}/{$targetPage}";
+        if ($pageType === 'privacy' && $code === 'pt') {
+            $link = "/privacy-policy";
+        }
         $isActive = ($langCode === $code);
         $activeClass = $isActive 
             ? 'bg-primary-50 border border-primary-300 font-bold text-primary-700 shadow-2xs' 
@@ -235,6 +241,7 @@ foreach ($languages as $langCode => $langInfo) {
 
     $privacyHreflang = '';
     foreach ($languages as $lCode => $lInfo) {
+        if ($lCode === 'pt') continue; // Exclude pt for privacy-policy
         $lUrl = "https://compressimagesize.com/" . ($lCode === 'en' ? 'privacy-policy' : "{$lCode}/privacy-policy");
         $privacyHreflang .= "  <link rel=\"alternate\" hreflang=\"{$lCode}\" href=\"{$lUrl}\" />\n";
     }
@@ -460,8 +467,10 @@ foreach ($languages as $langCode => $langInfo) {
 </html>
 HTML;
 
-    file_put_contents("{$destDir}/privacy-policy.html", $privacyHtml);
-    file_put_contents("{$destDir}/privacy.html", $privacyHtml);
+    if ($langCode !== 'pt') {
+        file_put_contents("{$destDir}/privacy-policy.html", $privacyHtml);
+        file_put_contents("{$destDir}/privacy.html", $privacyHtml);
+    }
 
     // ─────────────────────────────────────────────────────────────
     // 2. TERMS OF SERVICE

@@ -32,6 +32,12 @@ RewriteRule ^(.+?)\.html$ /%1 [R=301,L]
 RewriteRule ^faq/?$ /#faq [R=301,NE,L]
 RewriteRule ^features/?$ /#features [R=301,NE,L]
 
+# Redirect /delivery/ to homepage (Resolves Google Search Console error)
+RewriteRule ^delivery/?$ / [R=301,L]
+
+# Redirect /pt/privacy-policy to main /privacy-policy (Resolves Google Search Console error)
+RewriteRule ^pt/privacy(-policy)?(\.html)?$ /privacy-policy [R=301,L]
+
 # ----------------------------------------------------------------------
 # Internal Rewrites: Silently map clean URLs to their physical .html files
 # ----------------------------------------------------------------------

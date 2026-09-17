@@ -63,6 +63,11 @@ foreach ($keepKeywords as $keywordKey) {
 $legalPages = ['privacy-policy', 'terms-of-service', 'about-us', 'contact-us'];
 foreach ($legalPages as $page) {
     foreach ($languages as $lang) {
+        // Exclude Portuguese for privacy-policy as it is consolidated to main English version
+        if ($page === 'privacy-policy' && $lang === 'pt') {
+            continue;
+        }
+
         $loc = ($lang === 'en') ? "{$domain}/{$page}" : "{$domain}/{$lang}/{$page}";
         
         $xml .= "  <url>\n";
@@ -72,6 +77,9 @@ foreach ($legalPages as $page) {
         $xml .= "    <priority>0.5</priority>\n";
 
         foreach ($languages as $altLang) {
+            if ($page === 'privacy-policy' && $altLang === 'pt') {
+                continue;
+            }
             $altLoc = ($altLang === 'en') ? "{$domain}/{$page}" : "{$domain}/{$altLang}/{$page}";
             $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"{$altLang}\" href=\"{$altLoc}\" />\n";
         }
