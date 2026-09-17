@@ -38,7 +38,17 @@ const missingXhtmlFiles = [];
 function urlToLocalPath(url) {
   let rel = url.replace(domain, '');
   if (rel.startsWith('/')) rel = rel.substring(1);
-  return path.join(rootDir, rel);
+  if (rel === '' || rel.endsWith('/')) {
+    return path.join(rootDir, rel, 'index.html');
+  }
+  const cleanPath = path.join(rootDir, rel);
+  if (fs.existsSync(cleanPath + '.html')) {
+    return cleanPath + '.html';
+  }
+  if (fs.existsSync(path.join(cleanPath, 'index.html'))) {
+    return path.join(cleanPath, 'index.html');
+  }
+  return cleanPath;
 }
 
 // Check <loc> files
@@ -70,8 +80,10 @@ languages.forEach(lang => {
   if (fs.existsSync(dir)) {
     const files = fs.readdirSync(dir).filter(f => f.endsWith('.html'));
     files.forEach(f => {
-      // index.html in subfolders or root
-      const url = (lang === 'en') ? `${domain}/${f}` : `${domain}/${lang}/${f}`;
+      const cleanName = f === 'index.html' ? '' : f.replace('.html', '');
+      const url = (lang === 'en')
+        ? (cleanName ? `${domain}/${cleanName}` : `${domain}/`)
+        : (cleanName ? `${domain}/${lang}/${cleanName}` : `${domain}/${lang}/`);
       allProjectHtmlFiles.push({ file: `${lang}/${f}`, url });
     });
   }
@@ -79,8 +91,6 @@ languages.forEach(lang => {
 
 const unlistedInSitemap = [];
 allProjectHtmlFiles.forEach(item => {
-  // In sitemap, 'compress-image-size.html' is the main tool and represents index.
-  // Let's see if item.url is in locUrls
   if (!uniqueLocs.has(item.url)) {
     unlistedInSitemap.push(item);
   }
